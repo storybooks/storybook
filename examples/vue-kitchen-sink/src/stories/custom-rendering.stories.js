@@ -58,7 +58,6 @@ templateMethods.story = {
 export const JSX = () => ({
   components: { MyButton },
   render() {
-    // eslint-disable-next-line react/react-in-jsx-scope
     return <my-button>MyButton rendered with JSX</my-button>;
   },
 });

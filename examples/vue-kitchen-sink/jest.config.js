@@ -8,9 +8,4 @@ module.exports = {
     '.*\\.(vue)$': '<rootDir>/node_modules/jest-vue-preprocessor',
   },
   moduleFileExtensions: [...config.moduleFileExtensions, 'vue'],
-  moduleNameMapper: {
-    ...config.moduleNameMapper,
-    // TMP: disable MDX until we upgrade vue-kitchen-sink to latest
-    '\\.mdx': '<rootDir>/__mocks__/fileMock.js',
-  },
 };

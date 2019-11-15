@@ -1,19 +1,42 @@
 {
-  "name": "vue-example",
+  "name": "vue-kitchen-sink",
   "version": "5.3.0-alpha.45",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "build-storybook": "build-storybook -s public",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "storybook": "start-storybook -p 9009 -s public"
+    "build": "vue-cli-service build",
+    "build-storybook": "build-storybook",
+    "lint": "vue-cli-service lint",
+    "serve": "vue-cli-service serve",
+    "storybook": "start-storybook -p 6006"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "eslintConfig": {
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "@storybook/eslint-config-storybook",
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "root": true,
+    "rules": {
+      "react/react-in-jsx-scope": 0
+    }
   },
   "dependencies": {
-    "vue": "^2.6.8",
-    "vuex": "^3.1.0"
+    "core-js": "^3.3.2",
+    "vue": "^2.6.10",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.6.4",
     "@storybook/addon-a11y": "5.3.0-alpha.45",
     "@storybook/addon-actions": "5.3.0-alpha.45",
     "@storybook/addon-backgrounds": "5.3.0-alpha.45",
@@ -30,14 +53,22 @@
     "@storybook/addons": "5.3.0-alpha.45",
     "@storybook/source-loader": "5.3.0-alpha.45",
     "@storybook/vue": "5.3.0-alpha.45",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "^8.0.5",
-    "cross-env": "^6.0.3",
-    "file-loader": "^4.2.0",
-    "prop-types": "^15.7.2",
-    "svg-url-loader": "^3.0.2",
-    "vue-loader": "^15.7.0",
-    "webpack": "^4.33.0",
-    "webpack-dev-server": "^3.8.2"
+    "@vue/babel-preset-jsx": "^1.1.1",
+    "@vue/cli-plugin-babel": "^4.0.0",
+    "@vue/cli-plugin-eslint": "^4.0.0",
+    "@vue/cli-service": "^4.0.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-vue": "^2.0.2",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "jest-vue-preprocessor": "^1.7.0",
+    "storybook-addon-vue-info": "^1.2.1",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   }
 }
