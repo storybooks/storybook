@@ -5,8 +5,8 @@ import {
   PropsTable,
   PropsTableError,
   PropsTableProps,
-  PropsTableRowsProps,
   PropsTableSectionsProps,
+  PropRowsProps,
   PropDef,
   TabsState,
 } from '@storybook/components';
@@ -46,7 +46,7 @@ export const getComponentProps = (
   component: Component,
   { exclude }: PropsProps,
   { parameters }: DocsContextProps
-): PropsTableProps => {
+): PropsTableProps | PropsTableSectionsProps => {
   if (!component) {
     return null;
   }
@@ -59,9 +59,9 @@ export const getComponentProps = (
     if (!extractProps) {
       throw new Error(PropsTableError.PROPS_UNSUPPORTED);
     }
-    let props = extractProps(component);
+    let props: PropsTableProps | PropsTableSectionsProps = extractProps(component);
     if (!isNil(exclude)) {
-      const { rows } = props as PropsTableRowsProps;
+      const { rows } = props as PropRowsProps;
       const { sections } = props as PropsTableSectionsProps;
       if (rows) {
         props = { rows: filterRows(rows, exclude) };
@@ -71,7 +71,47 @@ export const getComponentProps = (
         });
       }
     }
+    if ((props as PropRowsProps).rows) {
+      const propSections = (props as PropRowsProps).rows.reduce(
+        (acc: { [key: string]: PropDef[] }, prop: PropDef) => {
+          if (prop.parent && prop.parent.name) {
+            if (!acc[prop.parent.name]) {
+              return { ...acc, [prop.parent.name]: [prop] };
+            }
+            return { ...acc, [prop.parent.name]: [...acc[prop.parent.name], prop] };
+          }
+          return acc;
+        },
+        {}
+      );
+      const propSectionsArray = Object.keys(propSections);
+      if (propSectionsArray.length > 1) {
+        // the props are with sections (inherited interfaces in typescript)
 
+        // find out what section is the components own props
+        // by default just use the first listed interface of props
+        let expanded: string[] = [propSectionsArray[0]];
+
+        // if any section names contain the componnet name, expand them by default
+        if (component.displayName) {
+          // find all sections that contain the component name
+          const nameMatch = propSectionsArray.filter(
+            section => section.indexOf(component.displayName) >= 0
+          );
+          //
+          if (nameMatch.length) {
+            expanded = nameMatch;
+          }
+          // if any section have only 1 prop, expand them by default
+          propSectionsArray.forEach(section => {
+            if (propSections[section].length === 1 && expanded.indexOf(section) < 0) {
+              expanded.push(section);
+            }
+          });
+        }
+        props = { sections: propSections, expanded };
+      }
+    }
     return props;
   } catch (err) {
     return { error: err.message };

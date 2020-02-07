@@ -1,4 +1,4 @@
-import { PropsTableProps } from '@storybook/components';
+import { PropsTableSectionsProps, PropsTableProps, PropParent } from '@storybook/components';
 import { Component } from '../../blocks/shared';
 
 export type PropsExtractor = (component: Component) => PropsTableProps | null;
@@ -38,6 +38,7 @@ export interface DocgenInfo {
   required: boolean;
   description?: string;
   defaultValue?: DocgenPropDefaultValue;
+  parent?: PropParent;
 }
 
 export enum TypeSystem {

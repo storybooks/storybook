@@ -1,16 +1,18 @@
 import React, { FC } from 'react';
 import { styled } from '@storybook/theming';
 import { opacify, transparentize, darken, lighten } from 'polished';
-import { PropRow, PropRowProps } from './PropRow';
-import { SectionRow, SectionRowProps } from './SectionRow';
-import { PropDef, PropType, PropDefaultValue, PropSummaryValue } from './PropDef';
+import { PropRows, PropRowsProps } from './PropRows';
+import { SectionRow } from './SectionRow';
+import { CollapsibleRow } from './CollapsibleRow';
+import { PropDef, PropType, PropDefaultValue, PropSummaryValue, PropParent } from './PropDef';
 import { EmptyBlock } from '../EmptyBlock';
 import { ResetWrapper } from '../../typography/DocumentFormatting';
 
-export const Table = styled.table<{}>(({ theme }) => ({
+export const Table = styled.table<{ expandable: boolean }>(({ theme, expandable }) => ({
   '&&': {
     // Resets for cascading/system styles
     borderCollapse: 'collapse',
+    tableLayout: 'fixed',
     borderSpacing: 0,
     color: theme.color.defaultText,
     tr: {
@@ -22,6 +24,8 @@ export const Table = styled.table<{}>(({ theme }) => ({
       padding: 0,
       border: 'none',
       verticalAlign: 'top',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
     // End Resets
 
@@ -34,8 +38,13 @@ export const Table = styled.table<{}>(({ theme }) => ({
     marginTop: 25,
     marginBottom: 40,
 
+    'thead th:first-of-type, td:first-of-type': {
+      width: '30%',
+    },
+
     'th:first-of-type, td:first-of-type': {
-      paddingLeft: 20,
+      paddingLeft: '20px',
+      wordBreak: 'break-all',
     },
 
     'th:last-of-type, td:last-of-type': {
@@ -58,9 +67,11 @@ export const Table = styled.table<{}>(({ theme }) => ({
     },
 
     td: {
-      paddingTop: '16px',
-      paddingBottom: '16px',
-
+      paddingTop: '10px',
+      paddingBottom: '10px',
+      ':first-of-type': {
+        paddingLeft: expandable ? '45px' : '20px',
+      },
       '&:not(:first-of-type)': {
         paddingLeft: 15,
         paddingRight: 15,
@@ -133,27 +144,40 @@ export enum PropsTableError {
   PROPS_UNSUPPORTED = 'Props unsupported. See Props documentation for your framework.',
 }
 
-export interface PropsTableRowsProps {
-  rows: PropDef[];
-}
-
 export interface PropsTableSectionsProps {
   sections?: Record<string, PropDef[]>;
+  expanded?: string[];
 }
 
 export interface PropsTableErrorProps {
   error: PropsTableError;
 }
 
-export type PropsTableProps = PropsTableRowsProps | PropsTableSectionsProps | PropsTableErrorProps;
+export type PropsTableProps = PropRowsProps | PropsTableSectionsProps | PropsTableErrorProps;
 
-const PropsTableRow: FC<SectionRowProps | PropRowProps> = props => {
-  const { section } = props as SectionRowProps;
-  if (section) {
-    return <SectionRow section={section} />;
+interface SectionTableRowProps {
+  section: string;
+  rows: PropDef[];
+  expanded?: string[];
+}
+
+const SectionTableRow: FC<SectionTableRowProps> = ({ section, rows, expanded }) => {
+  if (expanded) {
+    return (
+      <CollapsibleRow
+        section={section}
+        expanded={expanded.indexOf(section) >= 0}
+        rows={rows}
+        numRows={rows.length}
+      />
+    );
   }
-  const { row } = props as PropRowProps;
-  return <PropRow row={row} />;
+  return (
+    <>
+      <SectionRow section={section} />
+      <PropRows section={section} rows={rows} />
+    </>
+  );
 };
 
 /**
@@ -166,35 +190,28 @@ const PropsTable: FC<PropsTableProps> = props => {
     return <EmptyBlock>{error}</EmptyBlock>;
   }
 
-  let allRows: any[] = [];
-  const { sections } = props as PropsTableSectionsProps;
-  const { rows } = props as PropsTableRowsProps;
+  let allRows: React.ReactNode[] | React.ReactNode;
+  const { sections, expanded } = props as PropsTableSectionsProps;
+  const { rows } = props as PropRowsProps;
   if (sections) {
-    Object.keys(sections).forEach(section => {
-      const sectionRows = sections[section];
-      if (sectionRows && sectionRows.length > 0) {
-        allRows.push({ key: section, value: { section } });
-        sectionRows.forEach(row => {
-          allRows.push({
-            key: `${section}_${row.name}`,
-            value: { row },
-          });
-        });
-      }
-    });
+    allRows = Object.keys(sections).map(section => (
+      <SectionTableRow
+        key={section}
+        section={section}
+        rows={sections[section]}
+        expanded={expanded}
+      />
+    ));
   } else if (rows) {
-    allRows = rows.map(row => ({
-      key: row.name,
-      value: { row },
-    }));
+    allRows = <PropRows rows={rows} />;
   }
 
-  if (allRows.length === 0) {
+  if (Array.isArray(allRows) && allRows.length === 0) {
     return <EmptyBlock>No props found for this component</EmptyBlock>;
   }
   return (
     <ResetWrapper>
-      <Table className="docblock-propstable">
+      <Table className="docblock-propstable" expandable={expanded !== undefined}>
         <thead className="docblock-propstable-head">
           <tr>
             <th>Name</th>
@@ -202,14 +219,18 @@ const PropsTable: FC<PropsTableProps> = props => {
             <th>Default</th>
           </tr>
         </thead>
-        <tbody className="docblock-propstable-body">
-          {allRows.map(row => (
-            <PropsTableRow key={row.key} {...row.value} />
-          ))}
-        </tbody>
+        <tbody className="docblock-propstable-body">{allRows}</tbody>
       </Table>
     </ResetWrapper>
   );
 };
 
-export { PropsTable, PropDef, PropType, PropDefaultValue, PropSummaryValue };
+export {
+  PropsTable,
+  PropDef,
+  PropType,
+  PropDefaultValue,
+  PropSummaryValue,
+  PropParent,
+  PropRowsProps,
+};

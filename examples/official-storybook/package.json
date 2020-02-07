@@ -60,6 +60,7 @@
     "terser-webpack-plugin": "^2.3.4",
     "ts-loader": "^6.0.0",
     "uuid": "^3.3.2",
-    "webpack": "^4.33.0"
+    "webpack": "^4.33.0",
+    "webpack-react-docgen-typescript": "^0.9.5"
   }
 }

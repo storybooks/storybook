@@ -66,6 +66,11 @@ module.exports = {
           ],
           exclude: [/node_modules/, /dist/],
         },
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: [/node_modules/, /dist/, /\.(story|stories).(ts|tsx)$/],
+          loader: require.resolve('webpack-react-docgen-typescript'),
+        },
       ],
     },
     resolve: {

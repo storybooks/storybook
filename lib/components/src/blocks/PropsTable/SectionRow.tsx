@@ -11,7 +11,7 @@ const SectionTh = styled.th<{}>(({ theme }) => ({
   textTransform: 'uppercase',
   fontWeight: theme.typography.weight.black,
   fontSize: theme.typography.size.s1 - 1,
-  lineHeight: '24px',
+  lineHeight: '20px',
   color:
     theme.base === 'light'
       ? transparentize(0.4, theme.color.defaultText)

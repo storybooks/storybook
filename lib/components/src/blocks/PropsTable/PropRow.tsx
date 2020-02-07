@@ -60,7 +60,7 @@ export const PropRow: FC<PropRowProps> = ({
   return (
     <tr>
       <td>
-        <Name>{name}</Name>
+        <Name title={name}>{name}</Name>
         {required ? <Required title="Required">*</Required> : null}
       </td>
       <td>

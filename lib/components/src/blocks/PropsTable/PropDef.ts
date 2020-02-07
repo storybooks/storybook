@@ -20,6 +20,12 @@ export interface PropSummaryValue {
 export type PropType = PropSummaryValue;
 export type PropDefaultValue = PropSummaryValue;
 
+// the parent interface in case of typescript
+export interface PropParent {
+  fileName?: string;
+  name: string;
+}
+
 export interface PropDef {
   name: string;
   type: PropType;
@@ -27,4 +33,5 @@ export interface PropDef {
   description?: string;
   defaultValue?: PropDefaultValue;
   jsDocTags?: JsDocTags;
+  parent?: PropParent;
 }

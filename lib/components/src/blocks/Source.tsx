@@ -37,7 +37,7 @@ interface SourceCodeProps {
 
 // FIXME: Using | causes a typescript error, so stubbing it with & for now
 // and making `error` optional
-export type SourceProps = SourceErrorProps & SourceCodeProps;
+export type SourceProps = SourceCodeProps & SourceErrorProps;
 
 /**
  * Syntax-highlighted source code for a component (or anything!)

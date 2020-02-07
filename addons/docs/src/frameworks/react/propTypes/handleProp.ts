@@ -33,6 +33,8 @@ export function enhancePropTypesProp(extractedProp: ExtractedProp, rawDefaultPro
       propDef.defaultValue = newDefaultValue;
     }
   }
+  // typescript information for types inheritance
+  propDef.parent = extractedProp.docgenInfo.parent;
 
   return propDef;
 }
