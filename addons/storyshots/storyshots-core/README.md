@@ -685,6 +685,8 @@ Enables Jest `done()` callback in the StoryShots tests for async testing. See [S
 
 Some stories are difficult or impossible to snapshot, such as those covering components that use external DOM-modifying libraries, and those that deliberately throw errors. It is possible to skip stories like these by giving them a parameter of `storyshots: {disable: true}`. There is also a shorthand for this, `storyshots: false`.
 
+If you wish to remove a story from some snapshot tests but not others, you can pass the test suite name(s) to the `storyshots.disabledSuites` param as a string or array.
+
 ```js
 export const Exception = () => {
   throw new Error('storyFn threw an error! WHOOPS');
@@ -692,7 +694,11 @@ export const Exception = () => {
 Exception.story = {
   name: 'story throws exception',
   parameters: {
-    storyshots: { disable: true },
+    storyshots: { 
+      disable: true,
+      // or
+      disabledSuites: ['a11yTests']
+    },
   },
 };
 ```
