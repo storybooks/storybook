@@ -1,4 +1,10 @@
-import React, { ComponentProps, FunctionComponent, MouseEvent, useState } from 'react';
+import React, {
+  ComponentProps,
+  FunctionComponent,
+  MouseEvent,
+  useState,
+  useLayoutEffect,
+} from 'react';
 import { styled } from '@storybook/theming';
 import { document, window } from 'global';
 import memoize from 'memoizerific';
@@ -97,13 +103,14 @@ export interface SyntaxHighlighterRendererProps {
   useInlineStyles: boolean;
 }
 export interface SyntaxHighlighterProps {
-  language: string;
+  language?: string;
   copyable?: boolean;
   bordered?: boolean;
   padded?: boolean;
   format?: boolean;
   className?: string;
   renderer?: (props: SyntaxHighlighterRendererProps) => React.ReactNode;
+  children?: string;
 }
 
 export interface SyntaxHighlighterState {
@@ -115,7 +122,7 @@ type ReactSyntaxHighlighterProps = ComponentProps<typeof ReactSyntaxHighlighter>
 type Props = SyntaxHighlighterProps & ReactSyntaxHighlighterProps;
 export const SyntaxHighlighter: FunctionComponent<Props> = ({
   children,
-  language = 'jsx',
+  language,
   copyable = false,
   bordered = false,
   padded = false,
@@ -143,19 +150,41 @@ export const SyntaxHighlighter: FunctionComponent<Props> = ({
     window.setTimeout(() => setCopied(false), 1500);
   };
 
+  const [sourceCode, setSourceCode] = useState(() => children && children.trim());
+  useLayoutEffect(() => {
+    if (!children) {
+      return () => {};
+    }
+
+    let mounted = true;
+    if (format) {
+      formatter(children.trim(), language).then((formatted) => {
+        if (mounted) {
+          setSourceCode(formatted);
+        }
+      });
+    } else {
+      setSourceCode(children.trim());
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [children]);
+
   return children ? (
     <Wrapper bordered={bordered} padded={padded} className={className}>
       <Scroller>
         <ReactSyntaxHighlighter
           padded={padded || bordered}
-          language={language}
+          language={language || 'jsx'}
           useInlineStyles={false}
           PreTag={Pre}
           CodeTag={Code}
           lineNumberContainerStyle={{}}
           {...rest}
         >
-          {format ? formatter((children as string).trim()) : (children as string).trim()}
+          {sourceCode}
         </ReactSyntaxHighlighter>
       </Scroller>
 

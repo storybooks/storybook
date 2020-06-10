@@ -2,7 +2,11 @@ import React, { FunctionComponent, ReactElement, ReactNode, ReactNodeArray } fro
 import { MDXProvider } from '@mdx-js/react';
 import { toId, storyNameFromExport } from '@storybook/csf';
 import { resetComponents } from '@storybook/components/html';
-import { Preview as PurePreview, PreviewProps as PurePreviewProps } from '@storybook/components';
+import {
+  Preview as PurePreview,
+  PreviewProps as PurePreviewProps,
+  SourceProps as PureSourceProps,
+} from '@storybook/components';
 import { getSourceProps } from './Source';
 import { DocsContext, DocsContextProps } from './DocsContext';
 
@@ -12,10 +16,16 @@ export enum SourceState {
   NONE = 'none',
 }
 
-type PreviewProps = PurePreviewProps & {
-  withSource?: SourceState;
+type PassedSourceProps = Pick<PureSourceProps, 'language' | 'format'>;
+interface SourcePropsWithState extends PassedSourceProps {
+  state: SourceState;
+}
+type WithSourceData = SourceState | SourcePropsWithState;
+
+interface PreviewProps extends Omit<PurePreviewProps, 'withSource'> {
+  withSource?: WithSourceData;
   mdxSource?: string;
-};
+}
 
 const getPreviewProps = (
   {
@@ -26,15 +36,23 @@ const getPreviewProps = (
   }: PreviewProps & { children?: ReactNode },
   { mdxStoryNameToKey, mdxComponentMeta, storyStore }: DocsContextProps
 ): PurePreviewProps => {
-  if (withSource === SourceState.NONE) {
-    return props;
+  const sourceState = typeof withSource === 'object' ? withSource.state : withSource;
+  const passedSourceProps: PassedSourceProps = typeof withSource === 'object' ? withSource : {};
+
+  if (sourceState === SourceState.NONE) {
+    return { ...props, withSource: passedSourceProps };
   }
+
   if (mdxSource) {
     return {
       ...props,
-      withSource: getSourceProps({ code: decodeURI(mdxSource) }, { storyStore }),
+      withSource: getSourceProps(
+        { ...passedSourceProps, code: decodeURI(mdxSource) },
+        { storyStore }
+      ),
     };
   }
+
   const childArray: ReactNodeArray = Array.isArray(children) ? children : [children];
   const stories = childArray.filter(
     (c: ReactElement) => c.props && (c.props.id || c.props.name)
@@ -47,11 +65,18 @@ const getPreviewProps = (
         storyNameFromExport(mdxStoryNameToKey[s.props.name])
       )
   );
-  const sourceProps = getSourceProps({ ids: targetIds }, { storyStore });
+
+  const sourceProps = getSourceProps(
+    {
+      ...passedSourceProps,
+      ids: targetIds,
+    },
+    { storyStore }
+  );
   return {
     ...props, // pass through columns etc.
     withSource: sourceProps,
-    isExpanded: withSource === SourceState.OPEN,
+    isExpanded: sourceState === SourceState.OPEN,
   };
 };
 

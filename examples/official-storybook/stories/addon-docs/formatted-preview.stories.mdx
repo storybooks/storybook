@@ -1,0 +1,52 @@
+import { Meta, Story, Preview, Props, SourceState } from '@storybook/addon-docs/blocks';
+
+<Meta title="Addons/Docs/formatted-preview" component={Preview} />
+
+### formatted JSX
+
+<!-- language defaults to "jsx" -->
+
+<Preview withSource={SourceState.OPEN}>
+  {/* prettier-ignore */}
+  <Story name="formatted JSX in MDX">
+    {() => {
+      return (
+        <ul>
+          {[{ id: 1, title: 'a' },{ id: 2, title: 'b' },
+                ].map((item, idx) => {
+            return <li key={item.id}>{item.title}</li>;
+                })}
+              </ul>
+      );
+    }}
+  </Story>
+</Preview>
+
+### unformatted JSX
+
+<Preview withSource={{ language: 'jsx', format: false, state: SourceState.OPEN }}>
+  <Story name="unformatted JSX in MDX">
+    {() => {
+      return (
+        <ul>
+          {[
+            { id: 1, title: 'a' },
+            { id: 2, title: 'b' },
+          ].map((item, idx) => {
+            return <li key={item.id}>{item.title}</li>;
+          })}
+        </ul>
+      );
+    }}
+  </Story>
+</Preview>
+
+### formatted HTML
+
+<Preview withSource={{ language: 'html', state: SourceState.OPEN }}>
+  {/* prettier-ignore */}
+  <Story name="formatted HTML in MDX">
+    <p> Lorem ipsum <br />
+            Dolor sit amet </p>
+  </Story>
+</Preview>

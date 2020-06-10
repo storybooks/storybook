@@ -11,6 +11,7 @@
 - [Writing stories](#writing-stories)
 - [Embedding stories](#embedding-stories)
 - [Decorators and parameters](#decorators-and-parameters)
+- [Formatting](#formatting)
 - [Documentation-only MDX](#documentation-only-mdx)
 - [MDX file names](#mdx-file-names)
 - [More resources](#more-resources)
@@ -170,6 +171,18 @@ import { addDecorator, addParameters } from '@storybook/react';
 
 addDecorator(...);
 addParameters({ ... });
+```
+
+## Formatting
+
+Source code of stories defined in MDX is formatted with Prettier.
+You can opt out of the formatting by passing `withSource.format: false` to Preview block.
+
+```jsx
+<Preview withSource={{ format: false }}>
+  <Story name="story-1">...</Story>
+  <Story name="story-2">...</Story>
+</Preview>
 ```
 
 ## Documentation-only MDX

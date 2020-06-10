@@ -8,7 +8,7 @@
     "storybook": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true start-storybook -p 9011 -c ./ --no-dll"
   },
   "dependencies": {
-    "@storybook/addon-controls": "6.0.0-beta.22",
+    "@storybook/addon-controls": "6.0.0-beta.23",
     "@storybook/addon-essentials": "6.0.0-beta.23",
     "@storybook/react": "6.0.0-beta.23",
     "@types/react": "^16.9.35",

@@ -4,10 +4,7 @@ import { DocsContext, DocsContextProps } from './DocsContext';
 import { CURRENT_SELECTION } from './types';
 import { enhanceSource } from './enhanceSource';
 
-interface CommonProps {
-  language?: string;
-  dark?: boolean;
-}
+type CommonProps = Pick<PureSourceProps, 'language' | 'dark' | 'format'>;
 
 type SingleSourceProps = {
   id: string;
@@ -46,8 +43,14 @@ export const getSourceProps = (
       })
       .join('\n\n');
   }
+
   return source
-    ? { code: source, language: props.language || 'jsx', dark: props.dark || false }
+    ? {
+        format: props.format ?? true,
+        dark: props.dark ?? false,
+        language: props.language ?? 'jsx',
+        code: source,
+      }
     : { error: SourceError.SOURCE_UNAVAILABLE };
 };
 

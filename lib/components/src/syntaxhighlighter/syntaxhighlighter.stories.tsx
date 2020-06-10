@@ -196,4 +196,14 @@ storiesOf('Basics/SyntaxHighlighter', module)
         export { result as default };
       `}
     </SyntaxHighlighter>
+  ))
+  .add('format', () => (
+    <SyntaxHighlighter language="jsx" format>
+      {`
+        import { Good, Things, And, Wonderful, People } from 'life';
+        const result = () => <And><Good><Things /></Good><Wonderful>
+        <People /></Wonderful></And>;
+        export { result as default };
+      `}
+    </SyntaxHighlighter>
   ));
