@@ -19,14 +19,16 @@ export const extractArgTypes = (componentName) => {
     return null;
   }
   const rows = componentDoc.attributes.arguments.map((prop) => {
+    const required = prop.tags.length ? prop.tags.some((tag) => tag.name === 'required') : false;
     return {
       name: prop.name,
-      defaultValue: prop.defaultValue,
       description: prop.description,
+      required,
+      defaultValue: prop.defaultValue,
       table: {
         type: {
           summary: prop.type,
-          required: prop.tags.length ? prop.tags.some((tag) => tag.name === 'required') : false,
+          required,
         },
       },
     };

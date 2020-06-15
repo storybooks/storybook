@@ -21,12 +21,13 @@ export const extractArgTypes: ArgTypesExtractor = (component) => {
         name,
         description,
         type: { required, ...sbType },
+        required,
         defaultValue: defaultValue && trim(defaultValue.detail || defaultValue.summary),
         table: {
+          category: section,
           type,
           jsDocTags,
           defaultValue,
-          category: section,
         },
       };
     });

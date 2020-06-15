@@ -39,9 +39,9 @@ function mapData(data: TagItem[], category: string) {
       const type = category === 'properties' ? { name: item.type } : { name: 'void' };
       acc[item.name] = {
         name: item.name,
-        required: false,
         description: item.description,
         type,
+        required: false,
         table: {
           category,
           type: { summary: item.type },

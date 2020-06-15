@@ -9,6 +9,7 @@ Object {
     "table": Object {
       "category": "properties",
       "type": Object {
+        "private": true,
         "required": true,
         "summary": "string",
       },
@@ -25,6 +26,7 @@ Object {
     "table": Object {
       "category": "properties",
       "type": Object {
+        "private": true,
         "required": true,
         "summary": "string",
       },
@@ -41,6 +43,7 @@ Object {
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "\\"primary\\" | \\"secondary\\"",
       },
@@ -55,11 +58,12 @@ Object {
   },
   "buttonRef": Object {
     "defaultValue": undefined,
-    "description": "",
+    "description": "\`@ViewChild('buttonRef', {static: false})\`",
     "name": "buttonRef",
     "table": Object {
       "category": "view child",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "ElementRef",
       },
@@ -76,6 +80,7 @@ Object {
     "table": Object {
       "category": "methods",
       "type": Object {
+        "private": false,
         "required": false,
         "summary": "(x: number, y: string | number) => number",
       },
@@ -92,6 +97,7 @@ Object {
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "string",
       },
@@ -108,6 +114,7 @@ Object {
     "table": Object {
       "category": "properties",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "string",
       },
@@ -124,6 +131,7 @@ Object {
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": undefined,
       },
@@ -134,11 +142,12 @@ Object {
   },
   "item": Object {
     "defaultValue": undefined,
-    "description": undefined,
+    "description": "",
     "name": "item",
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "[]",
       },
@@ -155,6 +164,7 @@ Object {
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "string",
       },
@@ -172,6 +182,7 @@ Object {
     "table": Object {
       "category": "outputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "EventEmitter",
       },
@@ -188,6 +199,7 @@ Object {
     "table": Object {
       "category": "methods",
       "type": Object {
+        "private": true,
         "required": false,
         "summary": "(password: string) => void",
       },
@@ -203,6 +215,7 @@ Object {
     "table": Object {
       "category": "properties",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "T[]",
       },
@@ -219,6 +232,7 @@ Object {
     "table": Object {
       "category": "methods",
       "type": Object {
+        "private": false,
         "required": false,
         "summary": "(id?: number) => void",
       },
@@ -235,6 +249,7 @@ Object {
     "table": Object {
       "category": "methods",
       "type": Object {
+        "private": false,
         "required": false,
         "summary": "(things: ISomeInterface) => void",
       },
@@ -245,11 +260,12 @@ Object {
   },
   "showKeyAlias": Object {
     "defaultValue": undefined,
-    "description": undefined,
+    "description": "",
     "name": "showKeyAlias",
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "",
       },
@@ -266,6 +282,7 @@ Object {
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": "ButtonSize",
       },
@@ -282,6 +299,7 @@ Object {
     "table": Object {
       "category": "inputs",
       "type": Object {
+        "private": false,
         "required": true,
         "summary": undefined,
       },

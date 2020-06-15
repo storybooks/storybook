@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { styled } from '@storybook/theming';
 import { ArgsTable, Link } from '@storybook/components';
-import { useArgs, useArgTypes, useParameter } from '@storybook/api';
+import { ArgType, useArgs, useArgTypes, useParameter } from '@storybook/api';
 import { PARAM_KEY } from '../constants';
 
 interface ControlsParameters {
   expanded?: boolean;
+  filterFn?: (argType: ArgType) => boolean;
   hideNoControlsWarning?: boolean;
 }
 
@@ -30,11 +31,17 @@ const NoControlsWarning = () => (
 export const ControlsPanel: FC = () => {
   const [args, updateArgs] = useArgs();
   const rows = useArgTypes();
-  const { expanded, hideNoControlsWarning = false } = useParameter<ControlsParameters>(
-    PARAM_KEY,
-    {}
-  );
+  const {
+    expanded,
+    filterFn = (argType) => !argType?.table?.type?.private,
+    hideNoControlsWarning = false,
+  } = useParameter<ControlsParameters>(PARAM_KEY, {});
   const hasControls = Object.values(rows).filter((argType) => argType?.control?.type).length > 0;
+
+  Object.keys(rows).forEach((key) => {
+    if (!filterFn(rows[key])) delete rows[key];
+  });
+
   return (
     <>
       {hasControls || hideNoControlsWarning ? null : <NoControlsWarning />}

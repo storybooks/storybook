@@ -103,6 +103,10 @@ const displaySignature = (item: Method): string => {
   return `(${args.join(', ')}) => ${item.returnType}`;
 };
 
+const doesHaveModifier = (kind: number, modifierKind?: number[]) => {
+  return (modifierKind || []).includes(kind);
+};
+
 const extractTypeFromValue = (defaultValue: any) => {
   const valueType = typeof defaultValue;
   return defaultValue || valueType === 'boolean' ? valueType : null;
@@ -170,16 +174,25 @@ export const extractArgTypesFromData = (componentData: Class | Directive | Injec
         isMethod(item) || section !== 'inputs'
           ? { name: 'void' }
           : extractType(item as Property, defaultValue);
+      const decorators = (item.decorators || [])
+        .map(({ name, stringifiedArguments }) => {
+          return `@${name}${stringifiedArguments ? `(${stringifiedArguments})` : ''}`;
+        })
+        .join(' ');
+      const description = [item.description, decorators ? `\`${decorators}\`` : '']
+        .filter(Boolean)
+        .join('<br />');
       const argType = {
         name: item.name,
-        description: item.description,
-        defaultValue,
+        description,
         type,
+        defaultValue,
         table: {
           category: section,
           type: {
             summary: isMethod(item) ? displaySignature(item) : item.type,
             required: isMethod(item) ? false : !item.optional,
+            private: doesHaveModifier(112 /* SyntaxKind.PrivateKeyword */, item.modifierKind),
           },
         },
       };
