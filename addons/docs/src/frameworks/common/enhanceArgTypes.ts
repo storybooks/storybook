@@ -1,5 +1,5 @@
 import mapValues from 'lodash/mapValues';
-import { ArgTypesEnhancer, combineParameters } from '@storybook/client-api';
+import { StoryArgTypesEnhancer, combineParameters } from '@storybook/client-api';
 import { ArgTypes } from '@storybook/api';
 import { inferArgTypes } from './inferArgTypes';
 import { inferControls } from './inferControls';
@@ -12,7 +12,7 @@ const isSubset = (kind: string, subset: object, superset: object) => {
   return overlap.length === keys.length;
 };
 
-export const enhanceArgTypes: ArgTypesEnhancer = (context) => {
+export const enhanceArgTypes: StoryArgTypesEnhancer = (context) => {
   const { component, argTypes: userArgTypes = {}, docs = {}, args = {} } = context.parameters;
   const { extractArgTypes, forceExtractedArgTypes = false } = docs;
 

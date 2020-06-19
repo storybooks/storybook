@@ -1,5 +1,5 @@
 import mapValues from 'lodash/mapValues';
-import { ArgTypesEnhancer } from '@storybook/client-api';
+import { StoryArgTypesEnhancer } from '@storybook/client-api';
 
 import { action } from '../index';
 
@@ -12,7 +12,7 @@ import { action } from '../index';
  * Automatically add action args for argTypes whose name
  * matches a regex, such as `^on.*` for react-style `onClick` etc.
  */
-export const inferActionsFromArgTypesRegex: ArgTypesEnhancer = (context) => {
+export const inferActionsFromArgTypesRegex: StoryArgTypesEnhancer = (context) => {
   const { actions, argTypes } = context.parameters;
   if (!actions || actions.disable || !actions.argTypesRegex || !argTypes) {
     return argTypes;
@@ -30,7 +30,7 @@ export const inferActionsFromArgTypesRegex: ArgTypesEnhancer = (context) => {
 /**
  * Add action args for list of strings.
  */
-export const addActionsFromArgTypes: ArgTypesEnhancer = (context) => {
+export const addActionsFromArgTypes: StoryArgTypesEnhancer = (context) => {
   const { argTypes, actions } = context.parameters;
   if (actions?.disable || !argTypes) {
     return argTypes;

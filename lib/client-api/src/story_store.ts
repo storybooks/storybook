@@ -27,7 +27,8 @@ import {
   PublishedStoreItem,
   ErrorLike,
   GetStorybookKind,
-  ArgTypesEnhancer,
+  ComponentArgTypesEnhancer,
+  StoryArgTypesEnhancer,
 } from './types';
 import { HooksContext } from './hooks';
 import storySort from './storySort';
@@ -42,7 +43,7 @@ interface StoryOptions {
   includeDocsOnly?: boolean;
 }
 
-type KindMetadata = StoryMetadata & { order: number };
+type KindMetadata = StoryMetadata & { order: number; enhanced?: boolean };
 
 const isStoryDocsOnly = (parameters?: Parameters) => {
   return parameters && parameters.docsOnly;
@@ -108,7 +109,9 @@ export default class StoryStore {
   // Keyed on storyId
   _stories: StoreData;
 
-  _argTypesEnhancers: ArgTypesEnhancer[];
+  _componentArgTypesEnhancers: ComponentArgTypesEnhancer[];
+
+  _storyArgTypesEnhancers: StoryArgTypesEnhancer[];
 
   _selection: Selection;
 
@@ -120,7 +123,8 @@ export default class StoryStore {
     this._globalMetadata = { parameters: {}, decorators: [] };
     this._kinds = {};
     this._stories = {};
-    this._argTypesEnhancers = [];
+    this._componentArgTypesEnhancers = [];
+    this._storyArgTypesEnhancers = [];
     this._selection = {} as any;
     this._error = undefined;
     this._channel = params.channel;
@@ -213,6 +217,34 @@ export default class StoryStore {
     }
   }
 
+  enhanceKindArgTypes(kind: string) {
+    this.ensureKind(kind);
+    const kindData = this._kinds[kind];
+    if (kindData.enhanced) {
+      return;
+    }
+
+    const { argTypes = {} } = this._componentArgTypesEnhancers.reduce(
+      (accumulatedParameters: Parameters, enhancer) => ({
+        ...accumulatedParameters,
+        argTypes: enhancer({
+          ...kindData,
+          kind,
+          parameters: accumulatedParameters,
+          args: {},
+          // FIXME: fix types, drop these
+          id: '',
+          name: '',
+          globalArgs: {},
+        }),
+      }),
+      { ...kindData.parameters }
+    );
+
+    kindData.parameters.argTypes = argTypes;
+    kindData.enhanced = true;
+  }
+
   addKindMetadata(kind: string, { parameters, decorators }: StoryMetadata) {
     this.ensureKind(kind);
     if (parameters) {
@@ -224,11 +256,18 @@ export default class StoryStore {
     this._kinds[kind].decorators.push(...decorators);
   }
 
-  addArgTypesEnhancer(argTypesEnhancer: ArgTypesEnhancer) {
+  addComponentArgTypesEnhancer(argTypesEnhancer: ComponentArgTypesEnhancer) {
     if (Object.keys(this._stories).length > 0)
-      throw new Error('Cannot add a parameter enhancer to the store after a story has been added.');
+      throw new Error('Cannot add an argTypes enhancer to the store after a story has been added.');
 
-    this._argTypesEnhancers.push(argTypesEnhancer);
+    this._componentArgTypesEnhancers.push(argTypesEnhancer);
+  }
+
+  addStoryArgTypesEnhancer(argTypesEnhancer: StoryArgTypesEnhancer) {
+    if (Object.keys(this._stories).length > 0)
+      throw new Error('Cannot add an argTypes enhancer to the store after a story has been added.');
+
+    this._storyArgTypesEnhancers.push(argTypesEnhancer);
   }
 
   // Combine the global, kind & story parameters of a story
@@ -287,7 +326,7 @@ export default class StoryStore {
     // immutable original storyFn
     const getOriginal = () => original;
 
-    this.ensureKind(kind);
+    this.enhanceKindArgTypes(kind);
     const kindMetadata: KindMetadata = this._kinds[kind];
     const decorators = [
       ...storyDecorators,
@@ -312,7 +351,7 @@ export default class StoryStore {
     // We need the combined parameters now in order to calculate argTypes, but we won't keep them
     const combinedParameters = this.combineStoryParameters(storyParameters, kind);
 
-    const { argTypes = {} } = this._argTypesEnhancers.reduce(
+    const { argTypes = {} } = this._storyArgTypesEnhancers.reduce(
       (accumlatedParameters: Parameters, enhancer) => ({
         ...accumlatedParameters,
         argTypes: enhancer({
@@ -384,6 +423,7 @@ export default class StoryStore {
 
     this._kinds[kind].parameters = {};
     this._kinds[kind].decorators = [];
+    this._kinds[kind].enhanced = false;
 
     this.cleanHooksForKind(kind);
     this._stories = Object.entries(this._stories).reduce((acc: StoreData, [id, story]) => {
@@ -457,7 +497,10 @@ export default class StoryStore {
       const extracted = toExtracted(story);
       if (options.normalizeParameters) return Object.assign(acc, { [id]: extracted });
 
-      const { parameters, kind } = extracted as { parameters: Parameters; kind: StoryKind };
+      const { parameters, kind } = extracted as {
+        parameters: Parameters;
+        kind: StoryKind;
+      };
       return Object.assign(acc, {
         [id]: Object.assign(extracted, {
           parameters: this.combineStoryParameters(parameters, kind),

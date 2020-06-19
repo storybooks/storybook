@@ -23,7 +23,8 @@ export interface StoryMetadata {
   parameters: Parameters;
   decorators: DecoratorFunction[];
 }
-export type ArgTypesEnhancer = (context: StoryContext) => ArgTypes;
+export type ComponentArgTypesEnhancer = (context: StoryContext) => ArgTypes;
+export type StoryArgTypesEnhancer = (context: StoryContext) => ArgTypes;
 
 export type AddStoryArgs = StoryIdentifier & {
   storyFn: StoryFn<any>;

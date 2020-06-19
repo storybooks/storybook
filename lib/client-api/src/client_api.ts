@@ -8,7 +8,8 @@ import {
   DecoratorFunction,
   ClientApiAddons,
   StoryApi,
-  ArgTypesEnhancer,
+  ComponentArgTypesEnhancer,
+  StoryArgTypesEnhancer,
 } from './types';
 import { applyHooks } from './hooks';
 import StoryStore from './story_store';
@@ -31,11 +32,22 @@ export const addParameters = (parameters: Parameters) => {
   singleton.addParameters(parameters);
 };
 
-export const addArgTypesEnhancer = (enhancer: ArgTypesEnhancer) => {
+export const addComponentArgTypesEnhancer = (enhancer: ComponentArgTypesEnhancer) => {
   if (!singleton)
-    throw new Error(`Singleton client API not yet initialized, cannot call addArgTypesEnhancer`);
+    throw new Error(
+      `Singleton client API not yet initialized, cannot call addComponentArgTypesEnhancer`
+    );
 
-  singleton.addArgTypesEnhancer(enhancer);
+  singleton.addComponentArgTypesEnhancer(enhancer);
+};
+
+export const addStoryArgTypesEnhancer = (enhancer: StoryArgTypesEnhancer) => {
+  if (!singleton)
+    throw new Error(
+      `Singleton client API not yet initialized, cannot call addStoryArgTypesEnhancer`
+    );
+
+  singleton.addStoryArgTypesEnhancer(enhancer);
 };
 
 export default class ClientApi {
@@ -105,8 +117,12 @@ export default class ClientApi {
     this._storyStore.addGlobalMetadata({ decorators: [], parameters });
   };
 
-  addArgTypesEnhancer = (enhancer: ArgTypesEnhancer) => {
-    this._storyStore.addArgTypesEnhancer(enhancer);
+  addComponentArgTypesEnhancer = (enhancer: ComponentArgTypesEnhancer) => {
+    this._storyStore.addComponentArgTypesEnhancer(enhancer);
+  };
+
+  addStoryArgTypesEnhancer = (enhancer: StoryArgTypesEnhancer) => {
+    this._storyStore.addStoryArgTypesEnhancer(enhancer);
   };
 
   clearDecorators = () => {
@@ -210,7 +226,10 @@ export default class ClientApi {
         throw new Error(`You cannot add a decorator after the first story for a kind.
 Read more here: https://github.com/storybookjs/storybook/blob/master/MIGRATION.md#can-no-longer-add-decorators-parameters-after-stories`);
 
-      this._storyStore.addKindMetadata(kind, { decorators: [decorator], parameters: [] });
+      this._storyStore.addKindMetadata(kind, {
+        decorators: [decorator],
+        parameters: [],
+      });
       return api;
     };
 
