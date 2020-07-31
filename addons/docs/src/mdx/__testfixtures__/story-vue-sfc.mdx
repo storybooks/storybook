@@ -1,0 +1,22 @@
+import { Story, Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="MDX|Welcome" />
+
+# Story object
+
+<Story name="to storybook" height="300px">
+  ```vue
+  <template>
+    <button>click me {{ name }}</button>
+  </template>
+  <script>
+    export default {
+      data() {
+        return {
+          name: 'foo'
+        }
+      }
+    }
+  </script>
+  ```
+</Story>

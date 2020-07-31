@@ -3,6 +3,7 @@ const parser = require('@babel/parser');
 const generate = require('@babel/generator').default;
 const camelCase = require('lodash/camelCase');
 const jsStringEscape = require('js-string-escape');
+const transformSfc = require('./transform-vue-sfc');
 
 // Generate the MDX as is, but append named exports for every
 // story in the contents
@@ -119,7 +120,7 @@ function genStoryExport(ast, context) {
 
   let parameters = getAttr(ast.openingElement, 'parameters');
   parameters = parameters && parameters.expression;
-  const source = jsStringEscape(storyCode);
+  const source = jsStringEscape(context.source || storyCode);
   const sourceParam = `storySource: { source: '${source}' }`;
   if (parameters) {
     const { code: params } = generate(parameters, {});
@@ -143,14 +144,17 @@ function genStoryExport(ast, context) {
   };
 }
 
-function genPreviewExports(ast, context) {
+function genPreviewExports(ast, context, sources = []) {
   // console.log('genPreviewExports', JSON.stringify(ast, null, 2));
 
   const previewExports = {};
   for (let i = 0; i < ast.children.length; i += 1) {
     const child = ast.children[i];
     if (child.type === 'JSXElement' && child.openingElement.name.name === 'Story') {
-      const storyExport = genStoryExport(child, context);
+      const storyExport = genStoryExport(child, {
+        ...context,
+        source: sources[context.counter],
+      });
       if (storyExport) {
         Object.assign(previewExports, storyExport);
         // eslint-disable-next-line no-param-reassign
@@ -202,18 +206,18 @@ function genMeta(ast, options) {
 }
 
 function getExports(node, counter, options) {
-  const { value, type } = node;
+  const { value, type, source } = node;
   if (type === 'jsx') {
     if (STORY_REGEX.exec(value)) {
       // Single story
       const ast = parser.parseExpression(value, { plugins: ['jsx'] });
-      const storyExport = genStoryExport(ast, counter);
+      const storyExport = genStoryExport(ast, { ...counter, source });
       return storyExport && { stories: storyExport };
     }
     if (PREVIEW_REGEX.exec(value)) {
       // Preview, possibly containing multiple stories
       const ast = parser.parseExpression(value, { plugins: ['jsx'] });
-      return { stories: genPreviewExports(ast, counter) };
+      return { stories: genPreviewExports(ast, { ...counter }, source) };
     }
     if (META_REGEX.exec(value)) {
       // Preview, possibly containing multiple stories
@@ -261,6 +265,14 @@ const hasStoryChild = (node) => {
 function extractExports(node, options) {
   node.children.forEach((child) => {
     if (child.type === 'jsx') {
+      const vueSfc = transformSfc(child.value);
+      if (vueSfc) {
+        // eslint-disable-next-line no-param-reassign
+        child.value = vueSfc.story;
+        // eslint-disable-next-line no-param-reassign
+        child.source = vueSfc.source;
+      }
+
       try {
         const ast = parser.parseExpression(child.value, { plugins: ['jsx'] });
         if (

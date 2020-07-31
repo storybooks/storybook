@@ -38,11 +38,13 @@ storiesOf('Button', module).add('rounded', () => ({
 
 Similarly, here's how we do it in the Docs MDX format:
 
+<Preview>
 <Story name="rounded">
   {{
     template: '<my-button :rounded="true">A Button with rounded edges</my-button>',
   }}
 </Story>
+</Preview>
 
 This isn't the final syntax, but it gets the job done.
 
@@ -50,11 +52,41 @@ This isn't the final syntax, but it gets the job done.
 
 Let's add another one. The UI updates automatically as you'd expect.
 
+<Preview>
 <Story name="square">
   {{
     template: '<my-button :rounded="false">A Button with square edges</my-button>',
   }}
 </Story>
+</Preview>
+
+## SFC Syntax is supported
+
+You can also write stories in Vue SFC syntax.
+
+<Preview>
+<Story name="SFC Syntax">
+```vue
+<template>
+  <my-button :rounded="false" @click="countUp">Counter {{ counter }}</my-button>
+</template>
+<script>
+  export default {
+    methods: {
+      countUp() {
+        this.counter++
+      }
+    },
+    data() {
+      return {
+        counter: 0,
+      }
+    }
+  }
+</script>
+```
+</Story>
+</Preview>
 
 ## Longform docs
 

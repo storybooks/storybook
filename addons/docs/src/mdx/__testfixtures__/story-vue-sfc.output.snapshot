@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`docs-mdx-compiler-plugin story-vue-sfc.mdx 1`] = `
+"/* @jsx mdx */
+import { assertIsFn, AddContext } from '@storybook/addon-docs/blocks';
+
+import { Story, Meta } from '@storybook/addon-docs/blocks';
+
+const makeShortcode = name =>
+  function MDXDefaultShortcode(props) {
+    console.warn(
+      'Component ' +
+        name +
+        ' was not imported, exported, or provided by MDXProvider as global scope'
+    );
+    return <div {...props} />;
+  };
+
+const layoutProps = {};
+const MDXLayout = 'wrapper';
+function MDXContent({ components, ...props }) {
+  return (
+    <MDXLayout {...layoutProps} {...props} components={components} mdxType=\\"MDXLayout\\">
+      <Meta title=\\"MDX|Welcome\\" mdxType=\\"Meta\\" />
+      <h1>{\`Story object\`}</h1>
+      <Story name=\\"to storybook\\" height=\\"300px\\" mdxType=\\"Story\\">
+        {{
+          template: \`
+<button>click me {{ name }}</button>
+\`,
+
+          data() {
+            return {
+              name: 'foo',
+            };
+          },
+        }}
+      </Story>
+    </MDXLayout>
+  );
+}
+
+MDXContent.isMDXComponent = true;
+
+export const toStorybook = () => ({
+  template: \`
+<button>click me {{ name }}</button>
+\`,
+
+  data() {
+    return {
+      name: 'foo',
+    };
+  },
+});
+toStorybook.story = {};
+toStorybook.story.name = 'to storybook';
+toStorybook.story.parameters = {
+  mdxSource:
+    \\"\\\\n  <template>\\\\n    <button>click me {{ name }}</button>\\\\n  </template>\\\\n  <script>\\\\n    export default {\\\\n      data() {\\\\n        return {\\\\n          name: 'foo'\\\\n        }\\\\n      }\\\\n    }\\\\n  </script>\\\\n  \\",
+};
+
+const componentMeta = { title: 'MDX|Welcome', includeStories: ['toStorybook'] };
+
+const mdxStoryNameToKey = { 'to storybook': 'toStorybook' };
+
+componentMeta.parameters = componentMeta.parameters || {};
+componentMeta.parameters.docs = {
+  ...(componentMeta.parameters.docs || {}),
+  page: () => (
+    <AddContext mdxStoryNameToKey={mdxStoryNameToKey} mdxComponentMeta={componentMeta}>
+      <MDXContent />
+    </AddContext>
+  ),
+};
+
+export default componentMeta;
+"
+`;
