@@ -161,6 +161,7 @@ export const parameters = {
 
 export const globals = {
   foo: 'fooValue',
+  colorScheme: 'dark',
 };
 
 export const globalTypes = {

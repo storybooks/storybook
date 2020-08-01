@@ -14,6 +14,7 @@ export interface DocsContextProps {
   mdxComponentMeta?: any;
   parameters?: any;
   storyStore?: any;
+  globalArgs?: any;
   forceRender?: () => void;
 }
 
