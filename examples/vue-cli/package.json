@@ -9,21 +9,24 @@
     "storybook": "start-storybook -p 9009 -s public"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "vue": "^2.6.8",
-    "vue-class-component": "^7.2.3",
+    "vue-class-component": "^7.2.5",
     "vue-property-decorator": "^9.0.0"
   },
   "devDependencies": {
     "@storybook/addon-controls": "6.0.16",
     "@storybook/addon-essentials": "6.0.16",
+    "@storybook/addon-storysource": "6.0.16",
     "@storybook/preset-scss": "^1.0.2",
     "@storybook/source-loader": "6.0.16",
     "@storybook/vue": "6.0.16",
-    "@vue/cli-plugin-babel": "~4.3.0",
-    "@vue/cli-plugin-typescript": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
-    "typescript": "^3.9.3",
-    "vue-template-compiler": "^2.6.11"
+    "@vue/cli-plugin-babel": "~4.5.4",
+    "@vue/cli-plugin-typescript": "~4.5.4",
+    "@vue/cli-service": "~4.5.4",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.3",
+    "typescript": "^4.0.2",
+    "vue-template-compiler": "^2.6.12"
   }
 }

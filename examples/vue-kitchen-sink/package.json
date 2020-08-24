@@ -9,11 +9,11 @@
     "storybook": "start-storybook -p 9009 -s public"
   },
   "dependencies": {
-    "vue": "^2.6.8",
-    "vuex": "^3.1.0"
+    "vue": "^2.6.12",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.11.4",
     "@storybook/addon-a11y": "6.0.16",
     "@storybook/addon-actions": "6.0.16",
     "@storybook/addon-backgrounds": "6.0.16",
@@ -28,15 +28,18 @@
     "@storybook/source-loader": "6.0.16",
     "@storybook/vue": "6.0.16",
     "@vue/babel-preset-jsx": "^1.1.2",
-    "babel-loader": "^8.0.5",
-    "cross-env": "^7.0.0",
+    "babel-loader": "^8.1.0",
+    "cross-env": "^7.0.2",
     "file-loader": "^6.0.0",
     "prop-types": "^15.7.2",
-    "svg-url-loader": "^5.0.0",
-    "vue-loader": "^15.7.0",
+    "svg-url-loader": "^6.0.0",
+    "typescript": "^4.0.2",
+    "vue-loader": "^15.9.3",
     "vue-style-loader": "^4.1.2",
-    "webpack": "^4.33.0",
-    "webpack-dev-server": "^3.8.2"
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "storybook": {
     "chromatic": {
