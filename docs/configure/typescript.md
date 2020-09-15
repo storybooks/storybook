@@ -36,3 +36,5 @@ The following code snippets shows the fields for you to use with TypeScript:
 | **checkOptions**                 | All       | Options to pass to fork-ts-checker-webpack-plugin if it's enabled                        | [See docs](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin)      |
 | **reactDocgen**                  | React     | Which react docgen processor to run: `react-docgen-typescript`, `react-docgen`, `none`   | string                                                                        |
 | **reactDocgenTypescriptOptions** | React     | Options to pass to react-docgen-typescript-plugin if react-docgen-typescript is enabled. | [See docs](https://github.com/hipstersmoothie/react-docgen-typescript-plugin) |
+
+Default value is [here](https://github.com/storybookjs/storybook/blob/next/lib/core/src/server/config/defaults.js)
