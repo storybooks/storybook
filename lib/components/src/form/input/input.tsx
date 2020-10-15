@@ -1,4 +1,11 @@
-import React, { FunctionComponent, forwardRef, HTMLProps, SelectHTMLAttributes } from 'react';
+import React, {
+  FunctionComponent,
+  forwardRef,
+  HTMLProps,
+  SelectHTMLAttributes,
+  ChangeEvent,
+  KeyboardEvent,
+} from 'react';
 import { styled, Theme, CSSObject } from '@storybook/theming';
 
 import TextareaAutoResize, { TextareaAutosizeProps } from 'react-textarea-autosize';
@@ -57,7 +64,7 @@ export interface InputStyleProps {
   height?: number;
 }
 
-const sizes = ({ size }: { size?: Sizes }): CSSObject => {
+const sizes = ({ size }: Pick<InputStyleProps, 'size'>): CSSObject => {
   switch (size) {
     case '100%': {
       return { width: '100%' };
@@ -71,7 +78,7 @@ const sizes = ({ size }: { size?: Sizes }): CSSObject => {
     }
   }
 };
-const alignment = ({ align }: InputStyleProps): CSSObject => {
+const alignment = ({ align }: Pick<InputStyleProps, 'align'>): CSSObject => {
   switch (align) {
     case 'end': {
       return { textAlign: 'right' };
@@ -85,7 +92,10 @@ const alignment = ({ align }: InputStyleProps): CSSObject => {
     }
   }
 };
-const validation = ({ valid, theme }: { valid: ValidationStates; theme: Theme }): CSSObject => {
+const validation = ({
+  valid,
+  theme,
+}: Pick<InputStyleProps, 'valid'> & { valid: ValidationStates; theme: Theme }): CSSObject => {
   switch (valid) {
     case 'valid': {
       return { boxShadow: `${theme.color.positive} 0 0 0 1px inset !important` };
@@ -175,5 +185,80 @@ export const Button: FunctionComponent<any> = Object.assign(
   )),
   {
     displayName: 'Button',
+  }
+);
+
+export const parse = (value: string) => {
+  const result = parseFloat(value);
+  return Number.isNaN(result) ? '' : result;
+};
+
+type NumericSizes = Sizes | 'content';
+
+const numericSizes = ({ value, size }: { value?: number; size?: NumericSizes }): CSSObject => {
+  switch (size) {
+    case 'content': {
+      return {
+        width: `calc(${value ? value.toString().length : 1}ch + 20px)`,
+        boxSizing: 'content-box',
+        padding: '6px 10px',
+        // Override the default 32 as we are using content-box.
+        minHeight: 20,
+      };
+    }
+    default: {
+      return sizes({ size });
+    }
+  }
+};
+
+type NumericInputStyleProps = Omit<InputStyleProps, 'size'> & {
+  size?: NumericSizes;
+};
+
+type NumericInputOwnProps = {
+  value?: number;
+  defaultValue?: number;
+  onChange: (value: number | '') => number | void;
+} & NumericInputStyleProps;
+type NumericInputProps = Omit<HTMLProps<HTMLInputElement>, keyof NumericInputOwnProps> &
+  NumericInputOwnProps;
+export const NumericInput = Object.assign(
+  styled(
+    forwardRef<any, NumericInputProps>(
+      ({ size, valid, align, onChange, onKeyDown, ...props }, ref) => {
+        const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+          onChange(parse(event.target.value));
+        };
+        const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+          if (event.keyCode === 27) {
+            event.currentTarget.blur();
+          }
+          if (onKeyDown) {
+            onKeyDown(event);
+          }
+        };
+        return (
+          <input
+            type="number"
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            {...props}
+            ref={ref}
+          />
+        );
+      }
+    )
+  )<NumericInputStyleProps>(
+    styles,
+    alignment,
+    validation,
+    {
+      minHeight: 32,
+    },
+    numericSizes
+  ),
+  {
+    displayName: 'NumericInput',
   }
 );

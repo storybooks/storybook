@@ -32898,6 +32898,11 @@ use-composed-ref@^1.0.0:
   dependencies:
     ts-essentials "^2.0.3"
 
+use-debounce@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-5.0.1.tgz#b11861bc63970bfc6fd8393a0a3cc3d7cb5944ce"
+  integrity sha512-YHzlVa7qKFRlrMpVRiStGWGE0lumwJiQPvsTMlatsIrck39ycyJkdf0npUYG5MJEVxaJQWwvpmePRYZb534upg==
+
 use-image@^1.0.3:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/use-image/-/use-image-1.0.5.tgz#51fa23fe705c3ad0d4ae3eca6cf636551c591693"

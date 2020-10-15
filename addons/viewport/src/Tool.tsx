@@ -1,15 +1,24 @@
 /* eslint-disable no-fallthrough */
-import React, { Fragment, ReactNode, useEffect, useRef, FunctionComponent, memo } from 'react';
+import React, {
+  Fragment,
+  ReactNode,
+  useEffect,
+  useRef,
+  FunctionComponent,
+  memo,
+  useState,
+} from 'react';
 import memoize from 'memoizerific';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { styled, Global, Theme, withTheme } from '@storybook/theming';
 
-import { Icons, IconButton, WithTooltip, TooltipLinkList } from '@storybook/components';
+import { Icons, IconButton, WithTooltip, TooltipLinkList, Form } from '@storybook/components';
 
 import { useParameter, useAddonState } from '@storybook/api';
 import { PARAM_KEY, ADDON_ID } from './constants';
 import { MINIMAL_VIEWPORTS } from './defaults';
-import { ViewportAddonParameter, ViewportMap, ViewportStyles, Styles } from './models';
+import { ViewportAddonParameter, ViewportMap, ViewportStyles, Styles, Viewport } from './models';
 
 interface ViewportItem {
   id: string;
@@ -24,20 +33,29 @@ const toList = memoize(50)((items: ViewportMap): ViewportItem[] => [
   ...Object.entries(items).map(([id, { name, ...rest }]) => ({ ...rest, id, title: name })),
 ]);
 
-const responsiveViewport: ViewportItem = {
+const resetViewport: ViewportItem = {
   id: 'reset',
   title: 'Reset viewport',
   styles: null,
   type: 'other',
 };
 
-const baseViewports: ViewportItem[] = [responsiveViewport];
+const responsiveViewport: ViewportItem = {
+  id: 'responsive',
+  title: 'Responsive',
+  styles: (prevStyles) => {
+    return prevStyles;
+  },
+  type: 'other',
+};
+
+const baseViewports: ViewportItem[] = [resetViewport, responsiveViewport];
 
 const toLinks = memoize(50)((list: ViewportItem[], active: LinkBase, set, state, close): Link[] => {
   return list
     .map((i) => {
       switch (i.id) {
-        case responsiveViewport.id: {
+        case resetViewport.id: {
           if (active.id === i.id) {
             return null;
           }
@@ -81,18 +99,14 @@ const ActiveViewportSize = styled.div(() => ({
   display: 'inline-flex',
 }));
 
-const ActiveViewportLabel = styled.div<{}>(({ theme }) => ({
-  display: 'inline-block',
-  textDecoration: 'none',
-  padding: 10,
-  fontWeight: theme.typography.weight.bold,
-  fontSize: theme.typography.size.s2 - 1,
-  lineHeight: '1',
-  height: 40,
-  border: 'none',
-  borderTop: '3px solid transparent',
-  borderBottom: '3px solid transparent',
-  background: 'transparent',
+const ActiveViewportNumericInput = styled(Form.NumericInput)(() => ({
+  flexGrow: 0,
+  alignSelf: 'center',
+  padding: '2px 2px 2px 6px',
+}));
+
+const ActiveViewportIconButton = styled(IconButton)(() => ({
+  margin: '0 10px',
 }));
 
 const IconButtonWithLabel = styled(IconButton)(() => ({
@@ -108,32 +122,109 @@ const IconButtonLabel = styled.div<{}>(({ theme }) => ({
 interface ViewportToolState {
   isRotated: boolean;
   selected: string | null;
+  width: number;
+  height: number;
 }
+
+const getSizeFromStyles = (
+  styles: ViewportStyles,
+  state: ViewportToolState
+): { width: number; height: number } => {
+  let { width, height } = state;
+  if (styles) {
+    if (styles.width) {
+      const w = parseInt(styles.width.replace('px', ''), 10);
+      if (!Number.isNaN(w)) {
+        width = w;
+      }
+    }
+    if (styles.height) {
+      const h = parseInt(styles.height.replace('px', ''), 10);
+      if (!Number.isNaN(h)) {
+        height = h;
+      }
+    }
+  }
+  return { width, height };
+};
 
 const getStyles = (
   prevStyles: ViewportStyles,
   styles: Styles,
-  isRotated: boolean
+  state: ViewportToolState
 ): ViewportStyles => {
   if (styles === null) {
     return null;
   }
-  const result = typeof styles === 'function' ? styles(prevStyles) : styles;
-  return isRotated ? flip(result) : result;
+  const newStyles = typeof styles === 'function' ? styles(prevStyles) : styles;
+  const result = { ...newStyles };
+  if (state.selected === responsiveViewport.id) {
+    result.width = state.width > 0 ? `${state.width}px` : '100%';
+    result.height = state.height > 0 ? `${state.height}px` : '100%';
+  }
+  return state.isRotated ? flip(result) : result;
+};
+
+const getItem = (list: ViewportItem[], selected: string, defaultViewport: string) => {
+  return (
+    list.find((i) => i.id === selected) ||
+    list.find((i) => i.id === defaultViewport) ||
+    list.find((i) => i.default) ||
+    resetViewport
+  );
+};
+
+const getSize = (
+  list: ViewportItem[],
+  defaultViewport: string,
+  state: ViewportToolState,
+  prevStyles: ViewportStyles
+): { width: number; height: number } => {
+  const item = getItem(list, state.selected, defaultViewport);
+  const styles = getStyles(prevStyles, item.styles, state);
+  if (item.id === responsiveViewport.id) {
+    return {
+      width: state.width,
+      height: state.height,
+    };
+  }
+  return getSizeFromStyles(styles, state);
 };
 
 export const ViewportTool: FunctionComponent = memo(
   withTheme(({ theme }: { theme: Theme }) => {
     const {
       viewports = MINIMAL_VIEWPORTS,
-      defaultViewport = responsiveViewport.id,
+      defaultViewport = resetViewport.id,
       disable,
     } = useParameter<ViewportAddonParameter>(PARAM_KEY, {});
-    const [state, setState] = useAddonState<ViewportToolState>(ADDON_ID, {
+    const [state, setStateRaw] = useAddonState<ViewportToolState>(ADDON_ID, {
       selected: defaultViewport,
       isRotated: false,
+      width: 0,
+      height: 0,
     });
+    const setStateDebounced = useDebouncedCallback(setStateRaw, 100);
+
+    // Store width/height locally so we can debounce the main state, but still
+    // have responsive inputs.
+    const [localWidth, _setLocalWidth] = useState(state.width);
+    const [localHeight, _setLocalHeight] = useState(state.height);
+
     const list = toList(viewports);
+    const ref = useRef<ViewportStyles>();
+
+    const setState = (newState: ViewportToolState) => {
+      const { width, height } = getSize(list, defaultViewport, newState, ref.current);
+      const updatedState = {
+        ...newState,
+        width,
+        height,
+      };
+      _setLocalWidth(width);
+      _setLocalHeight(height);
+      setStateDebounced.callback(updatedState);
+    };
 
     if (!list.find((i) => i.id === defaultViewport)) {
       console.warn(
@@ -144,28 +235,34 @@ export const ViewportTool: FunctionComponent = memo(
     useEffect(() => {
       setState({
         selected:
-          defaultViewport || (viewports[state.selected] ? state.selected : responsiveViewport.id),
+          defaultViewport || (viewports[state.selected] ? state.selected : resetViewport.id),
         isRotated: state.isRotated,
+        width: state.width,
+        height: state.height,
       });
     }, [defaultViewport]);
 
-    const { selected, isRotated } = state;
-    const item =
-      list.find((i) => i.id === selected) ||
-      list.find((i) => i.id === defaultViewport) ||
-      list.find((i) => i.default) ||
-      responsiveViewport;
+    const { selected, isRotated, width, height } = state;
 
-    const ref = useRef<ViewportStyles>();
+    const item = getItem(list, selected, defaultViewport);
 
-    const styles = getStyles(ref.current, item.styles, isRotated);
-
+    const styles = getStyles(ref.current, item.styles, state);
     useEffect(() => {
       ref.current = styles;
     }, [item]);
 
     if (disable || Object.entries(viewports).length === 0) {
       return null;
+    }
+
+    const isReset = selected === resetViewport.id;
+    const isResponsive = selected === responsiveViewport.id;
+
+    let viewportLabel: string;
+    if (!isResponsive) {
+      viewportLabel = isRotated ? `${item.title} (L)` : `${item.title} (P)`;
+    } else {
+      viewportLabel = item.title;
     }
 
     return (
@@ -183,19 +280,15 @@ export const ViewportTool: FunctionComponent = memo(
             title="Change the size of the preview"
             active={!!styles}
             onDoubleClick={() => {
-              setState({ ...state, selected: responsiveViewport.id });
+              setState({ ...state, selected: resetViewport.id });
             }}
           >
             <Icons icon="grow" />
-            {styles ? (
-              <IconButtonLabel>
-                {isRotated ? `${item.title} (L)` : `${item.title} (P)`}
-              </IconButtonLabel>
-            ) : null}
+            {styles ? <IconButtonLabel>{viewportLabel}</IconButtonLabel> : null}
           </IconButtonWithLabel>
         </WithTooltip>
 
-        {styles ? (
+        {!isReset && styles && (
           <ActiveViewportSize>
             <Global
               styles={{
@@ -206,7 +299,6 @@ export const ViewportTool: FunctionComponent = memo(
                   border: `1px solid black`,
                   boxShadow:
                     '0 0 100px 1000px rgba(0,0,0,0.5), 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
-
                   ...styles,
                 },
                 [`#${wrapperId}`]: {
@@ -223,10 +315,15 @@ export const ViewportTool: FunctionComponent = memo(
                 },
               }}
             />
-            <ActiveViewportLabel title="Viewport width">
-              {styles.width.replace('px', '')}
-            </ActiveViewportLabel>
-            <IconButton
+            <ActiveViewportNumericInput
+              title="Viewport width"
+              value={localWidth}
+              onChange={(value: number) =>
+                setState({ ...state, width: value, selected: responsiveViewport.id })
+              }
+              size="content"
+            />
+            <ActiveViewportIconButton
               key="viewport-rotate"
               title="Rotate viewport"
               onClick={() => {
@@ -234,12 +331,17 @@ export const ViewportTool: FunctionComponent = memo(
               }}
             >
               <Icons icon="transfer" />
-            </IconButton>
-            <ActiveViewportLabel title="Viewport height">
-              {styles.height.replace('px', '')}
-            </ActiveViewportLabel>
+            </ActiveViewportIconButton>
+            <ActiveViewportNumericInput
+              title="Viewport height"
+              value={localHeight}
+              onChange={(value: number) =>
+                setState({ ...state, height: value, selected: responsiveViewport.id })
+              }
+              size="content"
+            />
           </ActiveViewportSize>
-        ) : null}
+        )}
       </Fragment>
     );
   })

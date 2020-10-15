@@ -41,7 +41,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "use-debounce": "^5.0.1"
   },
   "publishConfig": {
     "access": "public"
