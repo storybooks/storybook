@@ -111,7 +111,7 @@ The Controls addon can be configured in two ways:
 
 ### Annotation
 
-As shown above, you can configure individual controls with the “control" annotation in the [argTypes](../api/argtypes) field of either a component or story.
+As shown above, you can configure individual controls with the `control` annotation in the [argTypes](../api/argtypes) field of either a component or story.
 
 Here is the full list of available controls you can use:
 
@@ -168,9 +168,9 @@ If you don't provide a specific one, it defaults to the number control type.
 
 ### Parameters
 
-Controls supports the following configuration [parameters](../writing-stories/parameters.md), either globally or on a per-story basis:
+[Parameters](../writing-stories/parameters.md) support the following control configurations, either globally or on a story.
 
-## Show full documentation for each property
+#### Show full documentation for each property
 
 Since Controls is built on the same engine as Storybook Docs, it can also show property documentation alongside your controls using the expanded parameter (defaults to false). This means you embed a complete [ArgsTable](../writing-docs/doc-blocks.md#argstable) doc block in the controls pane. The description and default value rendering can be [customized](#fully-custom-args) in the same way as the doc block.
 
@@ -190,9 +190,9 @@ And here's what the resulting UI looks like:
 
 ![Controls addon expanded](./addon-controls-expanded.png)
 
-## Hide NoControls warning
+#### Hide NoControls warning
 
-If you don't plan to handle the control args inside your Story, you can remove the warning with:
+If you don't plan to handle the control args inside your Story, you can remove the warning with the `controls.hideNoControlsWarning` parameter field.  You can hide the warning on a story using the `parameters` object like so:
 
 <!-- prettier-ignore-start -->
 
