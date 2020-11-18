@@ -5,7 +5,7 @@ module.exports = {
   emberOptions: {
     polyfills: [namedBlockPolyfill],
   },
-  stories: ['../stories/**/*.stories.js'],
+  stories: ['../stories/**/*.stories.[jt]s'],
   logLevel: 'debug',
   addons: [
     '@storybook/addon-a11y',

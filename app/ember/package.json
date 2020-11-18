@@ -40,11 +40,13 @@
     "regenerator-runtime": "^0.13.7",
     "ts-dedent": "^2.0.0"
   },
+  "devDependencies": {
+    "ember-cli-htmlbars": "^5.3.1"
+  },
   "peerDependencies": {
     "@babel/core": "*",
     "babel-plugin-ember-modules-api-polyfill": "^2.12.0",
-    "babel-plugin-htmlbars-inline-precompile": "2 || 3",
-    "ember-source": "^3.16.0"
+    "ember-cli-htmlbars": ">=5.2.1"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -55,6 +57,9 @@
   "gitHead": "c174d7429c2593e051cc2dd1361bb28bff71f75b",
   "typesVersions": {
     "<3.8": {
+      "types-6-0": [
+        "ts3.4/dist/client/preview/types-6-0.d.ts"
+      ],
       "*": [
         "ts3.4/*"
       ]

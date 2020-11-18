@@ -253,7 +253,7 @@ export interface BaseMeta<ComponentType> {
 }
 
 export interface BaseStory<Args, StoryFnReturnType> {
-  (args: Args, context: StoryContext): StoryFnReturnType;
+  (args?: Args, context?: StoryContext): StoryFnReturnType;
 
   /**
    * Override the display name in the UI
