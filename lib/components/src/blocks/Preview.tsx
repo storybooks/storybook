@@ -1,4 +1,11 @@
-import React, { Children, FunctionComponent, ReactElement, ReactNode, useState } from 'react';
+import React, {
+  Children,
+  FunctionComponent,
+  ReactElement,
+  ReactNode,
+  useState,
+  useEffect,
+} from 'react';
 import { darken } from 'polished';
 import { styled } from '@storybook/theming';
 
@@ -98,6 +105,52 @@ const PreviewContainer = styled.div<PreviewProps>(
   ({ withToolbar }) => withToolbar && { paddingTop: 40 }
 );
 
+interface ElementItem {
+  element: React.ReactNode;
+  actionItem: ActionItem;
+}
+
+const getElement = (
+  children: React.ReactNode,
+  withSource: SourceProps,
+  refreshed: boolean,
+  setRefreshed: Function
+): ElementItem => {
+  switch (true) {
+    case !!(withSource && withSource.error): {
+      return {
+        element: <></>,
+        actionItem: {
+          title: 'Unable to use refresh',
+          disabled: true,
+          onClick: () => setRefreshed(false),
+        },
+      };
+    }
+    case refreshed: {
+      return {
+        element: children,
+        actionItem: {
+          title: 'Refreshe component',
+          disabled: true,
+          onClick: () => setRefreshed(false),
+        },
+      };
+    }
+    default: {
+      return {
+        element: children,
+        actionItem: {
+          title: 'Refreshe component',
+          onClick: () => {
+            setRefreshed(true);
+          },
+        },
+      };
+    }
+  }
+};
+
 interface SourceItem {
   source?: ReactElement;
   actionItem: ActionItem;
@@ -186,10 +239,17 @@ const Preview: FunctionComponent<PreviewProps> = ({
 }) => {
   const [expanded, setExpanded] = useState(isExpanded);
   const { source, actionItem } = getSource(withSource, expanded, setExpanded);
+  const [refreshed, setRefreshed] = useState(false);
+  const { element, actionItem: getElementActionItem } = getElement(
+    children,
+    withSource,
+    refreshed,
+    setRefreshed
+  );
   const [scale, setScale] = useState(1);
   const previewClasses = [className].concat(['sbdocs', 'sbdocs-preview']);
 
-  const defaultActionItems = withSource ? [actionItem] : [];
+  const defaultActionItems = withSource ? [actionItem, getElementActionItem] : [];
   const actionItems = additionalActions
     ? [...defaultActionItems, ...additionalActions]
     : defaultActionItems;
@@ -197,6 +257,11 @@ const Preview: FunctionComponent<PreviewProps> = ({
   // @ts-ignore
   const layout = getLayout(Children.count(children) === 1 ? [children] : children);
 
+  useEffect(() => {
+    if (refreshed) {
+      setRefreshed(false);
+    }
+  }, [refreshed]);
   return (
     <PreviewContainer
       {...{ withSource, withToolbar }}
@@ -215,16 +280,17 @@ const Preview: FunctionComponent<PreviewProps> = ({
       <ZoomContext.Provider value={{ scale }}>
         <Relative className="docs-story">
           <ChildrenContainer
+            key={String(refreshed)}
             isColumn={isColumn || !Array.isArray(children)}
             columns={columns}
             zoom={scale}
             layout={layout}
           >
-            {Array.isArray(children) ? (
+            {Array.isArray(element) ? (
               // eslint-disable-next-line react/no-array-index-key
-              children.map((child, i) => <div key={i}>{child}</div>)
+              element.map((child, i) => <div key={i}>{child}</div>)
             ) : (
-              <div>{children}</div>
+              <div>{element}</div>
             )}
           </ChildrenContainer>
           <ActionBar actionItems={actionItems} />
