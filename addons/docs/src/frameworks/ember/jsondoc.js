@@ -21,13 +21,16 @@ export const extractArgTypes = (componentName) => {
   return componentDoc.attributes.arguments.reduce((acc, prop) => {
     acc[prop.name] = {
       name: prop.name,
+      type: {
+        name: prop.type,
+        required: prop.tags.length ? prop.tags.some((tag) => tag.name === 'required') : false,
+      },
       defaultValue: prop.defaultValue,
       description: prop.description,
       table: {
         defaultValue: { summary: prop.defaultValue },
         type: {
           summary: prop.type,
-          required: prop.tags.length ? prop.tags.some((tag) => tag.name === 'required') : false,
         },
       },
     };

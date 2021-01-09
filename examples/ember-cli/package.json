@@ -17,6 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@ember/optional-features": "^2.0.0",
+    "@glimmer/component": "1.0.2",
     "@storybook/addon-a11y": "6.2.0-alpha.10",
     "@storybook/addon-actions": "6.2.0-alpha.10",
     "@storybook/addon-backgrounds": "6.2.0-alpha.10",

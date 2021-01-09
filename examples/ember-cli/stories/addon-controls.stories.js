@@ -2,18 +2,23 @@ import { hbs } from 'ember-cli-htmlbars';
 
 export default {
   title: 'Addon/Controls',
+  component: 'ArgTypesInferenceExample',
   argTypes: {
-    label: { type: { name: 'string' } },
+    className: {
+      control: {
+        type: 'select',
+        options: ['text-align-center', 'link', 'code', 'codeBlock', 'note'],
+      },
+    },
   },
 };
 
 const Template = (args) => ({
-  template: hbs`<button>{{label}}</button>`,
+  template: hbs`<ArgTypesInferenceExample @className={{this.className}} @text={{this.text}} @toggle={{this.toggle}}/>`,
   context: args,
 });
 
-export const Hello = Template.bind({});
-Hello.args = { label: 'Hello!' };
+export const ArgTypesInference = Template.bind({});
 
-export const Bonjour = Template.bind({});
-Bonjour.args = { label: 'Bonjour!' };
+export const PresetArgs = Template.bind({});
+PresetArgs.args = { text: 'Hello!' };
