@@ -6,7 +6,7 @@ executors:
       class:
         description: The Resource class
         type: enum
-        enum: [ 'small', 'medium', 'large', 'xlarge' ]
+        enum: ['small', 'medium', 'large', 'xlarge']
         default: 'medium'
     working_directory: /tmp/storybook
     docker:
@@ -121,7 +121,7 @@ jobs:
             - install-examples-deps-yarn-cache-v4--
       - run:
           name: Install dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+          command: yarn install --ignore-engines --frozen-lockfile --cache-folder ~/.cache/yarn
       - save_cache:
           name: Save Yarn cache
           key: install-examples-deps-yarn-cache-v4--{{ checksum "yarn.lock" }}
@@ -148,7 +148,7 @@ jobs:
             - install-e2e-deps-node_modules-cache-v1--{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies if cache wasn't hit
-          command: "[ ! -d \"node_modules/\" ] && yarn install --frozen-lockfile || echo \"Skipping yarn install\""
+          command: '[ ! -d "node_modules/" ] && yarn install --frozen-lockfile || echo "Skipping yarn install"'
       - save_cache:
           name: Save node_modules
           key: install-e2e-deps-node_modules-cache-v1--{{ checksum "yarn.lock" }}
@@ -229,12 +229,12 @@ jobs:
           condition:
             and:
               - not:
-                  equal: [ master, << pipeline.git.branch >> ]
+                  equal: [master, << pipeline.git.branch >>]
               - not:
-                  equal: [ next, << pipeline.git.branch >> ]
+                  equal: [next, << pipeline.git.branch >>]
           steps:
             - ensure-pr-is-labeled-with:
-                label: "run e2e extended test suite"
+                label: 'run e2e extended test suite'
       - git-shallow-clone/checkout_advanced:
           clone_options: '--depth 1 --verbose'
       - attach_workspace:

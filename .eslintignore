@@ -19,6 +19,7 @@ examples/cra-ts-kitchen-sink/*.json
 examples/cra-ts-kitchen-sink/public/*
 examples/cra-ts-essentials/*.json
 examples/cra-ts-essentials/public/*
+examples/cra-essentials
 examples/rax-kitchen-sink/src/document/*
 ember-output
 .yarn

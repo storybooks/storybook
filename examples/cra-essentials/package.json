@@ -1,0 +1,48 @@
+{
+  "name": "cra-essentials",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "bench": "sb-bench ''",
+    "build": "react-scripts build",
+    "build-storybook": "build-storybook -s public",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "storybook": "start-storybook -p 6006 -s public",
+    "test": "react-scripts test"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.0",
+    "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@storybook/addon-actions": "^6.1.0-beta.6",
+    "@storybook/addon-bench": "^0.0.2",
+    "@storybook/addon-essentials": "^6.1.0-beta.6",
+    "@storybook/addon-links": "^6.1.0-beta.6",
+    "@storybook/bench": "^0.6.1",
+    "@storybook/node-logger": "^6.1.0-beta.6",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.0-beta.6",
+    "babel-loader": "^8.1.0"
+  }
+}
