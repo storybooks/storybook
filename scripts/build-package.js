@@ -139,7 +139,7 @@ function run() {
             )}`;
             const watchTsc = `${baseWatchCommand}/utils/watch-tsc.js`;
             const watchBabel = `${baseWatchCommand}/utils/watch-babel.js`;
-            const command = `concurrently --kill-others "${watchTsc}" "${watchBabel}"`;
+            const command = `concurrently "${watchTsc}" "${watchBabel}"`;
             spawn(command);
           };
 
