@@ -4,8 +4,8 @@ import Vue from 'vue';
 // and we need it to inject args into the story component's props
 const VALUES = 'STORYBOOK_VALUES';
 
-function getRenderedTree(story: any) {
-  const component = story.render();
+async function getRenderedTree(story: any) {
+  const component = await story.render();
 
   const vm = new Vue({
     render(h) {

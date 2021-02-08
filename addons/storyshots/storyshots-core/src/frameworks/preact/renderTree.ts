@@ -3,8 +3,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import preactRenderer from 'preact-render-to-json';
 
-function getRenderedTree(story: any, context: any, { renderer, ...rendererOptions }: any) {
-  const storyElement = story.render();
+async function getRenderedTree(story: any, context: any, { renderer, ...rendererOptions }: any) {
+  const storyElement = await story.render();
   const currentRenderer = renderer || preactRenderer;
   const tree = currentRenderer(storyElement, rendererOptions);
 

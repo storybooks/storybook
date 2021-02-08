@@ -1,7 +1,7 @@
 import { document, Node } from 'global';
 
-function getRenderedTree(story: { render: () => any }) {
-  const component = story.render();
+async function getRenderedTree(story: { render: () => any }) {
+  const component = await story.render();
 
   if (component instanceof Node) {
     return component;

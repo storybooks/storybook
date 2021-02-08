@@ -1,7 +1,7 @@
 import React from 'react';
 import reactTestRenderer from 'react-test-renderer';
 
-function getRenderedTree(story: any, context: any, { renderer, ...rendererOptions }: any) {
+async function getRenderedTree(story: any, context: any, { renderer, ...rendererOptions }: any) {
   const StoryFn = story.render;
   const storyElement = React.createElement(StoryFn);
   const currentRenderer = renderer || reactTestRenderer.create;

@@ -58,9 +58,11 @@ function testStorySnapshots(options: StoryshotsOptions = {}) {
         return acc;
       }
 
-      const { kind, storyFn: render, parameters } = item;
+      const { kind, unboundStoryFn, applyLoaders, parameters } = item;
       const existing = acc.find((i: any) => i.kind === kind);
       const { fileName } = item.parameters;
+
+      const render = async () => unboundStoryFn(await applyLoaders());
 
       if (!isDisabled(parameters.storyshots)) {
         if (existing) {

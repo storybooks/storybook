@@ -21,10 +21,10 @@ function makeSureThatResultIsRenderedSomehow({ context, result, rootElement }: a
   }
 }
 
-function getRenderedTree(story: any, context: any) {
+async function getRenderedTree(story: any, context: any) {
   const rootElement = bootstrapADocumentAndReturnANode();
 
-  const result = story.render();
+  const result = await story.render();
 
   makeSureThatResultIsRenderedSomehow({ context, result, rootElement });
 

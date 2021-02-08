@@ -11,8 +11,8 @@ type SnapshotsWithOptionsReturnType = (
 export function snapshotWithOptions(
   options: { renderer?: any; serializer?: any } | Function = {}
 ): SnapshotsWithOptionsReturnType {
-  return ({ story, context, renderTree, snapshotFileName }) => {
-    const result = renderTree(story, context, optionsOrCallOptions(options, story));
+  return async ({ story, context, renderTree, snapshotFileName }) => {
+    const result = await renderTree(story, context, optionsOrCallOptions(options, story));
 
     function match(tree: any) {
       let target = tree;
