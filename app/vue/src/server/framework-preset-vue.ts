@@ -15,13 +15,25 @@ export function webpack(config: Configuration) {
           options: {},
         },
         {
-          test: /\.tsx?$/,
+          test: /\.ts$/,
           use: [
             {
               loader: require.resolve('ts-loader'),
               options: {
                 transpileOnly: true,
                 appendTsSuffixTo: [/\.vue$/],
+              },
+            },
+          ],
+        },
+        {
+          test: /\.tsx$/,
+          use: [
+            {
+              loader: require.resolve('ts-loader'),
+              options: {
+                transpileOnly: true,
+                appendTsxSuffixTo: [/\.vue$/],
               },
             },
           ],
