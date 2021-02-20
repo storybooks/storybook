@@ -57,7 +57,10 @@ const loadStories = (
             typeof req.resolve === 'function' ? req.resolve(filename) : filename
           );
         } catch (error) {
-          logger.warn(`Unexpected error while loading ${filename}: ${error}`);
+          setTimeout(() => {
+            logger.warn(`The following error was encountered while loading ${filename}`);
+            throw error;
+          }, 0);
         }
       });
     });
@@ -199,7 +202,7 @@ const loadStories = (
 
 const configureDeprecationWarning = deprecate(
   () => {},
-  `\`configure()\` is deprecated and will be removed in Storybook 7.0. 
+  `\`configure()\` is deprecated and will be removed in Storybook 7.0.
 Please use the \`stories\` field of \`main.js\` to load stories.
 Read more at https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-configure`
 );
