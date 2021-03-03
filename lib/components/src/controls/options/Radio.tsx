@@ -47,7 +47,14 @@ const Label = styled.label({
 
 type RadioConfig = NormalizedOptionsConfig & { isInline: boolean };
 type RadioProps = ControlProps<OptionsSingleSelection> & RadioConfig;
-export const RadioControl: FC<RadioProps> = ({ name, options, value, onChange, isInline }) => {
+export const RadioControl: FC<RadioProps> = ({
+  name,
+  options,
+  value,
+  onChange,
+  isInline,
+  readOnly,
+}) => {
   const selection = selectedKey(value, options);
   return (
     <Wrapper isInline={isInline}>
@@ -62,6 +69,7 @@ export const RadioControl: FC<RadioProps> = ({ name, options, value, onChange, i
               value={key}
               onChange={(e) => onChange(options[e.currentTarget.value])}
               checked={key === selection}
+              {...{ readOnly }}
             />
             <Text>{key}</Text>
           </Label>

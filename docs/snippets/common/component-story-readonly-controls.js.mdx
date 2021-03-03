@@ -7,10 +7,10 @@ export default {
   component: YourComponent,
   title:'My Story',
   argTypes:{
-    // foo is the property we want to remove from the UI
+    // foo is the property we want to make readonly on the UI
     foo:{
-      table:{
-        disable: true
+      control:{
+        readOnly: true
       }
     }
   }

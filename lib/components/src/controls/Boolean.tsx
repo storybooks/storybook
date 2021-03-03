@@ -80,14 +80,21 @@ const format = (value: BooleanValue): string | null => (value ? String(value) : 
 const parse = (value: string | null) => value === 'true';
 
 export type BooleanProps = ControlProps<BooleanValue> & BooleanConfig;
-export const BooleanControl: FC<BooleanProps> = ({ name, value, onChange, onBlur, onFocus }) => (
+export const BooleanControl: FC<BooleanProps> = ({
+  name,
+  value,
+  onChange,
+  onBlur,
+  onFocus,
+  readOnly,
+}) => (
   <Label htmlFor={name} title={value ? 'Change to false' : 'Change to true'}>
     <input
       id={name}
       type="checkbox"
       onChange={(e) => onChange(e.target.checked)}
       checked={value || false}
-      {...{ name, onBlur, onFocus }}
+      {...{ name, onBlur, onFocus, readOnly }}
     />
     <span>True</span>
     <span>False</span>

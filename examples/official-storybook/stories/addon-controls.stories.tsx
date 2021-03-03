@@ -6,6 +6,20 @@ export default {
   component: Button,
   argTypes: {
     children: { control: 'text', name: 'Children' },
+    readonlyInput: {
+      name: 'Readonly input',
+      control: {
+        type: 'text',
+        readOnly: true,
+      },
+    },
+    disabledInput: {
+      name: 'Disabled input',
+      control: {
+        type: 'text',
+        disable: true,
+      },
+    },
     type: { control: 'text', name: 'Type' },
     json: { control: 'object', name: 'JSON' },
     imageUrls: { control: { type: 'file', accept: '.png' }, name: 'Image Urls' },
@@ -135,3 +149,8 @@ FilteredWithExcludeRegex.parameters = {
     exclude: /hello*/,
   },
 };
+export const Readonly = Template.bind({});
+Readonly.args = {
+  readonlyInput: 'This is read-only',
+};
+Readonly.parameters = {};

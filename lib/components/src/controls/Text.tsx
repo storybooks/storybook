@@ -12,7 +12,14 @@ const Wrapper = styled.label({
 
 const format = (value?: TextValue) => value || '';
 
-export const TextControl: FC<TextProps> = ({ name, value, onChange, onFocus, onBlur }) => {
+export const TextControl: FC<TextProps> = ({
+  name,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+  readOnly,
+}) => {
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(event.target.value);
   };
@@ -23,7 +30,7 @@ export const TextControl: FC<TextProps> = ({ name, value, onChange, onFocus, onB
         onChange={handleChange}
         size="flex"
         placeholder="Adjust string dynamically"
-        {...{ name, value: format(value), onFocus, onBlur }}
+        {...{ name, value: format(value), onFocus, onBlur, readOnly }}
       />
     </Wrapper>
   );

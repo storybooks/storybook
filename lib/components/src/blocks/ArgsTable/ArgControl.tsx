@@ -43,6 +43,12 @@ export const ArgControl: FC<ArgControlProps> = ({ row, arg, updateArgs }) => {
   const onBlur = useCallback(() => setFocused(false), []);
   const onFocus = useCallback(() => setFocused(true), []);
 
+  if (control?.disable && control?.readOnly) {
+    console.warn(
+      `Both "disable" and "readOnly" options were defined. The "disable" option takes precedence.`
+    );
+  }
+
   if (!control || control.disable) return <NoControl />;
 
   // row.name is a display name and not a suitable DOM input id or name - i might contain whitespace etc.

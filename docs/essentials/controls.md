@@ -195,7 +195,7 @@ Here is the full list of available controls you can use:
 |             |    color     | color picker input that assumes strings are color values       |       -        |
 |             |     date     | date picker input                                              |       -        |
 
-If you need to customize a control to use a enum data type in your story, for instance the `inline-radio` you can do it like so:
+If you need to customize a control to use an enum data type in your story, for instance the `inline-radio` you can do it like so:
 
 <!-- prettier-ignore-start -->
 
@@ -234,6 +234,8 @@ If you don't provide a specific one, it defaults to the number control type.
 ### Parameters
 
 Controls supports the following configuration [parameters](../writing-stories/parameters.md), either globally or on a per-story basis:
+
+> NOTE: `parameters` uses `controls`, while `argTypes` uses `control`.
 
 ## Show full documentation for each property
 
@@ -295,6 +297,15 @@ paths={[
 As with other Storybook properties, such as [decorators](../writing-stories/decorators.md) the same principle can also be applied at a story-level for more granular cases.
 
 </div>
+
+### Read-only controls for specific properties
+
+Alternatively, if you wish to still display the control but disallow edits, you can use the `readOnly` option.
+
+<CodeSnippets paths={[
+'common/component-story-readonly-controls.js.mdx',
+'common/component-story-readonly-controls.mdx.mdx'
+]} />
 
 ## Hide NoControls warning
 

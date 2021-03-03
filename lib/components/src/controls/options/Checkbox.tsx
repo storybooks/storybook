@@ -47,6 +47,7 @@ export const CheckboxControl: FC<CheckboxProps> = ({
   value,
   onChange,
   isInline,
+  readOnly,
 }) => {
   const initial = selectedKeys(value, options);
   const [selected, setSelected] = useState(initial);
@@ -76,6 +77,7 @@ export const CheckboxControl: FC<CheckboxProps> = ({
               value={key}
               onChange={handleChange}
               checked={selected?.includes(key)}
+              {...{ readOnly }}
             />
             <Text>{key}</Text>
           </Label>
