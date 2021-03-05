@@ -8,7 +8,7 @@ import { ICollection, StoryFnAngularReturnType } from '../types';
 import { Parameters } from '../types-6-0';
 import { storyPropsProvider } from './StorybookProvider';
 import { isComponentAlreadyDeclaredInModules } from './utils/NgModulesAnalyzer';
-import { isDeclarable } from './utils/NgComponentAnalyzer';
+import { getComponentDecoratorMetadata, isDeclarable } from './utils/NgComponentAnalyzer';
 import { createStorybookWrapperComponent } from './StorybookWrapperComponent';
 import { computesTemplateFromComponent } from './ComputesTemplateFromComponent';
 
@@ -37,13 +37,23 @@ export const getStorybookModuleMetadata = (
   },
   storyProps$: Subject<ICollection>
 ): NgModule => {
-  const { component: storyComponent, props, styles, moduleMetadata = {} } = storyFnAngular;
+  const {
+    component: storyComponent,
+    props,
+    styles,
+    componentMetadata,
+    moduleMetadata = {},
+  } = storyFnAngular;
   let { template } = storyFnAngular;
 
   if (storyComponent) {
     deprecatedStoryComponentWarning();
   }
   const component = storyComponent ?? parameters.component;
+
+  if (componentMetadata) {
+    Object.assign(getComponentDecoratorMetadata(component), componentMetadata);
+  }
 
   if (!template && component) {
     template = computesTemplateFromComponent(component, props, '');

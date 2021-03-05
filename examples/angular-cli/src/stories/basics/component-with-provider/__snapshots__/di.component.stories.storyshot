@@ -22,7 +22,7 @@ exports[`Storyshots Basics / Component / With Provider inputs and inject depende
         ElementRef: {"nativeElement":{}}
       </div>
       <div>
-        TestToken: 123
+        TestToken: 321
       </div>
     </div>
   </storybook-di-component>
@@ -51,7 +51,7 @@ exports[`Storyshots Basics / Component / With Provider inputs and inject depende
         ElementRef: {"nativeElement":{}}
       </div>
       <div>
-        TestToken: 123
+        TestToken: 321
       </div>
     </div>
   </storybook-di-component>

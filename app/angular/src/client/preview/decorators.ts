@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { Type } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { DecoratorFunction, StoryContext } from '@storybook/addons';
 import { computesTemplateFromComponent } from './angular-beta/ComputesTemplateFromComponent';
 import { isComponent } from './angular-beta/utils/NgComponentAnalyzer';
@@ -25,6 +25,12 @@ export const moduleMetadata = (
       providers: [...(metadata.providers || []), ...(storyMetadata.providers || [])],
     },
   };
+};
+
+export const componentMetadata = (
+  metadata: Partial<Component>
+): DecoratorFunction<StoryFnAngularReturnType> => (storyFn) => {
+  return { ...storyFn(), componentMetadata: metadata };
 };
 
 export const componentWrapperDecorator = (

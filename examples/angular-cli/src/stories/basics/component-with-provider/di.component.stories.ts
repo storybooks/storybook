@@ -1,8 +1,10 @@
-import { DiComponent } from './di.component';
+import { componentMetadata } from '@storybook/angular';
+import { DiComponent, TEST_TOKEN } from './di.component';
 
 export default {
   title: 'Basics / Component / With Provider',
   component: DiComponent,
+  decorators: [componentMetadata({ providers: [{ provide: TEST_TOKEN, useValue: 321 }] })],
 };
 
 export const InputsAndInjectDependencies = () => ({
@@ -23,3 +25,6 @@ InputsAndInjectDependenciesWithArgs.argTypes = {
 InputsAndInjectDependenciesWithArgs.args = {
   title: 'Component dependencies',
 };
+InputsAndInjectDependencies.decorators = [
+  componentMetadata({ providers: [{ provide: TEST_TOKEN, useValue: 42 }] }),
+];
