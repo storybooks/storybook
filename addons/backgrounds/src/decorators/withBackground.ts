@@ -1,16 +1,23 @@
 import { StoryFn as StoryFunction, StoryContext, useMemo, useEffect } from '@storybook/addons';
 
 import { PARAM_KEY as BACKGROUNDS_PARAM_KEY } from '../constants';
-import { clearStyles, addBackgroundStyle, getBackgroundColorByName } from '../helpers';
+import {
+  clearStyles,
+  addBackgroundStyle,
+  getBackgroundColorByName,
+  clearBackground,
+  applyOrRemoveCssVariables,
+  removeCssVariables,
+} from '../helpers';
 
 export const withBackground = (StoryFn: StoryFunction, context: StoryContext) => {
   const { globals, parameters } = context;
   const globalsBackgroundColor = globals[BACKGROUNDS_PARAM_KEY]?.value;
   const backgroundsConfig = parameters[BACKGROUNDS_PARAM_KEY];
 
-  const selectedBackgroundColor = useMemo(() => {
+  const selectedBackground = useMemo(() => {
     if (backgroundsConfig.disable) {
-      return 'transparent';
+      return clearBackground;
     }
 
     return getBackgroundColorByName(
@@ -21,8 +28,8 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
   }, [backgroundsConfig, globalsBackgroundColor]);
 
   const isActive = useMemo(
-    () => selectedBackgroundColor && selectedBackgroundColor !== 'transparent',
-    [selectedBackgroundColor]
+    () => selectedBackground && selectedBackground.value !== 'transparent',
+    [selectedBackground]
   );
 
   const selector =
@@ -31,11 +38,11 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
   const backgroundStyles = useMemo(() => {
     return `
       ${selector} {
-        background: ${selectedBackgroundColor} !important;
+        background: ${selectedBackground.value} !important;
         transition: background-color 0.3s;
       }
     `;
-  }, [selectedBackgroundColor, selector]);
+  }, [selectedBackground, selector]);
 
   useEffect(() => {
     const selectorId =
@@ -45,6 +52,7 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
 
     if (!isActive) {
       clearStyles(selectorId);
+      removeCssVariables();
       return;
     }
 
@@ -53,6 +61,8 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
       backgroundStyles,
       context.viewMode === 'docs' ? context.id : null
     );
+
+    applyOrRemoveCssVariables(selectedBackground);
   }, [isActive, backgroundStyles, context]);
 
   return StoryFn();
