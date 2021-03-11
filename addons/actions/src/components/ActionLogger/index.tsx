@@ -7,7 +7,7 @@ import { ActionBar, ScrollArea } from '@storybook/components';
 import { Action, InspectorContainer, Counter } from './style';
 import { ActionDisplay } from '../../models';
 
-export const Wrapper = styled(({ children, className }) => (
+export const Wrapper = styled(({ children, className }: any) => (
   <ScrollArea horizontal vertical className={className}>
     {children}
   </ScrollArea>

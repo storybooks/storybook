@@ -35,7 +35,7 @@ const Side = styled.div<SideProps>(
 );
 Side.displayName = 'Side';
 
-export const Bar = styled(({ children, className }) => (
+export const Bar = styled(({ children, className }: any) => (
   <ScrollArea horizontal vertical={false} className={className}>
     {children}
   </ScrollArea>

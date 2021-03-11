@@ -42,7 +42,7 @@ const SuiteHead = styled.div({
   marginTop: 15,
 });
 
-const SuiteTotals = styled(({ result, className, width }) => (
+const SuiteTotals = styled(({ result, className, width }: any) => (
   <div className={className}>
     <Fragment>
       {width > 325 && result.assertionResults ? (

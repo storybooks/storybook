@@ -36,13 +36,13 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@emotion/core": "^10.1.1",
-    "@emotion/is-prop-valid": "^0.8.6",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/is-prop-valid": "^1.0.0",
+    "@emotion/react": "^11.0.0",
+    "@emotion/serialize": "^1.0.0",
+    "@emotion/styled": "^11.0.0",
     "@storybook/client-logger": "6.2.0-beta.13",
     "core-js": "^3.8.2",
     "deep-object-diff": "^1.1.0",
-    "emotion-theming": "^10.0.27",
     "global": "^4.4.0",
     "memoizerific": "^1.11.3",
     "polished": "^4.0.5",

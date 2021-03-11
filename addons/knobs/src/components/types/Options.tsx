@@ -48,7 +48,7 @@ export interface OptionsTypeProps<T extends OptionsTypeKnobValue> extends KnobCo
   display: OptionsKnobOptionsDisplay;
 }
 
-const OptionsSelect = styled(ReactSelect)({
+const OptionsSelect = styled<any>(ReactSelect)({
   width: '100%',
   maxWidth: '300px',
   color: 'black',

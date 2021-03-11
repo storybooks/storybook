@@ -18,13 +18,6 @@
   },
   "license": "MIT",
   "author": "Storybook Team",
-  "typesVersions": {
-    "<3.8": {
-      "*": [
-        "ts3.4/*"
-      ]
-    }
-  },
   "bin": {
     "getstorybook": "./bin/index.js",
     "sb": "./bin/index.js"

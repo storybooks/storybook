@@ -97,7 +97,7 @@ const ItemContent: FunctionComponent<Pick<State['notifications'][0], 'icon' | 'c
   </>
 );
 
-const DismissButtonWrapper = styled(IconButton)(({ theme }) => ({
+const DismissButtonWrapper = styled<any>(IconButton)(({ theme }) => ({
   height: '100%',
   display: 'flex',
   color: theme.base === 'light' ? 'rgba(255,255,255,0.7)' : ' #999999',

@@ -45,7 +45,7 @@ export const useMenu = (
   showNav: boolean,
   enableShortcuts: boolean
 ) => {
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   const shortcutKeys = api.getShortcutKeys();
 
   const about = useMemo(

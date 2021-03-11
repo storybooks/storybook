@@ -60,6 +60,7 @@
     "ts-dedent": "^2.0.0"
   },
   "devDependencies": {
+    "@emotion/jest": "11.0.0",
     "@angular/core": "^11.2.0",
     "@angular/platform-browser-dynamic": "^11.2.0",
     "@storybook/addon-docs": "6.2.0-beta.13",
@@ -70,7 +71,6 @@
     "babel-loader": "^8.2.2",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.1",
-    "jest-emotion": "^10.0.32",
     "jest-preset-angular": "^8.3.2",
     "jest-vue-preprocessor": "^1.7.1",
     "rxjs": "^6.6.3",

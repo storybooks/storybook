@@ -91,7 +91,7 @@ const Wrapper = styled.div<WrapperProps>(
       : {}
 );
 
-const Scroller = styled(({ children, className }) => (
+const Scroller = styled(({ children, className }: any) => (
   <ScrollArea horizontal vertical className={className}>
     {children}
   </ScrollArea>

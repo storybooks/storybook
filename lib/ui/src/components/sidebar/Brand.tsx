@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled, withTheme } from '@storybook/theming';
+import { styled, withTheme, Theme } from '@storybook/theming';
 
 import { StorybookLogo } from '@storybook/components';
 

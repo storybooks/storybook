@@ -13,6 +13,8 @@
     "storyshots-puppeteer": "yarn run build-storybook && yarn run do-storyshots-puppeteer"
   },
   "devDependencies": {
+
+    "@emotion/jest": "11.0.0",
     "@packtracker/webpack-plugin": "^2.3.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@storybook/addon-a11y": "6.2.0-beta.13",
@@ -52,7 +54,6 @@
     "format-json": "^1.0.3",
     "global": "^4.4.0",
     "graphql": "^15.4.0",
-    "jest-emotion": "^10.0.32",
     "lodash": "^4.17.20",
     "paths.macro": "^3.0.1",
     "prop-types": "^15.7.2",

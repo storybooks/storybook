@@ -1,13 +1,11 @@
 import emotionStyled, { CreateStyled } from '@emotion/styled';
-import { Theme } from './types';
 
-export const styled = emotionStyled as CreateStyled<Theme>;
+export const styled = emotionStyled as CreateStyled;
 
 export * from './base';
 export * from './types';
 
-export * from '@emotion/core';
-export * from 'emotion-theming';
+export * from '@emotion/react';
 export { default as isPropValid } from '@emotion/is-prop-valid';
 
 export { createGlobal, createReset } from './global';

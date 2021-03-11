@@ -347,7 +347,8 @@ export const Search = React.memo<{
                 className="search-field"
               >
                 <SearchIcon icon="search" />
-                <Input {...inputProps} />
+                {/* TODO: Fixme... */}
+                <Input {...(inputProps as any)} />
                 {enableShortcuts && <FocusKey>/</FocusKey>}
                 <ClearIcon icon="cross" onClick={() => clearSelection()} />
               </SearchField>

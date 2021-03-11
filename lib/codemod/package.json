@@ -19,13 +19,6 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "jsnext:main": "src/index.js",
-  "typesVersions": {
-    "<3.8": {
-      "*": [
-        "ts3.4/*"
-      ]
-    }
-  },
   "files": [
     "dist/**/*",
     "README.md",

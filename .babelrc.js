@@ -47,7 +47,7 @@ module.exports = {
     '@babel/plugin-syntax-dynamic-import',
     ['@babel/plugin-proposal-object-rest-spread', { loose: true, useBuiltIns: true }],
     'babel-plugin-macros',
-    ['emotion', { sourceMap: true, autoLabel: true }],
+    ['@emotion', { sourceMap: true, autoLabel: 'always' }],
   ],
   env: {
     test: withTests,
@@ -81,7 +81,7 @@ module.exports = {
         '@babel/plugin-syntax-dynamic-import',
         ['@babel/plugin-proposal-class-properties', { loose: true }],
         'babel-plugin-macros',
-        ['emotion', { sourceMap: true, autoLabel: true }],
+        '@emotion',
         'babel-plugin-add-react-displayname',
       ],
       env: {
@@ -116,7 +116,7 @@ module.exports = {
         ],
       ],
       plugins: [
-        'emotion',
+        ['@emotion', { sourceMap: true, autoLabel: 'always' }],
         'babel-plugin-macros',
         '@babel/plugin-transform-arrow-functions',
         '@babel/plugin-transform-shorthand-properties',

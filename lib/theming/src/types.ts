@@ -54,35 +54,37 @@ export interface Brand {
   image: string | null | undefined;
 }
 
-export interface Theme {
-  color: Color;
-  background: Background;
-  typography: Typography;
-  animation: Animation;
-  easing: Easing;
+declare module '@emotion/react' {
+  export interface Theme {
+    color: Color;
+    background: Background;
+    typography: Typography;
+    animation: Animation;
+    easing: Easing;
 
-  input: {
-    border: string;
-    background: string;
-    color: string;
-    borderRadius: number;
-  };
+    input: {
+      border: string;
+      background: string;
+      color: string;
+      borderRadius: number;
+    };
 
-  // UI
-  layoutMargin: number;
-  appBorderColor: string;
-  appBorderRadius: number;
+    // UI
+    layoutMargin: number;
+    appBorderColor: string;
+    appBorderRadius: number;
 
-  // Toolbar default/active colors
-  barTextColor: string;
-  barSelectedColor: string;
-  barBg: string;
+    // Toolbar default/active colors
+    barTextColor: string;
+    barSelectedColor: string;
+    barBg: string;
 
-  brand: Brand;
+    brand: Brand;
 
-  code: {
-    [key: string]: string | object;
-  };
+    code: {
+      [key: string]: string | object;
+    };
 
-  [key: string]: any;
+    [key: string]: any;
+  }
 }

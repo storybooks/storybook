@@ -1,4 +1,5 @@
-import { css, keyframes } from '@emotion/core';
+import { css, keyframes } from '@emotion/react';
+import { Keyframes, SerializedStyles } from '@emotion/serialize';
 
 export const easing = {
   rubber: 'cubic-bezier(0.175, 0.885, 0.335, 1.05)',
@@ -51,7 +52,16 @@ const hoverable = css`
   }
 `;
 
-export const animation = {
+interface Animation {
+  rotate360: Keyframes;
+  glow: Keyframes;
+  float: Keyframes;
+  jiggle: Keyframes;
+  inlineGlow: SerializedStyles;
+  hoverable: SerializedStyles;
+}
+
+export const animation: Animation = {
   rotate360,
   glow,
   float,

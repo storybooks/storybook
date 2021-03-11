@@ -19,7 +19,7 @@ const Wrapper = styled.div<{}>(({ theme }) => ({
   },
 }));
 
-const Icon = styled<any, any>(Icons)(({ theme }) => ({
+const Icon = styled<any>(Icons)(({ theme }) => ({
   height: 10,
   width: 10,
   minWidth: 10,
