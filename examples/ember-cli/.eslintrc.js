@@ -7,7 +7,7 @@ module.exports = {
       '@ember/component',
       '@ember/routing/router',
       '@ember/application',
-      './config/environment',
+      'ember-example/config/environment',
     ],
   },
 };
