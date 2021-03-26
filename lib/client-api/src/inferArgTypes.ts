@@ -1,4 +1,3 @@
-import mapValues from 'lodash/mapValues';
 import dedent from 'ts-dedent';
 import { logger } from '@storybook/client-logger';
 import { SBType, ArgTypesEnhancer } from './types';
@@ -34,7 +33,10 @@ const inferType = (value: any, name: string, visited: Set<any>): SBType => {
           : { name: 'other', value: 'unknown' };
       return { name: 'array', value: childType };
     }
-    const fieldTypes = mapValues(value, (field) => inferType(field, name, new Set(visited)));
+    const fieldTypes = Object.entries(value).reduce<Record<string, SBType>>((acc, [key, field]) => {
+      acc[key] = inferType(field, name, new Set(visited));
+      return acc;
+    }, {});
     return { name: 'object', value: fieldTypes };
   }
   return { name: 'object', value: {} };
@@ -44,8 +46,14 @@ export const inferArgTypes: ArgTypesEnhancer = (context) => {
   const { id, parameters } = context;
   const { argTypes: userArgTypes = {}, args = {} } = parameters;
   if (!args) return userArgTypes;
-  const argTypes = mapValues(args, (arg, key) => ({
-    type: inferType(arg, `${id}.${key}`, new Set()),
-  }));
+  const argTypes = Object.entries(args).reduce<Record<string, { type: SBType }>>(
+    (acc, [key, arg]) => {
+      acc[key] = {
+        type: inferType(arg, `${id}.${key}`, new Set()),
+      };
+      return acc;
+    },
+    {}
+  );
   return combineParameters(argTypes, userArgTypes);
 };

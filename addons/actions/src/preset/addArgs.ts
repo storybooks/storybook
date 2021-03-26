@@ -1,5 +1,5 @@
-import mapValues from 'lodash/mapValues';
 import { ArgTypesEnhancer } from '@storybook/client-api';
+import { ArgTypes } from '@storybook/addons';
 
 import { action } from '../index';
 
@@ -19,12 +19,15 @@ export const inferActionsFromArgTypesRegex: ArgTypesEnhancer = (context) => {
   }
 
   const argTypesRegex = new RegExp(actions.argTypesRegex);
-  return mapValues(argTypes, (argType, name) => {
-    if (!argTypesRegex.test(name)) {
-      return argType;
+  return Object.entries<ArgTypes>(argTypes).reduce<ArgTypes>((acc, [name, argType]) => {
+    if (argTypesRegex.test(name)) {
+      acc[name] = { ...argType, defaultValue: action(name) };
+    } else {
+      acc[name] = argType;
     }
-    return { ...argType, defaultValue: action(name) };
-  });
+
+    return acc;
+  }, {});
 };
 
 /**
@@ -36,13 +39,16 @@ export const addActionsFromArgTypes: ArgTypesEnhancer = (context) => {
     return argTypes;
   }
 
-  return mapValues(argTypes, (argType, name) => {
-    if (!argType.action) {
-      return argType;
+  return Object.entries<ArgTypes>(argTypes).reduce<ArgTypes>((acc, [name, argType]) => {
+    if (argType.action) {
+      const message = typeof argType.action === 'string' ? argType.action : name;
+      acc[name] = { ...argType, defaultValue: action(message) };
+    } else {
+      acc[name] = argType;
     }
-    const message = typeof argType.action === 'string' ? argType.action : name;
-    return { ...argType, defaultValue: action(message) };
-  });
+
+    return acc;
+  }, {});
 };
 
 export const argTypesEnhancers = [addActionsFromArgTypes, inferActionsFromArgTypesRegex];

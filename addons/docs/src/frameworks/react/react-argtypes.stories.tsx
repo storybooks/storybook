@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import mapValues from 'lodash/mapValues';
 import { storiesOf, StoryContext } from '@storybook/react';
 import { ArgsTable } from '@storybook/components';
 import { Args } from '@storybook/api';
@@ -35,7 +34,10 @@ function FormatArg({ arg }) {
 
 const ArgsStory = ({ component }: any) => {
   const { rows } = argsTableProps(component);
-  const initialArgs = mapValues(rows, (argType) => argType.defaultValue) as Args;
+  const initialArgs = Object.entries(rows).reduce<Args>((acc, [key, argType]) => {
+    acc[key] = argType.defaultValue;
+    return acc;
+  }, {});
 
   const [args, setArgs] = useState(initialArgs);
   return (

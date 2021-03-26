@@ -1,5 +1,4 @@
-import mapValues from 'lodash/mapValues';
-import { ArgType } from '@storybook/addons';
+import { ArgType, ArgTypes } from '@storybook/addons';
 import { SBEnumType, ArgTypesEnhancer } from './types';
 import { combineParameters } from './parameters';
 import { filterArgTypes } from './filterArgTypes';
@@ -56,9 +55,10 @@ export const inferControls: ArgTypesEnhancer = (context) => {
   if (!__isArgsStory) return argTypes;
 
   const filteredArgTypes = filterArgTypes(argTypes, include, exclude);
-  const withControls = mapValues(filteredArgTypes, (argType, name) => {
-    return argType?.type && inferControl(argType, name, matchers);
-  });
+  const withControls = Object.entries(filteredArgTypes).reduce<ArgTypes>((acc, [name, argType]) => {
+    acc[name] = argType?.type && inferControl(argType, name, matchers);
+    return acc;
+  }, {});
 
   return combineParameters(withControls, filteredArgTypes);
 };

@@ -1,5 +1,5 @@
-import mapValues from 'lodash/mapValues';
 import { ArgTypesEnhancer, combineParameters } from '@storybook/client-api';
+import { ArgTypes } from '@storybook/api';
 import { normalizeArgTypes } from './normalizeArgTypes';
 
 export const enhanceArgTypes: ArgTypesEnhancer = (context) => {
@@ -7,7 +7,10 @@ export const enhanceArgTypes: ArgTypesEnhancer = (context) => {
   const { extractArgTypes } = docs;
 
   const normalizedArgTypes = normalizeArgTypes(userArgTypes);
-  const namedArgTypes = mapValues(normalizedArgTypes, (val, key) => ({ name: key, ...val }));
+  const namedArgTypes = Object.entries(normalizedArgTypes).reduce<ArgTypes>((acc, [key, val]) => {
+    acc[key] = { name: key, ...val };
+    return acc;
+  }, {});
   const extractedArgTypes = extractArgTypes && component ? extractArgTypes(component) : {};
   const withExtractedTypes = extractedArgTypes
     ? combineParameters(extractedArgTypes, namedArgTypes)

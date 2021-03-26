@@ -2,7 +2,6 @@ import React from 'react';
 import deprecate from 'util-deprecate';
 import dedent from 'ts-dedent';
 import { sanitize } from '@storybook/csf';
-import mapValues from 'lodash/mapValues';
 
 import { StoryId, StoryKind, Args, Parameters, combineParameters } from '../index';
 import merge from './merge';
@@ -137,14 +136,17 @@ export const denormalizeStoryParameters = ({
   kindParameters,
   stories,
 }: SetStoriesPayload): StoriesRaw => {
-  return mapValues(stories, (storyData) => ({
-    ...storyData,
-    parameters: combineParameters(
-      globalParameters,
-      kindParameters[storyData.kind],
-      (storyData.parameters as unknown) as Parameters
-    ),
-  }));
+  return Object.entries(stories).reduce<StoriesRaw>((acc, [key, storyData]) => {
+    acc[key] = {
+      ...storyData,
+      parameters: combineParameters(
+        globalParameters,
+        kindParameters[storyData.kind],
+        (storyData.parameters as unknown) as Parameters
+      ),
+    };
+    return acc;
+  }, {});
 };
 
 export const transformStoriesRawToStoriesHash = (

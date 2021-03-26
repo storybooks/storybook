@@ -2,7 +2,6 @@
 import memoize from 'memoizerific';
 import dedent from 'ts-dedent';
 import stable from 'stable';
-import mapValues from 'lodash/mapValues';
 import pick from 'lodash/pick';
 import store from 'store2';
 import deprecate from 'util-deprecate';
@@ -582,7 +581,13 @@ export default class StoryStore {
   sortedStories(): StoreItem[] {
     // NOTE: when kinds are HMR'ed they get temporarily removed from the `_stories` array
     // and thus lose order. However `_kinds[x].order` preservers the original load order
-    const kindOrder = mapValues(this._kinds, ({ order }) => order);
+    const kindOrder = Object.entries(this._kinds).reduce<Record<string, number>>(
+      (acc, [key, { order }]) => {
+        acc[key] = order;
+        return acc;
+      },
+      {}
+    );
     const storySortParameter = this._globalMetadata.parameters?.options?.storySort;
 
     const storyEntries = Object.entries(this._stories);
@@ -664,7 +669,13 @@ export default class StoryStore {
       globalParameters: this._globalMetadata.parameters,
       globals: this._globals,
       error: this.getError(),
-      kindParameters: mapValues(this._kinds, (metadata) => metadata.parameters),
+      kindParameters: Object.entries(this._kinds).reduce<Record<string, Parameters>>(
+        (acc, [key, metadata]) => {
+          acc[key] = metadata.parameters;
+          return acc;
+        },
+        {}
+      ),
       stories: this.extract({ includeDocsOnly: true, normalizeParameters: true }),
     };
   };
@@ -676,11 +687,22 @@ export default class StoryStore {
     return {
       v: 2,
       globalParameters: pick(value.globalParameters, allowed),
-      kindParameters: mapValues(value.kindParameters, (v) => pick(v, allowed)),
-      stories: mapValues(value.stories, (v: any) => ({
-        ...pick(v, ['id', 'name', 'kind', 'story']),
-        parameters: pick(v.parameters, allowed),
-      })),
+      kindParameters: Object.entries(value.kindParameters).reduce<Record<string, Parameters>>(
+        (acc, [key, v]) => {
+          acc[key] = pick(v, allowed);
+          return acc;
+        },
+        {}
+      ),
+      stories: Object.entries<Record<string, StoryContext>>(value.stories).reduce<
+        Record<string, any>
+      >((acc, [key, v]) => {
+        acc[key] = {
+          ...pick(v, ['id', 'name', 'kind', 'story']),
+          parameters: pick(v.parameters, allowed),
+        };
+        return acc;
+      }, {}),
     };
   };
 

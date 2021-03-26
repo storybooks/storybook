@@ -1,11 +1,11 @@
 import 'jest-specific-snapshot';
-import mapValues from 'lodash/mapValues';
 import { transformSync } from '@babel/core';
 import requireFromString from 'require-from-string';
 import fs from 'fs';
 
 import { convert } from './index';
 import { normalizeNewlines } from '../utils';
+import { DocgenInfo } from '../docgen/types';
 
 expect.addSnapshotSerializer({
   print: (val: any) => JSON.stringify(val, null, 2),
@@ -797,7 +797,10 @@ const convertCommon = (code: string, fileExt: string) => {
   const { Component } = requireFromString(transformToModule(docgenPretty));
   // eslint-disable-next-line no-underscore-dangle
   const { props = {} } = Component.__docgenInfo || {};
-  const types = mapValues(props, (prop) => convert(prop));
+  const types = Object.entries(props).reduce((acc, [key, prop]) => {
+    acc[key] = convert(prop as DocgenInfo);
+    return acc;
+  }, {});
   return types;
 };
 

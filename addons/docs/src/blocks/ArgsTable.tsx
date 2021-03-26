@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import React, { FC, useContext, useEffect, useState, useCallback } from 'react';
-import mapValues from 'lodash/mapValues';
 import {
   ArgsTable as PureArgsTable,
   ArgsTableProps as PureArgsTableProps,
@@ -117,10 +116,13 @@ const addComponentTabs = (
   sort?: SortType
 ) => ({
   ...tabs,
-  ...mapValues(components, (comp) => ({
-    rows: extractComponentArgTypes(comp, context, include, exclude),
-    sort,
-  })),
+  ...Object.entries(components).reduce<typeof tabs>((acc, [key, comp]) => {
+    acc[key] = {
+      rows: extractComponentArgTypes(comp, context, include, exclude),
+      sort,
+    };
+    return acc;
+  }, {}),
 });
 
 export const StoryTable: FC<
