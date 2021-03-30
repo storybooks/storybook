@@ -102,3 +102,19 @@ The following code snippet shows how you can replace the loaders from Storybook 
 />
 
 <!-- prettier-ignore-end -->
+
+### TypeScript Module Resolution
+
+When working with TypeScript projects the default Webpack configuration may fail to resolve module aliases defined in your [`tsconfig` file](https://www.typescriptlang.org/tsconfig). To work around this issue you may use [`tsconfig-paths-webpack-plugin`](https://github.com/dividab/tsconfig-paths-webpack-plugin#tsconfig-paths-webpack-plugin) while [extending Storybook's Webpack config](#extending-storybooks-webpack-config) like:
+
+<!-- prettier-ignore-start -->
+
+<CodeSnippets
+  paths={[
+    'common/storybook-main-ts-module-resolution.js.mdx',
+  ]}
+/>
+
+<!-- prettier-ignore-end -->
+
+Learn more about Storybook's [built-in TypeScript support](./typescript.md) or see [this issue](https://github.com/storybookjs/storybook/issues/14087) for more information.
