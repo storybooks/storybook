@@ -1,6 +1,6 @@
 import React, { Component, ChangeEvent, Validator } from 'react';
 import PropTypes from 'prop-types';
-import deepEqual from 'fast-deep-equal';
+import { dequal } from 'dequal/lite';
 import { polyfill } from 'react-lifecycles-compat';
 import { Form } from '@storybook/components';
 import { KnobControlConfig, KnobControlProps } from './types';
@@ -36,7 +36,7 @@ class ObjectType<T> extends Component<ObjectTypeProps<T>> {
     props: ObjectTypeProps<T>,
     state: ObjectTypeState<T>
   ): ObjectTypeState<T> | null {
-    if (!deepEqual(props.knob.value, state.json)) {
+    if (!dequal(props.knob.value, state.json)) {
       try {
         return {
           value: JSON.stringify(props.knob.value, null, 2),
@@ -68,7 +68,7 @@ class ObjectType<T> extends Component<ObjectTypeProps<T>> {
         json,
         failed: false,
       });
-      if (deepEqual(knob.value, stateJson)) {
+      if (dequal(knob.value, stateJson)) {
         onChange(json);
       }
     } catch (err) {

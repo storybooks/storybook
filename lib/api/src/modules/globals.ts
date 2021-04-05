@@ -1,6 +1,6 @@
 import { SET_STORIES, UPDATE_GLOBALS, GLOBALS_UPDATED } from '@storybook/core-events';
 import { logger } from '@storybook/client-logger';
-import deepEqual from 'fast-deep-equal';
+import { dequal } from 'dequal/lite';
 
 import { Args, ModuleFn } from '../index';
 
@@ -35,7 +35,7 @@ export const init: ModuleFn = ({ store, fullAPI }) => {
 
   const updateGlobals = (globals: Args) => {
     const currentGlobals = store.getState()?.globals;
-    if (!deepEqual(globals, currentGlobals)) {
+    if (!dequal(globals, currentGlobals)) {
       store.setState({ globals });
     } else {
       logger.info('Tried to update globals but the old and new values are equal.');

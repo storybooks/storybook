@@ -1,5 +1,5 @@
 import { once } from '@storybook/client-logger';
-import deepEqual from 'fast-deep-equal';
+import { dequal } from 'dequal/lite';
 import isPlainObject from 'lodash/isPlainObject';
 import memoize from 'memoizerific';
 import qs from 'qs';
@@ -42,7 +42,7 @@ interface Args {
 export const DEEPLY_EQUAL = Symbol('Deeply equal');
 export const deepDiff = (value: any, update: any): any => {
   if (typeof value !== typeof update) return update;
-  if (deepEqual(value, update)) return DEEPLY_EQUAL;
+  if (dequal(value, update)) return DEEPLY_EQUAL;
   if (Array.isArray(value) && Array.isArray(update)) {
     const res = update.reduce((acc, upd, index) => {
       const diff = deepDiff(value[index], upd);

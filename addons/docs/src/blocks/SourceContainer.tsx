@@ -1,5 +1,5 @@
 import React, { FC, Context, createContext, useEffect, useState } from 'react';
-import deepEqual from 'fast-deep-equal';
+import { dequal } from 'dequal/lite';
 import { addons } from '@storybook/addons';
 import { StoryId } from '@storybook/api';
 import { SNIPPET_RENDERED } from '../shared';
@@ -33,7 +33,7 @@ export const SourceContainer: FC<{}> = ({ children }) => {
 
   useEffect(() => {
     const current = sourcesRef.current || {};
-    if (!deepEqual(sources, current)) {
+    if (!dequal(sources, current)) {
       setSources(current);
     }
 

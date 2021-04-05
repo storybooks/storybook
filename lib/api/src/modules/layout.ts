@@ -1,6 +1,6 @@
 import { DOCS_MODE, document } from 'global';
 import pick from 'lodash/pick';
-import deepEqual from 'fast-deep-equal';
+import { dequal } from 'dequal/lite';
 import { themes, ThemeVars } from '@storybook/theming';
 
 import merge from '../lib/merge';
@@ -250,20 +250,20 @@ export const init: ModuleFn = ({ store, provider }) => {
 
         const modification: PartialSubState = {};
 
-        if (!deepEqual(ui, updatedUi)) {
+        if (!dequal(ui, updatedUi)) {
           modification.ui = updatedUi;
         }
-        if (!deepEqual(layout, updatedLayout)) {
+        if (!dequal(layout, updatedLayout)) {
           modification.layout = updatedLayout;
         }
-        if (options.selectedPanel && !deepEqual(selectedPanel, options.selectedPanel)) {
+        if (options.selectedPanel && !dequal(selectedPanel, options.selectedPanel)) {
           modification.selectedPanel = options.selectedPanel;
         }
 
         if (Object.keys(modification).length) {
           store.setState(modification, { persistence: 'permanent' });
         }
-        if (!deepEqual(theme, updatedTheme)) {
+        if (!dequal(theme, updatedTheme)) {
           store.setState({ theme: updatedTheme });
         }
       }

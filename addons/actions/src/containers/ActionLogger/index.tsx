@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import deepEqual from 'fast-deep-equal';
+import { dequal } from 'dequal/lite';
 
 import { API } from '@storybook/api';
 import { STORY_CHANGED } from '@storybook/core-events';
@@ -19,7 +19,7 @@ interface ActionLoggerState {
 
 const safeDeepEqual = (a: any, b: any): boolean => {
   try {
-    return deepEqual(a, b);
+    return dequal(a, b);
   } catch (e) {
     return false;
   }

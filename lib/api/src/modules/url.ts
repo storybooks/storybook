@@ -2,7 +2,7 @@ import { navigate as navigateRouter, NavigateOptions } from '@reach/router';
 import { NAVIGATE_URL, STORY_ARGS_UPDATED, SET_CURRENT_STORY } from '@storybook/core-events';
 import { queryFromLocation, navigate as queryNavigate, buildArgsParam } from '@storybook/router';
 import { toId, sanitize } from '@storybook/csf';
-import deepEqual from 'fast-deep-equal';
+import { dequal } from 'dequal/lite';
 import { window } from 'global';
 
 import { ModuleArgs, ModuleFn } from '../index';
@@ -95,7 +95,7 @@ const initialUrlSupport = ({
   }
 
   // Avoid returning a new object each time if no params actually changed.
-  const customQueryParams = deepEqual(prevParams, otherParams) ? prevParams : otherParams;
+  const customQueryParams = dequal(prevParams, otherParams) ? prevParams : otherParams;
   prevParams = customQueryParams;
 
   return { viewMode, layout: addition, selectedPanel, location, path, customQueryParams, storyId };

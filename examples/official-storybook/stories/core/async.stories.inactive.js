@@ -8,9 +8,9 @@
 //   AsyncStories.add('.add called in setTimeout', () => <div>Added late</div>);
 // });
 
-// import('fast-deep-equal').then(m => {
+// import('dequal').then(m => {
 //   storiesOf('Core|Async', module).add('storyOf is added async', () => (
-//     <div>{m.default('foo', 'foo') ? 'TRUE' : 'FALSE'}</div>
+//     <div>{m.dequal('foo', 'foo') ? 'TRUE' : 'FALSE'}</div>
 //   ));
 // });
 
@@ -24,8 +24,8 @@
 //   AsyncStories.add('.add called in setTimeout', () => <div>Added late</div>);
 // });
 
-// import('fast-deep-equal').then(m => {
+// import('dequal').then(m => {
 //   storiesOf('Core|Async', module).add('storyOf is added async', () => (
-//     <div>{m.default('foo', 'foo') ? 'TRUE' : 'FALSE'}</div>
+//     <div>{m.dequal('foo', 'foo') ? 'TRUE' : 'FALSE'}</div>
 //   ));
 // });
