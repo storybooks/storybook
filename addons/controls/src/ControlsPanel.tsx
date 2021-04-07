@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { ArgTypes, useArgs, useArgTypes, useParameter } from '@storybook/api';
+import { Args, ArgTypes, useArgs, useChannel, useArgTypes, useParameter } from '@storybook/api';
 import { ArgsTable, NoControlsWarning, PresetColor, SortType } from '@storybook/components';
 
-import { PARAM_KEY } from './constants';
+import { CONTROL_BUTTON_CLICK, PARAM_KEY } from './constants';
 
 interface ControlsParameters {
   sort?: SortType;
@@ -12,6 +12,7 @@ interface ControlsParameters {
 }
 
 export const ControlsPanel: FC = () => {
+  const emit = useChannel({});
   const [args, updateArgs, resetArgs] = useArgs();
   const rows = useArgTypes();
   const isArgsStory = useParameter<boolean>('__isArgsStory', false);
@@ -22,6 +23,13 @@ export const ControlsPanel: FC = () => {
     hideNoControlsWarning = false,
   } = useParameter<ControlsParameters>(PARAM_KEY, {});
 
+  const buttonArgs = Object.entries(rows).reduce(
+    (acc, [key, { control }]) => ({
+      ...acc,
+      [key]: control?.type === 'button' ? () => emit(CONTROL_BUTTON_CLICK, key) : args[key],
+    }),
+    {} as Args
+  );
   const hasControls = Object.values(rows).some((arg) => arg?.control);
   const showWarning = !(hasControls && isArgsStory) && !hideNoControlsWarning;
 
@@ -38,7 +46,7 @@ export const ControlsPanel: FC = () => {
         {...{
           compact: !expanded && hasControls,
           rows: withPresetColors,
-          args,
+          args: buttonArgs,
           updateArgs,
           resetArgs,
           inAddonPanel: true,

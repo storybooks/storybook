@@ -15,6 +15,9 @@ export default {
       control: { type: 'select', labels: { Bold: 'BOLD' } },
       mapping: { Bold: <b>Bold</b> },
     },
+    buttonAction: {
+      control: { type: 'button', label: 'Click me!' },
+    },
     background: {
       name: 'Background color',
       control: {
@@ -45,8 +48,35 @@ export const Basic = Template.bind({});
 Basic.args = {
   children: 'basic',
   json: DEFAULT_NESTED_OBJECT,
+  buttonAction: () => {
+    console.log({ DEFAULT_NESTED_OBJECT });
+    console.log('ey! stop this!');
+  },
 };
 Basic.parameters = { chromatic: { disable: false } };
+
+export const Counter = ({ count }) => (
+  <>
+    <p>You clicked {count} times</p>
+  </>
+);
+Counter.argTypes = {
+  plusClick: {
+    control: { type: 'button', label: 'Add one' },
+  },
+  minusClick: {
+    control: { type: 'button', label: 'Remove one' },
+  },
+};
+Counter.args = {
+  count: 0,
+  plusClick: ({ count, ...args }) => {
+    return { count: count + 1, ...args };
+  },
+  minusClick: ({ count, ...args }) => {
+    return { count: count - 1, ...args };
+  },
+};
 
 export const Action = Template.bind({});
 Action.args = {

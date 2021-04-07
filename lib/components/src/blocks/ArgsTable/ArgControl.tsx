@@ -2,6 +2,7 @@ import React, { FC, useCallback, useState, useEffect } from 'react';
 import { Args, ArgType } from './types';
 import {
   BooleanControl,
+  ButtonControl,
   ColorControl,
   DateControl,
   FilesControl,
@@ -54,6 +55,8 @@ export const ArgControl: FC<ArgControlProps> = ({ row, arg, updateArgs }) => {
       return <ObjectControl {...props} {...control} />;
     case 'boolean':
       return <BooleanControl {...props} {...control} />;
+    case 'button':
+      return <ButtonControl {...props} {...control} />;
     case 'color':
       return <ColorControl {...props} {...control} />;
     case 'date':

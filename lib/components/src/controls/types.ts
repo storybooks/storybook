@@ -19,6 +19,11 @@ export interface ArrayConfig {
 export type BooleanValue = boolean;
 export interface BooleanConfig {}
 
+export type ButtonValue = (...args: any[]) => any;
+export interface ButtonConfig {
+  label?: string;
+}
+
 export type ColorValue = string;
 export type PresetColor = ColorValue | { color: ColorValue; title?: string };
 export interface ColorConfig {
@@ -71,6 +76,7 @@ export interface TextConfig {}
 export type ControlType =
   | 'array'
   | 'boolean'
+  | 'button'
   | 'color'
   | 'date'
   | 'number'
@@ -82,6 +88,7 @@ export type ControlType =
 export type Control =
   | ArrayConfig
   | BooleanConfig
+  | ButtonConfig
   | ColorConfig
   | DateConfig
   | NumberConfig
