@@ -1,4 +1,4 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
 /**
  *
@@ -6,45 +6,45 @@ import Component from '@ember/component';
  *
  *
  * ```js
- * {{welcome-banner
- *   backgroundColor=backgroundColor
- *   titleColor=titleColor
- *   subTitleColor=subTitleColor
- *   title=title
- *   subtitle=subtitle
- *   click=(action onClick)
- * }}
+ * <WelcomeBanner
+ *   @backgroundColor={{backgroundColor}}
+ *   @titleColor={{titleColor}}
+ *   @subTitleColor={{subTitleColor}}
+ *   @title={{title}}
+ *   @subtitle={{subtitle}}
+ *   @click={{(action onClick)}}
+ * />
  * ```
  *
  * @class WelcomeBanner
  */
-export default Component.extend({
+export default class WelcomeBanner extends Component {
   /**
    * The hex-formatted color code for the background.
    * @argument backgroundColor
    * @type {string}
    * @default null
    */
-  backgroundColor: null,
+  backgroundColor = null;
 
   /**
    * The hex-formatted color code for the subtitle.
    * @argument subTitleColor
    * @type {string}
    */
-  subTitleColor: null,
+  subTitleColor = null;
 
   /**
    * The title of the banner.
    * @argument title
    * @type {string}
    */
-  title: null,
+  title = null;
 
   /**
    * The subtitle of the banner.
    * @argument subtitle
    * @type {string}
    */
-  subtitle: null,
-});
+  subtitle = null;
+}

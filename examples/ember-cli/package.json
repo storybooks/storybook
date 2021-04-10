@@ -5,12 +5,13 @@
   "scripts": {
     "build": "ember build --output-path ember-output",
     "build-storybook": "yarn storybook-prebuild && build-storybook -s ember-output",
-    "dev": "ember serve",
+    "dev": "ember serve --output-path ember-output",
     "storybook": "yarn build && start-storybook -p 9009 -s ember-output",
     "storybook-prebuild": "yarn build && shx cp -r public/* ember-output",
-    "storybook:dev": "yarn dev & start-storybook -p 9009 -s ember-output"
+    "storybook:dev": "echo 'run `yarn dev` in another terminal' && start-storybook -p 9009 -s ember-output"
   },
   "dependencies": {
+    "@glimmer/component": "^1.0.0",
     "ember-named-blocks-polyfill": "^0.2.3",
     "ember-template-compiler": "^1.9.0-alpha"
   },

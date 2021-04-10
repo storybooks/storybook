@@ -21,6 +21,8 @@ export interface FrameworkOptions {
   extraMain?: any;
   extensions?: string[];
   commonJs?: boolean;
+  /** directly copy the framework folder as-is */
+  rawCopy?: boolean;
 }
 
 export type Generator = (
@@ -40,6 +42,7 @@ const defaultOptions: FrameworkOptions = {
   extraMain: undefined,
   extensions: undefined,
   commonJs: false,
+  rawCopy: false,
 };
 
 export async function baseGenerator(
@@ -59,6 +62,7 @@ export async function baseGenerator(
     addESLint,
     extraMain,
     extensions,
+    rawCopy
   } = {
     ...defaultOptions,
     ...options,
@@ -111,7 +115,7 @@ export async function baseGenerator(
     ...mainOptions,
   });
   if (addComponents) {
-    copyComponents(framework, language);
+    copyComponents(framework, language, rawCopy);
   }
 
   const babelDependencies = addBabel ? await getBabelDependencies(packageManager, packageJson) : [];

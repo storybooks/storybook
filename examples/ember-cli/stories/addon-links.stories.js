@@ -3,6 +3,9 @@ import { linkTo } from '@storybook/addon-links';
 
 export default {
   title: 'Addon/Links',
+  parameters: {
+    options: { showPanel: true },
+  },
 };
 
 export const GoToWelcome = () => ({

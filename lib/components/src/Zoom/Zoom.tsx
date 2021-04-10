@@ -4,7 +4,9 @@ import { ZoomIFrame as IFrame } from './ZoomIFrame';
 
 export const browserSupportsCssZoom = (): boolean => {
   try {
-    return globalWindow.document.implementation.createHTMLDocument('').body.style.zoom !== undefined;
+    return (
+      globalWindow.document.implementation.createHTMLDocument('').body.style.zoom !== undefined
+    );
   } catch (error) {
     return false;
   }

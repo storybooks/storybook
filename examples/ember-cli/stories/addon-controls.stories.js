@@ -2,18 +2,57 @@ import { hbs } from 'ember-cli-htmlbars';
 
 export default {
   title: 'Addon/Controls',
+  component: 'WelcomeBanner',
+  parameters: {
+    docs: {
+      iframeHeight: 200,
+    },
+    options: { showPanel: true, selectedPanel: 'storybook/controls/panel' },
+  },
   argTypes: {
-    label: { type: { name: 'string' } },
+    backgroundColor: {
+      description: 'background color of the bounding box',
+      control: {
+        type: 'color',
+      },
+    },
+    titleColor: {
+      description: 'Color of the title text',
+      control: {
+        type: 'color',
+      },
+    },
+    subTitleColor: {
+      description: 'Color of the sub title text',
+      control: {
+        type: 'color',
+      },
+    },
+    title: {
+      description: 'Title text',
+    },
+    subtitle: {
+      description: 'Subtitle text',
+    },
   },
 };
 
-const Template = (args) => ({
-  template: hbs`<button>{{label}}</button>`,
+export const Basic = (args) => ({
+  template: hbs`
+    <WelcomeBanner
+      @backgroundColor={{this.backgroundColor}}
+      @titleColor={{this.titleColor}}
+      @subTitleColor={{this.subTitleColor}}
+      @title={{this.title}}
+      @subtitle={{this.subtitle}}
+    />
+  `,
   context: args,
 });
-
-export const Hello = Template.bind({});
-Hello.args = { label: 'Hello!' };
-
-export const Bonjour = Template.bind({});
-Bonjour.args = { label: 'Bonjour!' };
+Basic.args = {
+  backgroundColor: '#FDF4E7',
+  titleColor: '#DF4D37',
+  subTitleColor: '#B8854F',
+  title: 'Welcome to storybook',
+  subtitle: 'This environment is completely editable',
+};

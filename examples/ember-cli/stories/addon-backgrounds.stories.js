@@ -14,7 +14,7 @@ export default {
 };
 
 export const Story1 = () => ({
-  template: hbs`<button>You should be able to switch backgrounds for this story</button>`,
+  template: hbs`<button>You should be able to switch backgrounds for this story. Click the background button in the toolbar to toggle backgrounds.</button>`,
 });
 
 Story1.storyName = 'story 1';

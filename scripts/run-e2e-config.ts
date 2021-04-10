@@ -29,14 +29,14 @@ export const angularv10: Parameters = {
 
 export const angular: Parameters = baseAngular;
 
-// TODO: not working yet, help needed
-// export const ember: Parameters = {
-//   name: 'ember',
-//   version: 'latest',
-//   generator:
-//     'npx ember-cli@{{version}} new {{name}}-{{version}} --skip-git --skip-npm --yarn --skip-bower',
-//   preBuildCommand: 'ember build',
-// };
+export const ember: Parameters = {
+  name: 'ember',
+  version: 'latest',
+  generator:
+    'npx ember-cli@{{version}} new {{name}}-{{version}} --skip-git --skip-npm --yarn --skip-bower',
+  preBuildCommand: 'ember build',
+  additionalDeps: ['@storybook/ember-cli-storybook'],
+};
 
 export const html: Parameters = {
   name: 'html',

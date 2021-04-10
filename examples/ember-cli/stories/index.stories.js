@@ -9,6 +9,6 @@ export default {
 
 export const Basic = () => ({
   template: hbs`
-        {{welcome-page}}
-      `,
+    <WelcomePage/>
+  `,
 });

@@ -1,26 +1,24 @@
 import { hbs } from 'ember-cli-htmlbars';
 import { withKnobs, text, color, boolean } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Addon/Knobs',
   decorators: [withKnobs],
   parameters: {
-    options: { selectedPanel: 'storybookjs/knobs/panel' },
+    options: { selectedPanel: 'storybook/knobs/panel' },
   },
 };
 
 export const WithText = () => ({
   template: hbs`
-      {{welcome-banner
-        style=(if hidden "display: none")
-        backgroundColor=backgroundColor
-        titleColor=titleColor
-        subTitleColor=subTitleColor
-        title=title
-        subtitle=subtitle
-        click=(action onClick)
-      }}
+      <WelcomeBanner
+        @style={{if this.hidden "display: none"}}
+        @backgroundColor={{this.backgroundColor}}
+        @titleColor={{this.titleColor}}
+        @subTitleColor={{this.subTitleColor}}
+        @title={{this.title}}
+        @subtitle={{this.subtitle}}
+      />
     `,
   context: {
     hidden: boolean('hidden', false),
@@ -29,7 +27,6 @@ export const WithText = () => ({
     subTitleColor: color('subTitleColor', '#B8854F'),
     title: text('title', 'Welcome to storybook'),
     subtitle: text('subtitle', 'This environment is completely editable'),
-    onClick: action('clicked'),
   },
 });
 
