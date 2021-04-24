@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import { StoryContext, RenderContext } from './types';
 
-const rootEl = document ? document.getElementById('root') : null;
+const rootEl = document ? document.getElementById('storybook-root') : null;
 
 const render = (node: ReactElement, el: Element) =>
   new Promise((resolve) => {

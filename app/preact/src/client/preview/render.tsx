@@ -3,7 +3,7 @@ import { document } from 'global';
 import dedent from 'ts-dedent';
 import { RenderContext, StoryFnPreactReturnType } from './types';
 
-const rootElement = document ? document.getElementById('root') : null;
+const rootElement = document ? document.getElementById('storybook-root') : null;
 
 let renderedStory: Element;
 

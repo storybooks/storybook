@@ -4,7 +4,7 @@ import { RenderContext, ElementArgs, OptionsArgs } from './types';
 
 declare let Ember: any;
 
-const rootEl = document.getElementById('root');
+const rootEl = document.getElementById('storybook-root');
 
 const config = globalWindow.require(`${globalWindow.STORYBOOK_NAME}/config/environment`);
 const app = globalWindow.require(`${globalWindow.STORYBOOK_NAME}/app`).default.create({

@@ -3,7 +3,7 @@
 exports[`Storyshots Story/Nest tags Matriochka 1`] = `
 <div
   data-is="root"
-  id="root"
+  id="storybook-root"
 >
   <matriochka>
     <div>
@@ -61,7 +61,7 @@ exports[`Storyshots Story/Nest tags Matriochka 1`] = `
 exports[`Storyshots Story/Nest tags Three tags 1`] = `
 <div
   data-is="root"
-  id="root"
+  id="storybook-root"
 >
   <webpage>
     <pageheader>

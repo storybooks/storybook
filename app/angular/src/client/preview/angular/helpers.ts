@@ -166,7 +166,7 @@ const initModule = (storyFn: StoryFn<StoryFnAngularReturnType>) => {
   );
 };
 
-const staticRoot = document.getElementById('root');
+const staticRoot = document.getElementById('storybook-root');
 const insertDynamicRoot = () => {
   const app = document.createElement('storybook-dynamic-app-root');
   staticRoot.innerHTML = '';

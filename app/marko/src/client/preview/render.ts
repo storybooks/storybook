@@ -3,7 +3,7 @@ import dedent from 'ts-dedent';
 
 import { logger } from '@storybook/client-logger';
 
-const rootEl = document.getElementById('root');
+const rootEl = document.getElementById('storybook-root');
 let activeComponent: any = null; // currently loaded marko component.
 let activeTemplate: any = null; // template for the currently loaded component.
 let activeStoryFn: any = null; // used to determine if we've switched stories.

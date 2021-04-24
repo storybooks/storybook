@@ -17,7 +17,7 @@ function cleanUpPreviousStory() {
 export default function render({ storyFn, kind, name, showMain, showError }: RenderContext) {
   cleanUpPreviousStory();
 
-  const target = document.getElementById('root');
+  const target = document.getElementById('storybook-root');
 
   target.innerHTML = '';
 

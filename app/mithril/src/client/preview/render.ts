@@ -6,7 +6,7 @@ import dedent from 'ts-dedent';
 
 import { RenderContext } from './types';
 
-const rootEl = document.getElementById('root');
+const rootEl = document.getElementById('storybook-root');
 
 export default function renderMain({ storyFn, kind, name, showMain, showError }: RenderContext) {
   const element = storyFn();

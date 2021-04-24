@@ -11,7 +11,7 @@ import {
 import { RenderMainArgs } from './types';
 import { generateKnobsFor } from '.';
 
-const host = document.getElementById('root'); // the root iframe provided by storybook
+const host = document.getElementById('storybook-root'); // the root iframe provided by storybook
 let previousAurelia: Aurelia;
 export default async function render({
   storyFn,

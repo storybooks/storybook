@@ -25,7 +25,7 @@ export class RendererService {
 
   public platform: PlatformRef;
 
-  private staticRoot = document.getElementById('root');
+  private staticRoot = document.getElementById('storybook-root');
 
   // Observable to change the properties dynamically without reloading angular module&component
   private storyProps$: Subject<ICollection | undefined>;

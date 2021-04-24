@@ -4,7 +4,7 @@ const riotForStorybook = jest.requireActual('@storybook/riot');
 
 function bootstrapADocumentAndReturnANode() {
   const rootElement = document.createElement('div');
-  rootElement.id = 'root';
+  rootElement.id = 'storybook-root';
   document.body = document.createElement('body');
   document.body.appendChild(rootElement);
   return rootElement;

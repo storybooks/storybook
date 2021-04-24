@@ -2,7 +2,7 @@
 import { document } from 'global';
 import { useEffect } from '@storybook/client-api';
 
-const root = document && document.getElementById('root');
+const root = document && document.getElementById('storybook-root');
 
 export const createDecorator = () => (options: any) => (storyFn: () => any) => {
   useEffect(() => {

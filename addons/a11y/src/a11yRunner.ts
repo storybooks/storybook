@@ -16,7 +16,7 @@ let activeStoryId: string | undefined;
 
 const getElement = () => {
   const storyRoot = document.getElementById('story-root');
-  return storyRoot ? storyRoot.children : document.getElementById('root');
+  return storyRoot ? storyRoot.children : document.getElementById('storybook-root');
 };
 
 /**

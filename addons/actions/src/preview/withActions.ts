@@ -14,7 +14,7 @@ const delegateEventSplitter = /^(\S+)\s*(.*)$/;
 const isIE = Element != null && !Element.prototype.matches;
 const matchesMethod = isIE ? 'msMatchesSelector' : 'matches';
 
-const root = document && document.getElementById('root');
+const root = document && document.getElementById('storybook-root');
 
 const hasMatchInAncestry = (element: any, selector: any): boolean => {
   if (element[matchesMethod](selector)) {

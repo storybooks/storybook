@@ -3,7 +3,7 @@
 exports[`Storyshots Addon/Actions Action only 1`] = `
 <div
   data-is="my-button"
-  id="root"
+  id="storybook-root"
 >
   <button
     class="button"
@@ -17,7 +17,7 @@ exports[`Storyshots Addon/Actions Action only 1`] = `
 exports[`Storyshots Addon/Actions Multiple actions 1`] = `
 <div
   data-is="my-button"
-  id="root"
+  id="storybook-root"
 >
   <button
     class="button"

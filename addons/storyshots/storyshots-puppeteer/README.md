@@ -311,7 +311,7 @@ To create a screenshot of just a single element (with its children), rather than
 import initStoryshots from '@storybook/addon-storyshots';
 import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
 
-const beforeScreenshot = (page) => page.$('#root > *');
+const beforeScreenshot = (page) => page.$('#storybook-root > *');
 
 initStoryshots({
   suite: 'Image storyshots',

@@ -3,7 +3,7 @@
 exports[`Storyshots Story/How to create a story built as string 1`] = `
 <div
   data-is="root"
-  id="root"
+  id="storybook-root"
 >
   <test>
     <div>
@@ -16,7 +16,7 @@ exports[`Storyshots Story/How to create a story built as string 1`] = `
 exports[`Storyshots Story/How to create a story built from raw import 1`] = `
 <div
   data-is="simpletest"
-  id="root"
+  id="storybook-root"
 >
   <div>
     simple test (without parameter). Oh, by the way (... well, nothing)
@@ -27,7 +27,7 @@ exports[`Storyshots Story/How to create a story built from raw import 1`] = `
 exports[`Storyshots Story/How to create a story built from tags and template 1`] = `
 <div
   data-is="root"
-  id="root"
+  id="storybook-root"
 >
   <simpletest
     test="with a parameter"
@@ -42,7 +42,7 @@ exports[`Storyshots Story/How to create a story built from tags and template 1`]
 exports[`Storyshots Story/How to create a story built from the precompilation 1`] = `
 <div
   data-is="anothertest"
-  id="root"
+  id="storybook-root"
 >
   <div>
     yet another test, precompiled this time (WARN, only works in lower case, never upper case with precompiled templates)
@@ -53,7 +53,7 @@ exports[`Storyshots Story/How to create a story built from the precompilation 1`
 exports[`Storyshots Story/How to create a story built with tag 1`] = `
 <div
   data-is="test"
-  id="root"
+  id="storybook-root"
 >
   <div>
     simple test (with a parameter)
@@ -64,7 +64,7 @@ exports[`Storyshots Story/How to create a story built with tag 1`] = `
 exports[`Storyshots Story/How to create a story tags, template and tagConstructor at once 1`] = `
 <div
   data-is="root"
-  id="root"
+  id="storybook-root"
 >
   <simpletest
     hacked="true"
@@ -80,7 +80,7 @@ exports[`Storyshots Story/How to create a story tags, template and tagConstructo
 exports[`Storyshots Story/How to create a story the mount instruction is not necessary 1`] = `
 <div
   data-is="anothertest"
-  id="root"
+  id="storybook-root"
 >
   <div>
     yet another test, precompiled this time (WARN, only works in lower case, never upper case with precompiled templates)
@@ -91,7 +91,7 @@ exports[`Storyshots Story/How to create a story the mount instruction is not nec
 exports[`Storyshots Story/How to create a story the opts value is not necessary 1`] = `
 <div
   data-is="anothertest"
-  id="root"
+  id="storybook-root"
 >
   <div>
     yet another test, precompiled this time (WARN, only works in lower case, never upper case with precompiled templates)

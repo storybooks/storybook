@@ -4,7 +4,7 @@ import * as DriverDOM from 'driver-dom';
 import { document } from 'global';
 import dedent from 'ts-dedent';
 
-const rootElement = document ? document.getElementById('root') : null;
+const rootElement = document ? document.getElementById('storybook-root') : null;
 
 export default function renderMain({
   storyFn,

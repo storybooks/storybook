@@ -3,7 +3,7 @@
 exports[`Storyshots Addon/Backgrounds story 1 1`] = `
 <div
   data-is="root"
-  id="root"
+  id="storybook-root"
 >
   <my-button>
     <button
@@ -19,7 +19,7 @@ exports[`Storyshots Addon/Backgrounds story 1 1`] = `
 exports[`Storyshots Addon/Backgrounds story 2 1`] = `
 <div
   data-is="root"
-  id="root"
+  id="storybook-root"
 >
   <my-button>
     <button

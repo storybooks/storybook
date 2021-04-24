@@ -51,6 +51,6 @@ export default function render({
   activeStoryComponent.value = element;
 
   if (!root) {
-    root = storybookApp.mount('#root');
+    root = storybookApp.mount('#storybook-root');
   }
 }

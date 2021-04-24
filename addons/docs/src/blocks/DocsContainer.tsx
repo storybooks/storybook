@@ -67,7 +67,7 @@ export const DocsContainer: FunctionComponent<DocsContainerProps> = ({ context, 
         let scrollTarget = element;
         if (allStories && allStories[0] === element) {
           // Include content above first story
-          scrollTarget = document.getElementById('docs-root');
+          scrollTarget = document.getElementById('storybook-docs-root');
         }
         // Introducing a delay to ensure scrolling works when it's a full refresh.
         setTimeout(() => {

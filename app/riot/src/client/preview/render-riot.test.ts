@@ -9,7 +9,7 @@ document.body = document.createElement('body');
 document.body.appendChild(rootElement);
 
 beforeEach(() => {
-  unregister('#root');
+  unregister('#storybook-root');
   rootElement.dataset.is = 'root';
 });
 

@@ -46,7 +46,7 @@ Cypress.Commands.add('visitStorybook', () => {
     .its('0.contentDocument.body', { log: false })
     .should('not.be.empty')
     .then((body) => cy.wrap(body, { log: false }))
-    .find('#docs-root', { log: false })
+    .find('#storybook-docs-root', { log: false })
     .should('not.be.empty');
 });
 
@@ -57,7 +57,7 @@ Cypress.Commands.add('getStoryElement', {}, () => {
     .its('0.contentDocument.body', { log: false })
     .should('not.be.empty')
     .then((body) => cy.wrap(body, { log: false }))
-    .find('#root', { log: false })
+    .find('#storybook-root', { log: false })
     .should('not.be.empty')
     .then((storyRoot) => cy.wrap(storyRoot, { log: false }));
 });
@@ -69,7 +69,7 @@ Cypress.Commands.add('getDocsElement', {}, () => {
     .its('0.contentDocument.body', { log: false })
     .should('not.be.empty')
     .then((body) => cy.wrap(body, { log: false }))
-    .find('#docs-root', { log: false })
+    .find('#storybook-docs-root', { log: false })
     .should('not.be.empty')
     .then((storyRoot) => cy.wrap(storyRoot, { log: false }));
 });

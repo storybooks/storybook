@@ -11,7 +11,7 @@ describe('RendererService', () => {
   let rendererService: RendererService;
 
   beforeEach(async () => {
-    document.body.innerHTML = '<div id="root"></div>';
+    document.body.innerHTML = '<div id="storybook-root"></div>';
     (platformBrowserDynamic as any).mockImplementation(platformBrowserDynamicTesting);
     rendererService = new RendererService();
   });

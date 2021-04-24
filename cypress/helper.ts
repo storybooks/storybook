@@ -23,7 +23,7 @@ export const visit = (route = '') => {
         expect(element).not.null;
 
         if (element !== null) {
-          expect(element.querySelector('#root > *')).not.null;
+          expect(element.querySelector('#storybook-root > *')).not.null;
         }
       });
     });
@@ -46,11 +46,11 @@ export const getStorybookPreview = () => {
         expect(element).not.null;
 
         if (element !== null) {
-          expect(element.querySelector('#root > *')).not.null;
+          expect(element.querySelector('#storybook-root > *')).not.null;
         }
       })
       .then(() => {
-        return cy.wrap(element).get('#root');
+        return cy.wrap(element).get('#storybook-root');
       });
   });
 };

@@ -59,7 +59,7 @@ export default {
   parameters: {
     a11y: {
       // optional selector which element to inspect
-      element: '#root',
+      element: '#storybook-root',
       // axe-core configurationOptions (https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#parameters-1)
       config: {},
       // axe-core optionsParameter (https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter)

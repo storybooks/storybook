@@ -21,6 +21,6 @@ export const storiesOf = (kind: string, m: any) =>
   clientApi.storiesOf(kind, m).addParameters({ framework });
 export const configure = (loadable: any, m: any) => coreConfigure(framework, loadable, m);
 
-const mount = vendorMount.bind(riot, '#root');
+const mount = vendorMount.bind(riot, '#storybook-root');
 const compileNow = unboundCompileNow.bind(null, tag2);
 export { forceReRender, render, tag2 as tag, mount, compileNow, asCompiledCode };

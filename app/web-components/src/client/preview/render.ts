@@ -4,7 +4,7 @@ import { render, TemplateResult } from 'lit-html';
 import { simulatePageLoad, simulateDOMContentLoaded } from '@storybook/client-api';
 import { RenderContext } from './types';
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('storybook-root');
 
 export default function renderMain({
   storyFn,

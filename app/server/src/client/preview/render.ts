@@ -4,7 +4,7 @@ import { Args, ArgTypes } from '@storybook/api';
 import { simulatePageLoad, simulateDOMContentLoaded } from '@storybook/client-api';
 import { RenderContext, FetchStoryHtmlType } from './types';
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('storybook-root');
 
 const defaultFetchStoryHtml: FetchStoryHtmlType = async (url, path, params, storyContext) => {
   const fetchUrl = new URL(`${url}/${path}`);

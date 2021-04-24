@@ -28,7 +28,9 @@ const defaultProviderValue = {
 
 describe('<HighlightToggle />', () => {
   it('should render', () => {
-    const { container } = render(<HighlightToggle elementsToHighlight={[nodeResult('#root')]} />);
+    const { container } = render(
+      <HighlightToggle elementsToHighlight={[nodeResult('#storybook-root')]} />
+    );
     expect(container.firstChild).toBeTruthy();
   });
 
@@ -37,10 +39,10 @@ describe('<HighlightToggle />', () => {
       <A11yContext.Provider
         value={{
           ...defaultProviderValue,
-          highlighted: ['#root'],
+          highlighted: ['#storybook-root'],
         }}
       >
-        <HighlightToggle elementsToHighlight={[nodeResult('#root')]} />
+        <HighlightToggle elementsToHighlight={[nodeResult('#storybook-root')]} />
       </A11yContext.Provider>
     );
     const checkbox = getByRole('checkbox') as HTMLInputElement;
@@ -52,10 +54,12 @@ describe('<HighlightToggle />', () => {
       <A11yContext.Provider
         value={{
           ...defaultProviderValue,
-          highlighted: ['#root'],
+          highlighted: ['#storybook-root'],
         }}
       >
-        <HighlightToggle elementsToHighlight={[nodeResult('#root'), nodeResult('#root1')]} />
+        <HighlightToggle
+          elementsToHighlight={[nodeResult('#storybook-root'), nodeResult('#storybook-root1')]}
+        />
       </A11yContext.Provider>
     );
     const checkbox = getByRole('checkbox') as HTMLInputElement;
@@ -64,10 +68,10 @@ describe('<HighlightToggle />', () => {
 
   describe('toggleHighlight', () => {
     it.each`
-      highlighted  | elementsToHighlight    | expected
-      ${[]}        | ${['#root']}           | ${true}
-      ${['#root']} | ${['#root']}           | ${false}
-      ${['#root']} | ${['#root', '#root1']} | ${true}
+      highlighted            | elementsToHighlight                        | expected
+      ${[]}                  | ${['#storybook-root']}                     | ${true}
+      ${['#storybook-root']} | ${['#storybook-root']}                     | ${false}
+      ${['#storybook-root']} | ${['#storybook-root', '#storybook-root1']} | ${true}
     `(
       'should be triggered with $expected when highlighted is $highlighted and elementsToHighlight is $elementsToHighlight',
       ({ highlighted, elementsToHighlight, expected }) => {

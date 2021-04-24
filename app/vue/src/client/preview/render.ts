@@ -14,7 +14,7 @@ const root = new Vue({
   },
   render(h) {
     const children = this[COMPONENT] ? [h(this[COMPONENT])] : undefined;
-    return h('div', { attrs: { id: 'root' } }, children);
+    return h('div', { attrs: { id: 'storybook-root' } }, children);
   },
 });
 
@@ -57,6 +57,6 @@ export default function render({
   root[VALUES] = { ...element.options[VALUES], ...args };
 
   if (!root.$el) {
-    root.$mount('#root');
+    root.$mount('#storybook-root');
   }
 }

@@ -3,7 +3,7 @@
 exports[`Storyshots Addon/Links Go to welcome 1`] = `
 <div
   data-is="my-button"
-  id="root"
+  id="storybook-root"
 >
   <button
     class="rounded button"

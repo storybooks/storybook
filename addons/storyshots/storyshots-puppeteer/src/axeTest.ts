@@ -17,7 +17,7 @@ export const axeTest = (customConfig: Partial<CommonConfig> = {}) =>
     ...customConfig,
     async testBody(page, options) {
       const parameters = options.context.parameters.a11y;
-      const include = parameters?.element ?? '#root';
+      const include = parameters?.element ?? '#storybook-root';
       await expect(page).toPassAxeTests({ ...parameters, include });
     },
   });

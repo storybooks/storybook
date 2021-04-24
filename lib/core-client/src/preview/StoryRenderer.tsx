@@ -158,7 +158,7 @@ export class StoryRenderer {
       case 'docs':
         if (kindChanged || viewModeChanged) {
           this.storyStore.cleanHooksForKind(previousMetadata.kind);
-          ReactDOM.unmountComponentAtNode(document.getElementById('docs-root'));
+          ReactDOM.unmountComponentAtNode(document.getElementById('storybook-docs-root'));
         }
         break;
       case 'story':
@@ -258,13 +258,13 @@ export class StoryRenderer {
   }
 
   showDocs() {
-    document.getElementById('root').setAttribute('hidden', 'true');
-    document.getElementById('docs-root').removeAttribute('hidden');
+    document.getElementById('storybook-root').setAttribute('hidden', 'true');
+    document.getElementById('storybook-docs-root').removeAttribute('hidden');
   }
 
   showStory() {
-    document.getElementById('docs-root').setAttribute('hidden', 'true');
-    document.getElementById('root').removeAttribute('hidden');
+    document.getElementById('storybook-docs-root').setAttribute('hidden', 'true');
+    document.getElementById('storybook-root').removeAttribute('hidden');
   }
 
   async renderStory({
@@ -314,7 +314,7 @@ export class StoryRenderer {
       <DocsContainer context={{ storyStore, ...context }}>
         <Page />
       </DocsContainer>,
-      document.getElementById('docs-root'),
+      document.getElementById('storybook-docs-root'),
       () => this.channel.emit(Events.DOCS_RENDERED, kind)
     );
   }

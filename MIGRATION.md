@@ -950,7 +950,7 @@ To configure a11y now, you have to specify configuration using story parameters,
 ```js
 export const parameters = {
   a11y: {
-    element: '#root',
+    element: "#storybook-root",
     config: {},
     options: {},
     manual: true,

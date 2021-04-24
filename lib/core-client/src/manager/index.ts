@@ -4,6 +4,6 @@ import Provider from './provider';
 import { importPolyfills } from './conditional-polyfills';
 
 importPolyfills().then(() => {
-  const rootEl = document.getElementById('root');
+  const rootEl = document.getElementById('storybook-root');
   renderStorybookUI(rootEl, new Provider());
 });

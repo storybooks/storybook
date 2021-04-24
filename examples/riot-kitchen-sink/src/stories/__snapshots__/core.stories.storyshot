@@ -3,7 +3,7 @@
 exports[`Storyshots Core/Parameters passed to story 1`] = `
 <div
   data-is="parameters"
-  id="root"
+  id="storybook-root"
 >
   <div>
     Parameters are 
@@ -17,7 +17,7 @@ exports[`Storyshots Core/Parameters passed to story 1`] = `
   "__id": "core-parameters--passed-to-story",
   "__isArgsStory": true,
   "storyParameter": "storyParameter",
-  "id": "root",
+  "id": "storybook-root",
   "dataIs": "parameters"
 }
     </pre>

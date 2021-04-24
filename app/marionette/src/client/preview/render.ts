@@ -3,7 +3,7 @@ import { stripIndents } from 'common-tags';
 import Marionette, { View } from 'backbone.marionette';
 import isMarionetteRenderable from './element_check';
 
-const rootEl = document.getElementById('root');
+const rootEl = document.getElementById('storybook-root');
 const rootRegion = new Marionette.Region({ el: rootEl });
 
 function render(view: View<any>) {
