@@ -1,4 +1,6 @@
 import React from 'react';
+// @ts-ignore
+import { vs, vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Button from '../../components/TsButton';
 
 export default {
@@ -30,3 +32,13 @@ ForceCodeSource.parameters = { docs: { source: { type: 'code' } } };
 export const CustomSource = Template.bind({});
 CustomSource.args = { ...Basic.args };
 CustomSource.parameters = { docs: { source: { code: 'custom source' } } };
+
+export const CustomSyntaxHighlighting = Template.bind({});
+CustomSyntaxHighlighting.args = { ...Basic.args };
+CustomSyntaxHighlighting.parameters = { docs: { source: { prismTheme: vs, language: 'tsx' } } };
+
+export const CustomSyntaxHighlightingDark = Template.bind({});
+CustomSyntaxHighlightingDark.args = { ...Basic.args };
+CustomSyntaxHighlightingDark.parameters = {
+  docs: { source: { prismTheme: vscDarkPlus, language: 'tsx', dark: true } },
+};

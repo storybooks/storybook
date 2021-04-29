@@ -14,4 +14,5 @@ export interface SyntaxHighlighterProps {
   format?: boolean;
   className?: string;
   renderer?: (props: SyntaxHighlighterRendererProps) => React.ReactNode;
+  style?: any;
 }

@@ -1,5 +1,4 @@
 import React, { Children, FunctionComponent, ReactElement, ReactNode, useState } from 'react';
-import { darken } from 'polished';
 import { styled } from '@storybook/theming';
 
 import { getBlockBackgroundStyle } from './BlockBackgroundStyles';
@@ -66,21 +65,16 @@ const ChildrenContainer = styled.div<PreviewProps & { layout: layout }>(
       : {}
 );
 
-const StyledSource = styled(Source)<{}>(({ theme }) => ({
+const StyledSource = styled(Source)<SourceProps>(({ theme }) => ({
   margin: 0,
   borderTopLeftRadius: 0,
   borderTopRightRadius: 0,
   borderBottomLeftRadius: theme.appBorderRadius,
   borderBottomRightRadius: theme.appBorderRadius,
   border: 'none',
-
-  background:
-    theme.base === 'light' ? 'rgba(0, 0, 0, 0.85)' : darken(0.05, theme.background.content),
-  color: theme.color.lightest,
-  button: {
-    background:
-      theme.base === 'light' ? 'rgba(0, 0, 0, 0.85)' : darken(0.05, theme.background.content),
-  },
+  borderTopWidth: 1,
+  borderTopStyle: 'solid',
+  borderTopColor: theme.color.border,
 }));
 
 const PreviewContainer = styled.div<PreviewProps>(
@@ -119,7 +113,7 @@ const getSource = (
     }
     case expanded: {
       return {
-        source: <StyledSource {...withSource} dark />,
+        source: <StyledSource {...withSource} />,
         actionItem: { title: 'Hide code', onClick: () => setExpanded(false) },
       };
     }

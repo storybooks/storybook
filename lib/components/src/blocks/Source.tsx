@@ -3,6 +3,7 @@ import { styled, ThemeProvider, convert, themes } from '@storybook/theming';
 import { EmptyBlock } from './EmptyBlock';
 
 import { SyntaxHighlighter } from '../syntaxhighlighter/lazy-syntaxhighlighter';
+import { SyntaxHighlighterProps } from '../syntaxhighlighter/syntaxhighlighter-types';
 
 const StyledSyntaxHighlighter = styled(SyntaxHighlighter)<{}>(({ theme }) => ({
   // DocBlocks-specific styling and overrides
@@ -32,6 +33,7 @@ interface SourceCodeProps {
   code?: string;
   format?: boolean;
   dark?: boolean;
+  prismTheme?: SyntaxHighlighterProps['style'];
 }
 
 // FIXME: Using | causes a typescript error, so stubbing it with & for now
@@ -47,7 +49,7 @@ const Source: FunctionComponent<SourceProps> = (props) => {
     return <EmptyBlock>{error}</EmptyBlock>;
   }
 
-  const { language, code, dark, format, ...rest } = props as SourceCodeProps;
+  const { language, code, dark, format, prismTheme, ...rest } = props as SourceCodeProps;
 
   const syntaxHighlighter = (
     <StyledSyntaxHighlighter
@@ -56,6 +58,7 @@ const Source: FunctionComponent<SourceProps> = (props) => {
       format={format}
       language={language}
       className="docblock-source"
+      style={prismTheme}
       {...rest}
     >
       {code}

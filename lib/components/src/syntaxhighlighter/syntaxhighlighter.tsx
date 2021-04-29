@@ -141,6 +141,7 @@ export const SyntaxHighlighter: FunctionComponent<Props> = ({
   format = true,
   className = null,
   showLineNumbers = false,
+  style,
   ...rest
 }) => {
   if (typeof children !== 'string' || !children.trim()) {
@@ -165,11 +166,16 @@ export const SyntaxHighlighter: FunctionComponent<Props> = ({
     <Wrapper bordered={bordered} padded={padded} className={className}>
       <Scroller>
         <ReactSyntaxHighlighter
+          customStyle={{
+            margin: undefined,
+            border: undefined,
+          }}
           padded={padded || bordered}
           language={language}
           showLineNumbers={showLineNumbers}
           showInlineLineNumbers={showLineNumbers}
-          useInlineStyles={false}
+          useInlineStyles={style !== undefined}
+          style={style}
           PreTag={Pre}
           CodeTag={Code}
           lineNumberContainerStyle={{}}

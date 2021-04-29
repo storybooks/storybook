@@ -19,6 +19,7 @@ interface CommonProps {
   language?: string;
   dark?: boolean;
   code?: string;
+  prismTheme?: any;
 }
 
 type SingleSourceProps = {
@@ -93,17 +94,20 @@ export const getSourceProps = (
   docsContext: DocsContextProps,
   sourceContext: SourceContextProps
 ): PureSourceProps => {
-  const { id: currentId, parameters = {} } = docsContext;
+  const { id: currentId } = docsContext;
 
   const codeProps = props as CodeProps;
   const singleProps = props as SingleSourceProps;
   const multiProps = props as MultiSourceProps;
 
+  const targetId =
+    singleProps.id === CURRENT_SELECTION || !singleProps.id ? currentId : singleProps.id;
+  const targetIds = multiProps.ids || [targetId];
+
+  const { parameters } = getStoryContext(targetIds[0], docsContext);
+
   let source = codeProps.code; // prefer user-specified code
   if (!source) {
-    const targetId =
-      singleProps.id === CURRENT_SELECTION || !singleProps.id ? currentId : singleProps.id;
-    const targetIds = multiProps.ids || [targetId];
     source = targetIds
       .map((storyId) => {
         const storySource = getStorySource(storyId, sourceContext);
@@ -113,12 +117,17 @@ export const getSourceProps = (
       .join('\n\n');
   }
 
-  const { docs: docsParameters = {} } = parameters;
-  const { source: sourceParameters = {} } = docsParameters;
-  const { language: docsLanguage = null } = sourceParameters;
+  const language = props.language || parameters.docs?.source?.language || 'jsx';
+  const prismTheme = props.prismTheme || parameters.docs?.source?.prismTheme;
+  const dark = props.dark || parameters.docs?.source?.dark || false;
 
   return source
-    ? { code: source, language: props.language || docsLanguage || 'jsx', dark: props.dark || false }
+    ? {
+        code: source,
+        language,
+        dark,
+        prismTheme,
+      }
     : { error: SourceError.SOURCE_UNAVAILABLE };
 };
 
