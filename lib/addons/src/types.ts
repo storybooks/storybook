@@ -98,9 +98,9 @@ export type StoryGetter = (context: StoryContext) => any;
 // This is the type of story function passed to a decorator -- does not rely on being passed any context
 export type PartialStoryFn<ReturnType = unknown> = (p?: StoryContextUpdate) => ReturnType;
 // This is a passArgsFirst: false user story function
-export type LegacyStoryFn<ReturnType = unknown> = (p?: StoryContext) => ReturnType;
+export type LegacyStoryFn<ReturnType = unknown> = (p: StoryContext) => ReturnType;
 // This is a passArgsFirst: true user story function
-export type ArgsStoryFn<ReturnType = unknown> = (a?: Args, p?: StoryContext) => ReturnType;
+export type ArgsStoryFn<ReturnType = unknown> = (a: Args, p: StoryContext) => ReturnType;
 // This is either type of user story function
 export type StoryFn<ReturnType = unknown> = LegacyStoryFn<ReturnType> | ArgsStoryFn<ReturnType>;
 

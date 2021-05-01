@@ -1,4 +1,4 @@
-import { StoryFn, DecoratorFunction, StoryContext } from '@storybook/addons';
+import { LegacyStoryFn, DecoratorFunction, StoryContext } from '@storybook/addons';
 import SlotDecorator from './SlotDecorator.svelte';
 
 const defaultContext: StoryContext = {
@@ -73,7 +73,7 @@ function prepareStory(context: StoryContext, story: any, originalStory?: any) {
 
 export function decorateStory(storyFn: any, decorators: any[]) {
   return decorators.reduce(
-    (previousStoryFn: StoryFn, decorator: DecoratorFunction) => (
+    (previousStoryFn: LegacyStoryFn, decorator: DecoratorFunction) => (
       context: StoryContext = defaultContext
     ) => {
       let story;

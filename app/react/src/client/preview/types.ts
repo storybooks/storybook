@@ -13,7 +13,7 @@ export type StoryFnReactReturnType = ReactElement<unknown>;
 
 export interface IStorybookStory {
   name: string;
-  render: () => any;
+  render: ((context: any) => any) | ((args: any, context: any) => any);
 }
 
 export interface IStorybookSection {

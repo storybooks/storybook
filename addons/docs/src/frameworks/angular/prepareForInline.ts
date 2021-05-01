@@ -1,6 +1,6 @@
 import React from 'react';
 import { IStory, StoryContext } from '@storybook/angular';
-import { StoryFn } from '@storybook/addons';
+import { PartialStoryFn } from '@storybook/addons';
 import { logger } from '@storybook/client-logger';
 
 const customElementsVersions: Record<string, number> = {};
@@ -9,7 +9,10 @@ const customElementsVersions: Record<string, number> = {};
  * Uses angular element to generate on-the-fly web components and reference it with `customElements`
  * then it is added into react
  */
-export const prepareForInline = (storyFn: StoryFn<IStory>, { id, parameters }: StoryContext) => {
+export const prepareForInline = (
+  storyFn: PartialStoryFn<IStory>,
+  { id, parameters }: StoryContext
+) => {
   // Upgrade story version in order that the next defined component has a unique key
   customElementsVersions[id] =
     customElementsVersions[id] !== undefined ? customElementsVersions[id] + 1 : 0;

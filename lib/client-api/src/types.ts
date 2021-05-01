@@ -5,6 +5,7 @@ import {
   StoryKind,
   ViewMode,
   StoryIdentifier,
+  LegacyStoryFn,
   StoryFn,
   Parameters,
   Args,
@@ -14,6 +15,7 @@ import {
   LoaderFunction,
   DecorateStoryFunction,
   StoryContext,
+  PartialStoryFn,
 } from '@storybook/addons';
 import StoryStore from './story_store';
 import { HooksContext } from './hooks';
@@ -53,11 +55,11 @@ export type AddStoryArgs = StoryIdentifier & {
 
 export type StoreItem = StoryIdentifier & {
   parameters: Parameters;
-  getDecorated: () => StoryFn<any>;
+  getDecorated: () => LegacyStoryFn<any>;
   getOriginal: () => StoryFn<any>;
   applyLoaders: () => Promise<StoryContext>;
-  storyFn: StoryFn<any>;
-  unboundStoryFn: StoryFn<any>;
+  storyFn: PartialStoryFn<any>;
+  unboundStoryFn: LegacyStoryFn<any>;
   hooks: HooksContext;
   args: Args;
   initialArgs: Args;

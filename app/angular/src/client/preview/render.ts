@@ -1,4 +1,4 @@
-import { StoryFn } from '@storybook/addons';
+import { PartialStoryFn } from '@storybook/addons';
 import { RendererService } from './angular-beta/RendererService';
 
 import { renderNgApp } from './angular/helpers';
@@ -12,7 +12,7 @@ export default function render({
   forceRender,
   parameters,
 }: {
-  storyFn: StoryFn<StoryFnAngularReturnType>;
+  storyFn: PartialStoryFn<StoryFnAngularReturnType>;
   showMain: () => void;
   forceRender: boolean;
   parameters: Parameters;

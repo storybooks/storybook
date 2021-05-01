@@ -1,4 +1,9 @@
-import { StoryFn as StoryFunction, StoryContext, useMemo, useEffect } from '@storybook/addons';
+import {
+  PartialStoryFn as StoryFunction,
+  StoryContext,
+  useMemo,
+  useEffect,
+} from '@storybook/addons';
 
 import { PARAM_KEY as BACKGROUNDS_PARAM_KEY } from '../constants';
 import { clearStyles, addBackgroundStyle, getBackgroundColorByName } from '../helpers';

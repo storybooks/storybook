@@ -1,4 +1,4 @@
-import { StoryFn } from '@storybook/addons';
+import { PartialStoryFn } from '@storybook/addons';
 import { withActions, action } from '@storybook/addon-actions';
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -6,7 +6,7 @@ import { StoryFnAureliaReturnType, addComponents } from '@storybook/aurelia';
 import { CoolButton } from '../cool-button/cool-button';
 import 'bootstrap/scss/bootstrap.scss';
 
-type StoryType = StoryFn<Partial<StoryFnAureliaReturnType>> & {
+type StoryType = PartialStoryFn<Partial<StoryFnAureliaReturnType>> & {
   storyName: string;
 };
 

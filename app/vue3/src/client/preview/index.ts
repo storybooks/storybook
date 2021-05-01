@@ -3,7 +3,7 @@ import { h } from 'vue';
 import { start } from '@storybook/core/client';
 import {
   ClientStoryApi,
-  StoryFn,
+  LegacyStoryFn,
   DecoratorFunction,
   StoryContext,
   Loadable,
@@ -55,11 +55,11 @@ const defaultContext: StoryContext = {
 };
 
 function decorateStory(
-  storyFn: StoryFn<StoryFnVueReturnType>,
+  storyFn: LegacyStoryFn<StoryFnVueReturnType>,
   decorators: DecoratorFunction<ConcreteComponent>[]
-): StoryFn<Component> {
+): LegacyStoryFn<Component> {
   return decorators.reduce(
-    (decorated: StoryFn<ConcreteComponent>, decorator) => (
+    (decorated: LegacyStoryFn<ConcreteComponent>, decorator) => (
       context: StoryContext = defaultContext
     ) => {
       let story;
@@ -82,7 +82,7 @@ function decorateStory(
 
       return prepare(decoratedStory, story);
     },
-    (context) => prepare(storyFn(context))
+    (context: StoryContext) => prepare(storyFn(context))
   );
 }
 const framework = 'vue3';

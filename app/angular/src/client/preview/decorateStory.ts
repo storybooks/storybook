@@ -1,4 +1,4 @@
-import { DecoratorFunction, StoryContext, StoryFn } from '@storybook/addons';
+import { DecoratorFunction, StoryContext, LegacyStoryFn } from '@storybook/addons';
 import { computesTemplateFromComponent } from './angular-beta/ComputesTemplateFromComponent';
 
 import { StoryFnAngularReturnType } from './types';
@@ -14,11 +14,11 @@ const defaultContext: StoryContext = {
 };
 
 export default function decorateStory(
-  mainStoryFn: StoryFn<StoryFnAngularReturnType>,
+  mainStoryFn: LegacyStoryFn<StoryFnAngularReturnType>,
   decorators: DecoratorFunction<StoryFnAngularReturnType>[]
-): StoryFn<StoryFnAngularReturnType> {
+): LegacyStoryFn<StoryFnAngularReturnType> {
   const returnDecorators = decorators.reduce(
-    (previousStoryFn: StoryFn<StoryFnAngularReturnType>, decorator) => (
+    (previousStoryFn: LegacyStoryFn<StoryFnAngularReturnType>, decorator) => (
       context: StoryContext = defaultContext
     ) => {
       const decoratedStory = decorator(

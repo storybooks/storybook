@@ -4,7 +4,7 @@ import { document } from 'global';
 import AnsiToHtml from 'ansi-to-html';
 import dedent from 'ts-dedent';
 
-import { StoryId, StoryKind, StoryFn, ViewMode, Channel } from '@storybook/addons';
+import { StoryId, StoryKind, LegacyStoryFn, ViewMode, Channel } from '@storybook/addons';
 import Events from '@storybook/core-events';
 import { logger } from '@storybook/client-logger';
 import { StoryStore } from '@storybook/client-api';
@@ -17,7 +17,7 @@ interface RenderMetadata {
   id: StoryId;
   kind: StoryKind;
   viewMode: ViewMode;
-  getDecorated: () => StoryFn<any>;
+  getDecorated: () => LegacyStoryFn<any>;
 }
 
 const layoutClassMap = {

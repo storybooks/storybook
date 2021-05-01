@@ -1,4 +1,4 @@
-import { addons, StoryContext, StoryFn } from '@storybook/addons';
+import { addons, StoryContext, PartialStoryFn } from '@storybook/addons';
 import { IStory } from '@storybook/angular';
 import { computesTemplateSourceFromComponent } from '@storybook/angular/renderer';
 import prettierHtml from 'prettier/parser-html';
@@ -30,7 +30,7 @@ const prettyUp = (source: string) => {
  * @param storyFn Fn
  * @param context  StoryContext
  */
-export const sourceDecorator = (storyFn: StoryFn<IStory>, context: StoryContext) => {
+export const sourceDecorator = (storyFn: PartialStoryFn<IStory>, context: StoryContext) => {
   const story = storyFn();
   if (skipSourceRender(context)) {
     return story;

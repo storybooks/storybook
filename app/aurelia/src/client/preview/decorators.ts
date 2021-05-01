@@ -1,9 +1,9 @@
-import { StoryFn } from '@storybook/addons';
+import { PartialStoryFn } from '@storybook/addons';
 import { IRegistry, IContainer } from 'aurelia';
 import { StoryFnAureliaReturnType } from './types';
 
 export const addRegistries = (...items: IRegistry[]) => (
-  storyFn: StoryFn<StoryFnAureliaReturnType>
+  storyFn: PartialStoryFn<StoryFnAureliaReturnType>
 ) => {
   const story = storyFn();
   story.items = story.items || [];
@@ -21,7 +21,7 @@ export interface Component {
 }
 
 export const addComponents = (...components: Component[] | unknown[]) => (
-  storyFn: StoryFn<StoryFnAureliaReturnType>
+  storyFn: PartialStoryFn<StoryFnAureliaReturnType>
 ) => {
   const story = storyFn();
   story.components = story.components || [];
@@ -34,7 +34,7 @@ export const addComponents = (...components: Component[] | unknown[]) => (
 };
 
 export const addContainer = (container: IContainer) => (
-  storyFn: StoryFn<StoryFnAureliaReturnType>
+  storyFn: PartialStoryFn<StoryFnAureliaReturnType>
 ) => {
   const story = storyFn();
 

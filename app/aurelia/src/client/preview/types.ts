@@ -1,9 +1,9 @@
-import { StoryFn } from '@storybook/addons';
+import { PartialStoryFn } from '@storybook/addons';
 import { IRegistry, IContainer, Constructable } from 'aurelia';
 import { Component } from './decorators';
 
 export interface RenderMainArgs {
-  storyFn: StoryFn<Partial<StoryFnAureliaReturnType>>;
+  storyFn: PartialStoryFn<Partial<StoryFnAureliaReturnType>>;
   selectedKind: string;
   selectedStory: string;
   showMain: () => void;
@@ -26,7 +26,7 @@ export interface ShowErrorArgs {
 
 export interface IStorybookStory {
   name: string;
-  render: () => any;
+  render: ((context: any) => any) | ((args: any, context: any) => any);
 }
 
 export interface IStorybookSection {

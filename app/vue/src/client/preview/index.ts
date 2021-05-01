@@ -3,10 +3,10 @@ import Vue, { VueConstructor, ComponentOptions } from 'vue';
 import { start } from '@storybook/core/client';
 import {
   ClientStoryApi,
-  StoryFn,
   DecoratorFunction,
   StoryContext,
   Loadable,
+  LegacyStoryFn,
 } from '@storybook/addons';
 
 import './globals';
@@ -74,11 +74,13 @@ const defaultContext: StoryContext = {
 };
 
 function decorateStory(
-  storyFn: StoryFn<StoryFnVueReturnType>,
+  storyFn: LegacyStoryFn<StoryFnVueReturnType>,
   decorators: DecoratorFunction<VueConstructor>[]
-): StoryFn<VueConstructor> {
+): LegacyStoryFn<VueConstructor> {
   return decorators.reduce(
-    (decorated: StoryFn<VueConstructor>, decorator) => (context: StoryContext = defaultContext) => {
+    (decorated: LegacyStoryFn<VueConstructor>, decorator) => (
+      context: StoryContext = defaultContext
+    ) => {
       let story;
 
       const decoratedStory = decorator(

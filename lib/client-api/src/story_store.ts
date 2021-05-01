@@ -14,6 +14,7 @@ import {
   Comparator,
   Parameters,
   Args,
+  PartialStoryFn,
   LegacyStoryFn,
   ArgsStoryFn,
   StoryContext,
@@ -434,7 +435,7 @@ export default class StoryStore {
 
     const storyParametersWithArgTypes = { ...storyParameters, argTypes, __isArgsStory };
 
-    const storyFn: LegacyStoryFn = (runtimeContext: StoryContext) => {
+    const storyFn: PartialStoryFn = (runtimeContext: StoryContext) => {
       storyFnWarning();
       return getDecorated()({
         ...identification,
