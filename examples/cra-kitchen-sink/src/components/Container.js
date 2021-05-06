@@ -10,7 +10,16 @@ const Container = ({ children, title, age, isAmazing }) => (
 );
 
 Container.propTypes = {
-  /** The nodes to be rendered in the button */
+  /**
+   * The nodes to be rendered in the button
+   * 
+   * Example value:
+   * 
+   * ```
+   * <h1>Node 1</h1>
+   * <h2>Node 2</h2>
+   * ```
+   */
   children: PropTypes.node.isRequired,
   /** Show exclamation marks */
   isAmazing: PropTypes.bool,

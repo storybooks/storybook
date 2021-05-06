@@ -1,7 +1,14 @@
-import { Story, Meta } from '@storybook/addon-docs/blocks';
+import { Story, Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+import Container from '../components/Container'
 
-<Meta title="Docs/Test" />
+<Meta title="Docs/Test" component={Container} />
 
 <Story name="NewStory123">
-  <h2> Hello </h2>
+  <Container>
+    <h1>Hello</h1>
+  </Container>
 </Story>
+
+## Arguments
+
+<ArgsTable story="NewStory123" />

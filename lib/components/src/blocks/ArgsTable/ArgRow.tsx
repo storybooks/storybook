@@ -41,6 +41,10 @@ const Description = styled.div(({ theme }) => ({
     margin: 0,
     display: 'inline-block',
   },
+
+  '& pre > code': {
+    whiteSpace: 'pre-wrap',
+  },
 }));
 
 const Type = styled.div<{ hasDescription: boolean }>(({ theme, hasDescription }) => ({
