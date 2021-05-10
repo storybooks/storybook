@@ -1,28 +1,43 @@
 import { customElement, bindable } from 'aurelia';
 
 @customElement({
-  name: 'storybook-button-component',
-  template: `
-  <template>
-    <button click.delegate="onClick($event)">\${text}</button>
-    <style>
-    button {
-      border: 1px solid #eee;
-      border-radius: 3px;
-      background-color: #ffffff;
-      cursor: pointer;
-      font-size: 15px;
-      padding: 3px 10px;
-      margin: 10px;
-    }
-    </style>
-    </template>
-  `,
+  name: 'storybook-button',
+  template: `<template>
+  <require from="button.css"></require>
+  <button class="\${classes()}" css="background-color: \${backgroundColor};">\${label}</button>
+</template>
+`,
 })
-export default class Button {
-  @bindable()
-  text = '';
+export class Button {
+  /**
+   * Button contents
+   *
+   * @required
+   */
+  @bindable
+  label = 'Button';
 
-  @bindable()
-  onClick: MouseEvent;
+  /**
+   * Is this the principal call to action on the page?
+   */
+  @bindable
+  primary = false;
+
+  /**
+   * How large should the button be?
+   */
+  @bindable
+  size: 'small' | 'medium' | 'large' = 'medium';
+
+  /**
+   * What background color to use
+   */
+  @bindable
+  backgroundColor?: string;
+
+  classes(): string {
+    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+
+    return ['storybook-button', `storybook-button--${this.size}`, mode].join(' ');
+  }
 }

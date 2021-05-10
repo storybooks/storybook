@@ -29,6 +29,14 @@ export const angularv10: Parameters = {
 
 export const angular: Parameters = baseAngular;
 
+export const aurelia: Parameters = {
+  name: 'aurelia',
+  version: 'latest',
+  generator: 'npx aurelia-cli@{{version}} new {{name}}-{{version}} --unattended',
+  ensureDir: false,
+  additionalDeps: ['@aurelia/webpack-loader'],
+};
+
 // TODO: not working yet, help needed
 // export const ember: Parameters = {
 //   name: 'ember',
