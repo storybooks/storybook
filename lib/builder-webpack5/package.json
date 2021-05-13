@@ -92,7 +92,7 @@
     "terser-webpack-plugin": "^5.0.3",
     "ts-dedent": "^2.0.0",
     "util-deprecate": "^1.0.2",
-    "webpack": "^5.9.0",
+    "webpack": "^5.36.2",
     "webpack-dev-middleware": "^4.1.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-virtual-modules": "^0.4.1"
