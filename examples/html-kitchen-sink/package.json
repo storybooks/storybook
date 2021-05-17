@@ -30,12 +30,16 @@
     "@storybook/core-events": "6.3.0-alpha.28",
     "@storybook/html": "6.3.0-alpha.28",
     "@storybook/source-loader": "6.3.0-alpha.28",
-    "autoprefixer": "^10.0.1",
+    "@types/autoprefixer": "^10.2.0",
+    "autoprefixer": "^10.2.5",
     "eventemitter3": "^4.0.7",
     "format-json": "^1.0.3",
     "global": "^4.4.0",
-    "postcss": "^8.2.4",
+    "postcss": "^8.2.15",
     "postcss-color-rebeccapurple": "^6.0.0"
+  },
+  "peerDependencies": {
+    "postcss": "^8.2.15"
   },
   "storybook": {
     "chromatic": {

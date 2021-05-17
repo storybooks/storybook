@@ -77,7 +77,7 @@
     "@storybook/ui": "6.3.0-alpha.28",
     "@types/node": "^14.0.10",
     "@types/webpack": "^4.41.26",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-polyfill-corejs3": "^0.1.0",
@@ -94,9 +94,9 @@
     "global": "^4.4.0",
     "html-webpack-plugin": "^4.0.0",
     "pnp-webpack-plugin": "1.6.4",
-    "postcss": "^7.0.35",
-    "postcss-flexbugs-fixes": "^4.2.1",
-    "postcss-loader": "^4.2.0",
+    "postcss": "^8.2.15",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-loader": "^5.3.0",
     "raw-loader": "^4.0.2",
     "react-dev-utils": "^11.0.3",
     "stable": "^0.1.8",
@@ -112,6 +112,7 @@
     "webpack-virtual-modules": "^0.2.2"
   },
   "devDependencies": {
+    "@types/autoprefixer": "^10.2.0",
     "@types/case-sensitive-paths-webpack-plugin": "^2.1.4",
     "@types/dotenv-webpack": "^3.0.0",
     "@types/react-dev-utils": "^9.0.4",
@@ -121,6 +122,7 @@
     "@types/webpack-virtual-modules": "^0.1.0"
   },
   "peerDependencies": {
+    "postcss": "^8.2.15",
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0"
   },

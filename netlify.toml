@@ -1,6 +1,41 @@
 [build]
   publish = "built-storybooks"
-  command = "yarn bootstrap --core && yarn build-storybooks"
+  command = '''
+    yarn workspace @storybook/node-logger prepare
+    yarn workspace @storybook/client-logger prepare
+    yarn workspace @storybook/core-common prepare
+    yarn workspace @storybook/theming prepare
+    yarn workspace @storybook/builder-webpack4 prepare
+    yarn workspace @storybook/core-events prepare
+    yarn workspace @storybook/router prepare
+    yarn workspace @storybook/channels prepare
+    yarn workspace @storybook/builder-webpack5 prepare
+    yarn workspace @storybook/api prepare
+    yarn workspace @storybook/addons prepare
+    yarn workspace @storybook/components prepare
+    yarn workspace @storybook/ui prepare
+    yarn workspace @storybook/channel-postmessage prepare
+    yarn workspace @storybook/client-api prepare
+    yarn workspace @storybook/addon-controls prepare
+    yarn workspace @storybook/core-server prepare
+    yarn workspace @storybook/core-client prepare
+    yarn workspace @storybook/addon-essentials prepare
+    yarn workspace @storybook/addon-actions prepare
+    yarn workspace @storybook/angular prepare
+    yarn workspace @storybook/addon-jest prepare
+    yarn workspace @storybook/core prepare
+    yarn workspace @storybook/source-loader prepare
+    yarn workspace @storybook/vue3 prepare
+    yarn workspace @storybook/web-components prepare
+    yarn workspace @storybook/addon-docs prepare
+    yarn workspace @storybook/addon-backgrounds prepare
+    yarn workspace @storybook/addon-viewport prepare
+    yarn workspace @storybook/addon-toolbars prepare
+    yarn workspace @storybook/addon-a11y prepare
+    yarn workspace @storybook/addon-storysource prepare
+    yarn bootstrap --core
+    yarn build-storybooks
+    '''
 [build.environment]
   NODE_VERSION = "12"
   YARN_VERSION = "1.22.10"

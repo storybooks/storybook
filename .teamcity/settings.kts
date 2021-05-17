@@ -124,8 +124,41 @@ object Build : BuildType({
             scriptContent = """
                 #!/bin/bash
                 set -e -x
-                
+
                 yarn install --immutable
+                # Following dependencies will fail whe not prepared first
+                yarn workspace @storybook/node-logger prepare
+                yarn workspace @storybook/client-logger prepare
+                yarn workspace @storybook/core-common prepare
+                yarn workspace @storybook/theming prepare
+                yarn workspace @storybook/builder-webpack4 prepare
+                yarn workspace @storybook/core-events prepare
+                yarn workspace @storybook/router prepare
+                yarn workspace @storybook/channels prepare
+                yarn workspace @storybook/builder-webpack5 prepare
+                yarn workspace @storybook/api prepare
+                yarn workspace @storybook/addons prepare
+                yarn workspace @storybook/components prepare
+                yarn workspace @storybook/ui prepare
+                yarn workspace @storybook/channel-postmessage prepare
+                yarn workspace @storybook/client-api prepare
+                yarn workspace @storybook/addon-controls prepare
+                yarn workspace @storybook/core-server prepare
+                yarn workspace @storybook/core-client prepare
+                yarn workspace @storybook/addon-essentials prepare
+                yarn workspace @storybook/addon-actions prepare
+                yarn workspace @storybook/angular prepare
+                yarn workspace @storybook/addon-jest prepare
+                yarn workspace @storybook/core prepare
+                yarn workspace @storybook/source-loader prepare
+                yarn workspace @storybook/vue3 prepare
+                yarn workspace @storybook/web-components prepare
+                yarn workspace @storybook/addon-docs prepare
+                yarn workspace @storybook/addon-backgrounds prepare
+                yarn workspace @storybook/addon-viewport prepare
+                yarn workspace @storybook/addon-toolbars prepare
+                yarn workspace @storybook/addon-a11y prepare
+                yarn workspace @storybook/addon-storysource prepare
                 yarn bootstrap --core
             """.trimIndent()
             dockerImage = "node:12"
@@ -172,11 +205,11 @@ object ExamplesTemplate : Template({
             scriptContent = """
                 #!/bin/bash
                 set -e -x
-                
+
                 yarn install
                 rm -rf built-storybooks
                 mkdir -p built-storybooks
-                
+
                 yarn build-storybooks
             """.trimIndent()
             dockerImage = "buildkite/puppeteer"
@@ -314,7 +347,7 @@ object E2E : BuildType({
             scriptContent = """
                 #!/bin/bash
                 set -e -x
-                
+
                 yarn install --immutable
                 yarn cypress install
                 yarn serve-storybooks &
@@ -367,33 +400,33 @@ object SmokeTests : BuildType({
             scriptContent = """
                 #!/bin/bash
                 set -e -x
-                
+
                 yarn install --immutable
-                
+
                 cd examples/cra-kitchen-sink
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../cra-ts-kitchen-sink
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../vue-kitchen-sink
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../svelte-kitchen-sink
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../angular-cli
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../ember-cli
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../official-storybook
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../preact-kitchen-sink
                 yarn storybook --smoke-test --quiet
-                
+
                 cd ../cra-react15
                 yarn storybook --smoke-test --quiet
             """.trimIndent()
@@ -450,9 +483,9 @@ object Test : BuildType({
             scriptContent = """
                 #!/bin/bash
                 set -e -x
-                
+
                 yarn install
-                
+
                 # TODO remove after merging
                 mkdir temp-jest-teamcity
                 cd temp-jest-teamcity
@@ -490,7 +523,7 @@ object Coverage : BuildType({
             scriptContent = """
                 #!/bin/bash
                 set -e -x
-                
+
                 yarn install
                 yarn coverage
             """.trimIndent()

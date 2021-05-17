@@ -118,7 +118,6 @@ const buildWebpackConfigOptions = async (
     scripts: [],
     sourceMap: {},
     styles: [],
-    lazyModules: [],
 
     // Project Options
     ...projectBuildOptions,
@@ -136,7 +135,6 @@ const buildWebpackConfigOptions = async (
 
     // Forced options
     statsJson: false,
-    forkTypeChecker: false,
   };
 
   return {
