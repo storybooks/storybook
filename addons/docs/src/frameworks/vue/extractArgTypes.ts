@@ -17,10 +17,17 @@ export const extractArgTypes: ArgTypesExtractor = (component) => {
     props.forEach(({ propDef, docgenInfo, jsDocTags }) => {
       const { name, type, description, defaultValue: defaultSummary, required } = propDef;
       const sbType = section === 'props' ? convert(docgenInfo) : { name: 'void' };
-      let defaultValue = defaultSummary && (defaultSummary.detail || defaultSummary.summary);
+      let defaultValue: any = defaultSummary && (defaultSummary.detail || defaultSummary.summary);
       try {
         // eslint-disable-next-line no-eval
         defaultValue = eval(defaultValue);
+        // B/c Vue requires that Object/Array defaults be supplied as factory functions.
+        if (
+          typeof defaultValue === 'function' &&
+          ['object', 'array', 'other'].includes(sbType.name)
+        ) {
+          defaultValue = defaultValue();
+        }
         // eslint-disable-next-line no-empty
       } catch {}
 
