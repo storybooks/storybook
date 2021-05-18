@@ -1,4 +1,6 @@
 import ClientApi, {
+  addArgs,
+  addArgTypes,
   addDecorator,
   addParameters,
   addLoader,
@@ -24,6 +26,8 @@ export * from './inferControls';
 export type { PropDescriptor } from './filterArgTypes';
 
 export {
+  addArgs,
+  addArgTypes,
   addArgTypesEnhancer,
   addDecorator,
   addLoader,

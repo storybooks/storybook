@@ -14,6 +14,7 @@ import {
   Comparator,
   Parameters,
   Args,
+  ArgTypes,
   LegacyStoryFn,
   ArgsStoryFn,
   StoryContext,
@@ -258,13 +259,24 @@ export default class StoryStore {
     this.pushToManager();
   }
 
-  addGlobalMetadata({ parameters = {}, decorators = [], loaders = [] }: StoryMetadata) {
+  addGlobalMetadata({
+    args = {},
+    argTypes = {},
+    parameters = {},
+    decorators = [],
+    loaders = [],
+  }: StoryMetadata) {
+    const globalArgs = this._globalMetadata.args;
+    this._globalMetadata.args = combineArgs(globalArgs, args);
+
+    // const globalArgTypes = this._globalMetadata.argTypes;
+    // this._globalMetadata.argTypes = combineArgTypes(globalArgTypes, argTypes);
+
     if (parameters) {
-      const { args, argTypes } = parameters;
-      if (args || argTypes)
+      if (parameters.args || parameters.argTypes)
         logger.warn(
           'Found args/argTypes in global parameters.',
-          JSON.stringify({ args, argTypes })
+          JSON.stringify({ args: parameters.args, argTypes: parameters.argTypes })
         );
     }
     const globalParameters = this._globalMetadata.parameters;

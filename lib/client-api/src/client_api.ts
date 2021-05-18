@@ -2,7 +2,14 @@
 import deprecate from 'util-deprecate';
 import dedent from 'ts-dedent';
 import { logger } from '@storybook/client-logger';
-import { StoryFn, Parameters, LoaderFunction, DecorateStoryFunction } from '@storybook/addons';
+import {
+  Args,
+  ArgTypes,
+  StoryFn,
+  Parameters,
+  LoaderFunction,
+  DecorateStoryFunction,
+} from '@storybook/addons';
 import { toId } from '@storybook/csf';
 
 import {
@@ -19,6 +26,22 @@ import { defaultDecorateStory } from './decorators';
 // ClientApi (and StoreStore) are really singletons. However they are not created until the
 // relevant framework instanciates them via `start.js`. The good news is this happens right away.
 let singleton: ClientApi;
+
+export const addArgs = (args: Args) => {
+  if (!singleton) {
+    throw new Error(`Singleton client API not yet initialized, cannot call addArgs`);
+  }
+
+  singleton.addArgs(args);
+};
+
+export const addArgTypes = (argTypes: ArgTypes) => {
+  if (!singleton) {
+    throw new Error(`Singleton client API not yet initialized, cannot call addArgTypes`);
+  }
+
+  singleton.addArgTypes(argTypes);
+};
 
 const addDecoratorDeprecationWarning = deprecate(
   () => {},
@@ -112,6 +135,14 @@ export default class ClientApi {
       https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-setaddon
     `
   );
+
+  addArgs = (args: Args) => {
+    this._storyStore.addGlobalMetadata({ args });
+  };
+
+  addArgTypes = (argTypes: ArgTypes) => {
+    this._storyStore.addGlobalMetadata({ argTypes });
+  };
 
   addDecorator = (decorator: DecoratorFunction) => {
     this._storyStore.addGlobalMetadata({ decorators: [decorator] });

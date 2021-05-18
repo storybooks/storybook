@@ -25,6 +25,8 @@ export interface ErrorLike {
 
 // Metadata about a story that can be set at various levels: global, for a kind, or for a single story.
 export interface StoryMetadata {
+  args?: Args;
+  argTypes?: ArgTypes;
   parameters?: Parameters;
   decorators?: DecoratorFunction[];
   loaders?: LoaderFunction[];

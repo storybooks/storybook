@@ -1,1 +1,12 @@
 /.yarn/** linguist-generated
+
+# Handle line endings consistently across operating systems
+# https://docs.github.com/en/github/getting-started-with-github/configuring-git-to-handle-line-endings
+
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+*.webp binary
