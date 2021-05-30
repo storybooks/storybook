@@ -73,6 +73,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@testing-library/react": "^11.2.2",
+    "@types/react-dom": "^17",
     "babel-loader": "^8.2.2",
     "chromatic": "^5.6.0",
     "enzyme": "^3.11.0",

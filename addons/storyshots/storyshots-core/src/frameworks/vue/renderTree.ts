@@ -8,7 +8,7 @@ function getRenderedTree(story: any) {
   const component = story.render();
 
   const vm = new Vue({
-    render(h) {
+    render(h: any) {
       return h(component);
     },
   });

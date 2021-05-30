@@ -42,8 +42,6 @@
       "addons/*",
       "addons/storyshots/*",
       "app/*",
-      "examples-native/*",
-      "examples/*",
       "lib/*",
       "lib/cli/test/run/*"
     ]
