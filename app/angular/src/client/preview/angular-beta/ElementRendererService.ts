@@ -32,7 +32,7 @@ export class ElementRendererService {
     parameters: Parameters;
   }): Promise<CustomElementConstructor> {
     const ngModule = getStorybookModuleMetadata(
-      { storyFnAngular, parameters },
+      { storyFnAngular, parameters, targetSelector: RendererService.SELECTOR_STORYBOOK_WRAPPER },
       new BehaviorSubject<ICollection>(storyFnAngular.props)
     );
 

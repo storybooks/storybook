@@ -15,7 +15,6 @@ import { map, skip } from 'rxjs/operators';
 import { ICollection } from '../types';
 import { STORY_PROPS } from './StorybookProvider';
 import { ComponentInputsOutputs, getComponentInputsOutputs } from './utils/NgComponentAnalyzer';
-import { RendererService } from './RendererService';
 
 const getNonInputsOutputsProps = (
   ngComponentInputsOutputs: ComponentInputsOutputs,
@@ -37,6 +36,7 @@ const getNonInputsOutputsProps = (
  * @param initialProps
  */
 export const createStorybookWrapperComponent = (
+  selector: string,
   template: string,
   storyComponent: Type<unknown> | undefined,
   styles: string[],
@@ -47,7 +47,7 @@ export const createStorybookWrapperComponent = (
   const viewChildSelector = storyComponent ?? '__storybook-noop';
 
   @Component({
-    selector: RendererService.SELECTOR_STORYBOOK_WRAPPER,
+    selector,
     template,
     styles,
   })

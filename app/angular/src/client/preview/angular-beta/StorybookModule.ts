@@ -31,9 +31,11 @@ export const getStorybookModuleMetadata = (
   {
     storyFnAngular,
     parameters,
+    targetSelector,
   }: {
     storyFnAngular: StoryFnAngularReturnType;
     parameters: Parameters;
+    targetSelector: string;
   },
   storyProps$: Subject<ICollection>
 ): NgModule => {
@@ -52,7 +54,13 @@ export const getStorybookModuleMetadata = (
   /**
    * Create a component that wraps generated template and gives it props
    */
-  const ComponentToInject = createStorybookWrapperComponent(template, component, styles, props);
+  const ComponentToInject = createStorybookWrapperComponent(
+    targetSelector,
+    template,
+    component,
+    styles,
+    props
+  );
 
   // Look recursively (deep) if the component is not already declared by an import module
   const requiresComponentDeclaration =

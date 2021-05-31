@@ -66,7 +66,10 @@ export class RendererService {
     parameters: Parameters;
   }) {
     const storyProps$ = new BehaviorSubject<ICollection>(storyFnAngular.props);
-    const moduleMetadata = getStorybookModuleMetadata({ storyFnAngular, parameters }, storyProps$);
+    const moduleMetadata = getStorybookModuleMetadata(
+      { storyFnAngular, parameters, targetSelector: RendererService.SELECTOR_STORYBOOK_WRAPPER },
+      storyProps$
+    );
 
     if (
       !this.fullRendererRequired({
