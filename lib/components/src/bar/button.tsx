@@ -68,6 +68,7 @@ export const TabButton = styled(ButtonOrLink, { shouldForwardProp: isPropValid }
           borderBottomColor: 'transparent',
         }
 );
+
 TabButton.displayName = 'TabButton';
 
 export interface IconButtonProps {

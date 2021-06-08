@@ -3,21 +3,27 @@ import { themes, convert } from '@storybook/theming';
 import { Result } from 'axe-core';
 import { useChannel, useStorybookState } from '@storybook/api';
 import { STORY_CHANGED, STORY_RENDERED } from '@storybook/core-events';
-import { EVENTS } from '../constants';
+import { EVENTS } from './constants';
 
-interface Results {
+export enum RuleType {
+  VIOLATION,
+  PASS,
+  INCOMPLETION,
+}
+
+export interface Results {
   passes: Result[];
   violations: Result[];
   incomplete: Result[];
 }
 
-interface A11yContextStore {
+export interface A11yContextStore {
   results: Results;
   setResults: (results: Results) => void;
   highlighted: string[];
   toggleHighlight: (target: string[], highlight: boolean) => void;
   clearHighlights: () => void;
-  tab: number;
+  tab: RuleType;
   setTab: (index: number) => void;
 }
 

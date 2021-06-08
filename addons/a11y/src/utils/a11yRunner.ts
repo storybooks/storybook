@@ -1,8 +1,8 @@
 import global from 'global';
 import axe from 'axe-core';
 import addons from '@storybook/addons';
-import { EVENTS } from './constants';
-import { A11yParameters } from './params';
+import { EVENTS } from '../constants';
+import { A11yParameters } from '../params';
 
 const { document, window: globalWindow } = global;
 

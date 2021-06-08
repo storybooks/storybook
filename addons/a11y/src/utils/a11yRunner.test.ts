@@ -1,5 +1,5 @@
 import addons from '@storybook/addons';
-import { EVENTS } from './constants';
+import { EVENTS } from '../constants';
 
 jest.mock('@storybook/addons');
 const mockedAddons = addons as jest.Mocked<typeof addons>;

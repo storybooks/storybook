@@ -1,16 +1,16 @@
 import React from 'react';
 import { addons, types } from '@storybook/addons';
 import { ADDON_ID, PANEL_ID, PARAM_KEY } from './constants';
-import { VisionSimulator } from './components/VisionSimulator';
-import { A11YPanel } from './components/A11YPanel';
-import { A11yContextProvider } from './components/A11yContext';
+import { A11yVisionSimulator } from './containers/A11yVisionSimulator';
+import { A11yAddonPanel } from './containers/A11yAddonPanel';
+import { A11yContextProvider } from './A11yContext';
 
 addons.register(ADDON_ID, () => {
   addons.add(PANEL_ID, {
     title: '',
     type: types.TOOL,
     match: ({ viewMode }) => viewMode === 'story',
-    render: () => <VisionSimulator />,
+    render: () => <A11yVisionSimulator />,
   });
 
   addons.add(PANEL_ID, {
@@ -18,7 +18,7 @@ addons.register(ADDON_ID, () => {
     type: types.PANEL,
     render: ({ active = true, key }) => (
       <A11yContextProvider key={key} active={active}>
-        <A11YPanel />
+        <A11yAddonPanel />
       </A11yContextProvider>
     ),
     paramKey: PARAM_KEY,

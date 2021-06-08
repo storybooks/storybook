@@ -4,8 +4,8 @@ import { render, waitFor, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider, themes, convert } from '@storybook/theming';
 import * as api from '@storybook/api';
 
-import { A11YPanel } from './A11YPanel';
-import { EVENTS } from '../constants';
+import { A11yAddonPanel } from '../A11yAddonPanel';
+import { EVENTS } from '../../constants';
 
 jest.mock('@storybook/api');
 const mockedApi = api as jest.Mocked<typeof api>;
@@ -51,7 +51,7 @@ const axeResult = {
 function ThemedA11YPanel() {
   return (
     <ThemeProvider theme={convert(themes.light)}>
-      <A11YPanel />
+      <A11yAddonPanel />
     </ThemeProvider>
   );
 }
@@ -72,12 +72,12 @@ describe('A11YPanel', () => {
   });
 
   it('should render', () => {
-    const { container } = render(<A11YPanel />);
+    const { container } = render(<A11yAddonPanel />);
     expect(container.firstChild).toBeTruthy();
   });
 
   it('should register event listener on mount', () => {
-    render(<A11YPanel />);
+    render(<A11yAddonPanel />);
     expect(mockedApi.useChannel).toHaveBeenCalledWith(
       expect.objectContaining({
         [EVENTS.RESULT]: expect.any(Function),
@@ -87,7 +87,7 @@ describe('A11YPanel', () => {
   });
 
   it('should handle "initial" status', () => {
-    const { getByText } = render(<A11YPanel />);
+    const { getByText } = render(<A11yAddonPanel />);
     expect(getByText(/Initializing/)).toBeTruthy();
   });
 

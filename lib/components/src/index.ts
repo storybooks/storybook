@@ -35,9 +35,15 @@ export { IconButton, TabButton } from './bar/button';
 export { Separator, interleaveSeparators } from './bar/separator';
 export { Bar, FlexBar } from './bar/bar';
 export { AddonPanel } from './addon-panel/addon-panel';
+// FF version of Tabs
+export { Tabs as FFTabs } from './tabs/FFTabs';
+export { TabItem as FFTabItem } from './tabs/FFTabItem';
+export type { TabsProps as FFTabsProps } from './tabs/FFTabs';
+export type { TabItemProps as FFTabItemProps } from './tabs/FFTabItem';
 
 // Graphics
 export type { IconsProps } from './icon/icon';
+export type { IconKey } from './icon/icons';
 export { Icons, Symbols } from './icon/icon';
 export { StorybookLogo } from './brand/StorybookLogo';
 export { StorybookIcon } from './brand/StorybookIcon';
@@ -48,6 +54,15 @@ export * from './controls';
 
 // Loader
 export { Loader } from './Loader/Loader';
+
+// Accordion
+export { Accordion, AccordionItem, AccordionHeader, AccordionBody } from './Accordion';
+export type {
+  AccordionProps,
+  AccordionItemProps,
+  AccordionHeaderProps,
+  AccordionBodyProps,
+} from './Accordion';
 
 export * from './typography/DocumentFormatting';
 

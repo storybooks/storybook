@@ -3,7 +3,9 @@ import { useGlobals } from '@storybook/api';
 import { Icons, IconButton, WithTooltip, TooltipLinkList, TabButton } from '@storybook/components';
 import { NormalizedToolbarArgType } from '../types';
 
-export type MenuToolbarProps = NormalizedToolbarArgType & { id: string };
+export type MenuToolbarProps = NormalizedToolbarArgType & {
+  id: string;
+};
 
 export const MenuToolbar: FC<MenuToolbarProps> = ({
   id,

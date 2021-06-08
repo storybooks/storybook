@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { Global, styled } from '@storybook/theming';
 import { Icons, IconButton, WithTooltip, TooltipLinkList } from '@storybook/components';
 
-import { Filters } from './ColorFilters';
+import { Filters } from '../components/ColorFilters';
 
 const iframeId = 'storybook-preview-iframe';
 
@@ -91,7 +91,7 @@ const getColorList = (active: Filter, set: (i: Filter) => void): Link[] => [
   })),
 ];
 
-export const VisionSimulator: FunctionComponent = () => {
+export const A11yVisionSimulator: FunctionComponent = () => {
   const [filter, setFilter] = useState<Filter>(null);
 
   return (

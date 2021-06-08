@@ -1,9 +1,9 @@
 import global from 'global';
 import addons from '@storybook/addons';
 import { STORY_CHANGED } from '@storybook/core-events';
-import { EVENTS, HIGHLIGHT_STYLE_ID } from './constants';
+import { EVENTS, HIGHLIGHT_STYLE_ID } from '../constants';
 
-import { highlightStyle } from './highlight';
+import { highlightStyle } from './highlight-styles';
 
 const { document } = global;
 

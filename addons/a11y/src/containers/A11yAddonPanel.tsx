@@ -1,67 +1,25 @@
-import React, { useCallback, useMemo, useState } from 'react';
-
+import React, { useEffect, useCallback, useMemo, useState } from 'react';
 import { styled } from '@storybook/theming';
-
 import { ActionBar, Icons, ScrollArea } from '@storybook/components';
-
-import { AxeResults } from 'axe-core';
 import { useChannel, useParameter, useStorybookState } from '@storybook/api';
-import { Report } from './Report';
-import { Tabs } from './Tabs';
-
-import { useA11yContext } from './A11yContext';
+import { PanelTabs } from '../components/PanelTabs';
+import { useA11yContext } from '../A11yContext';
 import { EVENTS } from '../constants';
-import { A11yParameters } from '../params';
 
-export enum RuleType {
-  VIOLATION,
-  PASS,
-  INCOMPLETION,
-}
+/* eslint-disable import/order */
+import { AxeResults } from 'axe-core';
+import type { A11yParameters } from '../params';
 
-const Icon = styled(Icons)({
-  height: 12,
-  width: 12,
-  marginRight: 4,
-});
-
-const RotatingIcon = styled(Icon)<{}>(({ theme }) => ({
-  animation: `${theme.animation.rotate360} 1s linear infinite;`,
-}));
-
-const Passes = styled.span<{}>(({ theme }) => ({
-  color: theme.color.positive,
-}));
-
-const Violations = styled.span<{}>(({ theme }) => ({
-  color: theme.color.negative,
-}));
-
-const Incomplete = styled.span<{}>(({ theme }) => ({
-  color: theme.color.warning,
-}));
-
-const Centered = styled.span<{}>({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100%',
-});
+type ManualParam = Pick<A11yParameters, 'manual'>;
 
 type Status = 'initial' | 'manual' | 'running' | 'error' | 'ran' | 'ready';
 
-export const A11YPanel: React.FC = () => {
-  const { manual } = useParameter<Pick<A11yParameters, 'manual'>>('a11y', {
-    manual: false,
-  });
+export const A11yAddonPanel = () => {
+  const { manual } = useParameter<ManualParam>('a11y', { manual: false });
   const [status, setStatus] = useState<Status>(manual ? 'manual' : 'initial');
   const [error, setError] = React.useState<unknown>(undefined);
   const { setResults, results } = useA11yContext();
   const { storyId } = useStorybookState();
-
-  React.useEffect(() => {
-    setStatus(manual ? 'manual' : 'initial');
-  }, [manual]);
 
   const handleResult = (axeResults: AxeResults) => {
     setStatus('ran');
@@ -97,6 +55,7 @@ export const A11YPanel: React.FC = () => {
   const manualActionItems = useMemo(() => [{ title: 'Run test', onClick: handleManual }], [
     handleManual,
   ]);
+
   const readyActionItems = useMemo(
     () => [
       {
@@ -105,7 +64,7 @@ export const A11YPanel: React.FC = () => {
             'Rerun tests'
           ) : (
             <>
-              <Icon inline icon="check" /> Tests completed
+              <Icon icon="check" /> Tests completed
             </>
           ),
         onClick: handleManual,
@@ -113,43 +72,11 @@ export const A11YPanel: React.FC = () => {
     ],
     [status, handleManual]
   );
-  const tabs = useMemo(() => {
-    const { passes, incomplete, violations } = results;
-    return [
-      {
-        label: <Violations>{violations.length} Violations</Violations>,
-        panel: (
-          <Report
-            items={violations}
-            type={RuleType.VIOLATION}
-            empty="No accessibility violations found."
-          />
-        ),
-        items: violations,
-        type: RuleType.VIOLATION,
-      },
-      {
-        label: <Passes>{passes.length} Passes</Passes>,
-        panel: (
-          <Report items={passes} type={RuleType.PASS} empty="No accessibility checks passed." />
-        ),
-        items: passes,
-        type: RuleType.PASS,
-      },
-      {
-        label: <Incomplete>{incomplete.length} Incomplete</Incomplete>,
-        panel: (
-          <Report
-            items={incomplete}
-            type={RuleType.INCOMPLETION}
-            empty="No accessibility checks incomplete."
-          />
-        ),
-        items: incomplete,
-        type: RuleType.INCOMPLETION,
-      },
-    ];
-  }, [results]);
+
+  useEffect(() => {
+    setStatus(manual ? 'manual' : 'initial');
+  }, [manual]);
+
   return (
     <>
       {status === 'initial' && <Centered>Initializing...</Centered>}
@@ -161,14 +88,14 @@ export const A11YPanel: React.FC = () => {
       )}
       {status === 'running' && (
         <Centered>
-          <RotatingIcon inline icon="sync" /> Please wait while the accessibility scan is running
-          ...
+          <RotatingIcon icon="sync" /> Please wait while the accessibility scan is running ...
         </Centered>
       )}
+      {/** This is the presentation of reports with tabs for violations, passes and incomplete */}
       {(status === 'ready' || status === 'ran') && (
         <>
           <ScrollArea vertical horizontal>
-            <Tabs key="tabs" tabs={tabs} />
+            <PanelTabs key="tabs" results={results} />
           </ScrollArea>
           <ActionBar key="actionbar" actionItems={readyActionItems} />
         </>
@@ -183,3 +110,20 @@ export const A11YPanel: React.FC = () => {
     </>
   );
 };
+
+const Icon = styled(Icons)({
+  height: 12,
+  width: 12,
+  marginRight: 4,
+});
+
+const RotatingIcon = styled(Icon)<{}>(({ theme }) => ({
+  animation: `${theme.animation.rotate360} 1s linear infinite;`,
+}));
+
+const Centered = styled.span<{}>({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100%',
+});
