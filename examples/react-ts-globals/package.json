@@ -1,0 +1,26 @@
+{
+  "name": "@storybook/example-react-ts-globals",
+  "version": "6.3.0-beta.4",
+  "private": true,
+  "scripts": {
+    "build-storybook": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true build-storybook -c ./",
+    "debug": "cross-env NODE_OPTIONS=--inspect-brk STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true start-storybook -p 9011 -c ./",
+    "storybook": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true start-storybook -p 9011 -c ./"
+  },
+  "dependencies": {
+    "@storybook/addon-controls": "6.3.0-beta.4",
+    "@storybook/addon-essentials": "6.3.0-beta.4",
+    "@storybook/addon-toolbars": "6.3.0-beta.4",
+    "@storybook/react": "6.3.0-beta.4",
+    "@types/react": "^16.14.2",
+    "@types/react-dom": "^16.9.10",
+    "prop-types": "15.7.2",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "typescript": "^3.9.7",
+    "webpack": "4"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

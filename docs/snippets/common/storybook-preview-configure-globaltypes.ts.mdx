@@ -1,0 +1,19 @@
+```ts
+// .storybook/preview.ts
+import { GlobalTypes } from '@storybook/addon-toolbars/src/types';
+
+export const globalTypes: GlobalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'circlehollow',
+      // Array of plain string values or MenuItem shape (see below)
+      items: ['light', 'dark'],
+      // Property that specifies if the name of the item will be displayed
+      showName: True,
+    },
+  },
+};
+```

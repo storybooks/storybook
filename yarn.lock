@@ -6832,6 +6832,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/example-react-ts-globals@workspace:examples/react-ts-globals":
+  version: 0.0.0-use.local
+  resolution: "@storybook/example-react-ts-globals@workspace:examples/react-ts-globals"
+  dependencies:
+    "@storybook/addon-controls": 6.3.0-beta.4
+    "@storybook/addon-essentials": 6.3.0-beta.4
+    "@storybook/addon-toolbars": 6.3.0-beta.4
+    "@storybook/react": 6.3.0-beta.4
+    "@types/react": ^16.14.2
+    "@types/react-dom": ^16.9.10
+    cross-env: ^7.0.3
+    prop-types: 15.7.2
+    react: 16.14.0
+    react-dom: 16.14.0
+    typescript: ^3.9.7
+    webpack: 4
+  languageName: unknown
+  linkType: soft
+
 "@storybook/example-react-ts-webpack4@workspace:examples/react-ts-webpack4":
   version: 0.0.0-use.local
   resolution: "@storybook/example-react-ts-webpack4@workspace:examples/react-ts-webpack4"

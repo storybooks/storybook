@@ -19,6 +19,7 @@ Storybook has a simple, declarative syntax for configuring toolbar menus. In you
 <CodeSnippets
   paths={[
     'common/storybook-preview-configure-globaltypes.js.mdx',
+    'common/storybook-preview-configure-globaltypes.ts.mdx',
   ]}
 />
 
@@ -61,6 +62,7 @@ In your [`.storybook/preview.js`](../configure/overview.md#configure-story-rende
 <CodeSnippets
   paths={[
     'common/storybook-preview-locales-globaltype.js.mdx',
+    'common/storybook-preview-locales-globaltype.ts.mdx',
   ]}
 />
 

@@ -26,3 +26,5 @@ export type ToolbarConfig = NormalizedToolbarConfig & {
 export type ToolbarArgType = ArgType & {
   toolbar: ToolbarConfig;
 };
+
+export type GlobalTypes = Record<string, ToolbarArgType>;
