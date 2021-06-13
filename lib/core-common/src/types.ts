@@ -259,4 +259,6 @@ export interface StorybookConfig {
     config: Configuration,
     options: Options
   ) => Configuration | Promise<Configuration>;
+
+  babel?: (config: TransformOptions) => TransformOptions | Promise<TransformOptions>;
 }

@@ -40,6 +40,7 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
+    "@babel/core": "^7.14.5",
     "@storybook/builder-webpack4": "6.3.0-rc.4",
     "@storybook/core-client": "6.3.0-rc.4",
     "@storybook/core-common": "6.3.0-rc.4",
@@ -76,6 +77,7 @@
   },
   "devDependencies": {
     "@storybook/builder-webpack5": "6.3.0-rc.4",
+    "@types/babel__core": "^7",
     "@types/compression": "^1.7.0",
     "@types/ip": "^1.1.0",
     "@types/serve-favicon": "^2.5.2",
