@@ -1,7 +1,7 @@
 import { resolvePathInStorybookCache } from '@storybook/core-common';
+import { TransformOptions } from '@babel/core';
 
-// FIXME: babelConfig is maybe a TransformOptions?
-const extend = (babelConfig: any) => ({
+const extend = (babelConfig: TransformOptions) => ({
   // This is a feature of `babel-loader` for webpack (not Babel itself).
   // It enables a cache directory for faster-rebuilds
   cacheDirectory: resolvePathInStorybookCache('babel'),
