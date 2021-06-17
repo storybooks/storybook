@@ -78,7 +78,7 @@
     "@types/node": "^14.0.10",
     "@types/webpack": "^4.41.26",
     "autoprefixer": "^9.8.6",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-polyfill-corejs3": "^0.1.0",
     "case-sensitive-paths-webpack-plugin": "^2.3.0",

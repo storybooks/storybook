@@ -74,7 +74,7 @@
     "@storybook/semver": "^7.3.2",
     "@storybook/theming": "6.3.0-rc.8",
     "@types/node": "^14.0.10",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^3.0.1",
     "babel-plugin-polyfill-corejs3": "^0.1.0",
     "case-sensitive-paths-webpack-plugin": "^2.3.0",

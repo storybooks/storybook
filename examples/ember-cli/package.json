@@ -29,7 +29,7 @@
     "@storybook/ember": "6.3.0-rc.8",
     "@storybook/ember-cli-storybook": "^0.2.1",
     "@storybook/source-loader": "6.3.0-rc.8",
-    "babel-loader": "^8",
+    "babel-loader": "^8.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "cross-env": "^7.0.3",
     "ember-ajax": "^5.0.0",

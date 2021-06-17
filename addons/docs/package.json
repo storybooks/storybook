@@ -117,7 +117,7 @@
     "@types/prop-types": "^15.7.3",
     "@types/tmp": "^0.2.0",
     "@types/util-deprecate": "^1.0.0",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.0.0",
     "babel-plugin-react-docgen": "^4.2.1",
     "cross-spawn": "^7.0.3",
     "fs-extra": "^9.0.1",

@@ -28,7 +28,7 @@
     "@types/prop-types": "^15.7.3",
     "@types/react": "^17",
     "@types/react-dom": "^17",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.0.0",
     "cross-env": "^7.0.3",
     "enzyme-adapter-preact": "^0.2.0",
     "file-loader": "^6.2.0",

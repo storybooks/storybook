@@ -72,7 +72,7 @@
     "@storybook/react": "6.3.0-rc.8",
     "@storybook/vue": "6.3.0-rc.8",
     "@storybook/vue3": "6.3.0-rc.8",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.0.0",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.1",
     "jest-emotion": "^10.0.32",

@@ -27,7 +27,7 @@
     "@storybook/source-loader": "6.3.0-rc.8",
     "@storybook/vue": "6.3.0-rc.8",
     "@vue/babel-preset-jsx": "^1.2.4",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.0.0",
     "cross-env": "^7.0.3",
     "file-loader": "^6.2.0",
     "prop-types": "^15.7.2",

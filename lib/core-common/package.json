@@ -67,7 +67,7 @@
     "@types/micromatch": "^4.0.1",
     "@types/node": "^14.0.10",
     "@types/pretty-hrtime": "^1.0.0",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^3.0.1",
     "babel-plugin-polyfill-corejs3": "^0.1.0",
     "chalk": "^4.1.0",

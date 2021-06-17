@@ -11,7 +11,7 @@
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
-    "babel-loader": "8.2.2",
+    "babel-loader": "^8.0.0",
     "global": "^4.4.0",
     "react": "^15.7.0",
     "react-dom": "^15.7.0",
