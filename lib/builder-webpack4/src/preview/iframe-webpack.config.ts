@@ -107,12 +107,11 @@ export default async ({
       });
     }
   });
-  if (stories) {
-    const storiesFilename = path.resolve(path.join(configDir, `generated-stories-entry.js`));
-    virtualModuleMapping[storiesFilename] = interpolate(storyTemplate, { frameworkImportPath })
-      // Make sure we also replace quotes for this one
-      .replace("'{{stories}}'", stories.map(toRequireContextString).join(','));
-  }
+
+  const storiesFilename = path.resolve(path.join(configDir, `generated-stories-entry.js`));
+  virtualModuleMapping[storiesFilename] = interpolate(storyTemplate, { frameworkImportPath })
+    // Make sure we also replace quotes for this one
+    .replace("'{{stories}}'", stories ? stories.map(toRequireContextString).join(',') : '[]');
 
   const shouldCheckTs = useBaseTsSupport(framework) && typescriptOptions.check;
   const tsCheckOptions = typescriptOptions.checkOptions || {};

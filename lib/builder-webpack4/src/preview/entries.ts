@@ -55,15 +55,14 @@ export async function createPreviewEntry(options: { configDir: string; presets: 
     entries.push(...other.map((filename: string) => `${filename}-generated-other-entry.js`));
   }
 
-  if (stories && stories.length) {
-    entries.push(path.resolve(path.join(configDir, `generated-stories-entry.js`)));
+  entries.push(path.resolve(path.join(configDir, `generated-stories-entry.js`)));
 
-    const files = (
-      await Promise.all(stories.map((g) => glob(path.isAbsolute(g) ? g : path.join(configDir, g))))
-    ).reduce((a, b) => a.concat(b));
+  const files = (
+    await Promise.all(stories.map((g) => glob(path.isAbsolute(g) ? g : path.join(configDir, g))))
+  ).reduce((a, b) => a.concat(b));
 
-    if (files.length === 0) {
-      logger.warn(dedent`
+  if (files.length === 0) {
+    logger.warn(dedent`
         We found no files matching any of the following globs:
         
         ${stories.join('\n')}
@@ -71,9 +70,8 @@ export async function createPreviewEntry(options: { configDir: string; presets: 
         Maybe your glob was invalid?
         see: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#correct-globs-in-mainjs
       `);
-    } else {
-      logger.info(`=> Adding stories defined in "${path.join(configDir, 'main.js')}"`);
-    }
+  } else {
+    logger.info(`=> Adding stories defined in "${path.join(configDir, 'main.js')}"`);
   }
 
   return sortEntries(entries);
