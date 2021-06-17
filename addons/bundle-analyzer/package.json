@@ -1,0 +1,71 @@
+{
+  "name": "@storybook/addon-bundle-analyzer",
+  "version": "6.2.0-alpha.5",
+  "description": "Webpack Bundle Analyzer for Storybook",
+  "keywords": [
+    "addon",
+    "bundle",
+    "analyzer",
+    "webpack"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/master/addons/bundle-analyzer",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "directory": "addons/bundle-analyzer"
+  },
+  "license": "MIT",
+  "author": "Norbert de Langen <ndelangen@me.com> (https://github.com/ndelangen)",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/ts3.9/index.d.ts",
+  "typesVersions": {
+    "<3.8": {
+      "*": [
+        "dist/ts3.4/*"
+      ]
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "prepare": "node ../../scripts/prepare.js"
+  },
+  "dependencies": {
+    "@storybook/addons": "6.2.0-alpha.5",
+    "@storybook/api": "6.2.0-alpha.5",
+    "@storybook/components": "6.2.0-alpha.5",
+    "@storybook/theming": "6.2.0-alpha.5",
+    "core-js": "^3.0.1",
+    "detect-port": "^1.3.0",
+    "global": "^4.3.2",
+    "regenerator-runtime": "^0.13.7",
+    "webpack-bundle-analyzer": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/webpack-env": "^1.15.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "850a0d8b98f2ddab1cd4d652e9beac11e21a369c"
+}

@@ -39,6 +39,7 @@ export default async ({
 }: Options & ManagerWebpackOptions): Promise<Configuration> => {
   const envs = await presets.apply<Record<string, string>>('env');
   const logLevel = await presets.apply('logLevel', undefined);
+  const globals = await presets.apply('managerGlobals', undefined);
   const template = await presets.apply('managerMainTemplate', getManagerMainTemplate());
 
   const headHtmlSnippet = await presets.apply(
@@ -98,6 +99,7 @@ export default async ({
             RELEASE_NOTES_DATA: JSON.stringify(releaseNotesData),
             DOCS_MODE: docsMode, // global docs mode
             PREVIEW_URL: previewUrl, // global preview URL
+            ...globals,
           },
           headHtmlSnippet,
         }),

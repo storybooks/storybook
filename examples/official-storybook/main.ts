@@ -21,6 +21,7 @@ const config: StorybookConfig = {
     },
     { name: '@storybook/addon-essentials' },
     '@storybook/addon-storysource',
+    '@storybook/addon-bundle-analyzer',
     '@storybook/addon-links',
     '@storybook/addon-a11y',
     '@storybook/addon-jest',
