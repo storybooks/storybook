@@ -6,12 +6,12 @@ const { window: globalWindow, document } = global;
 
 declare let Ember: any;
 
-const rootEl = document.getElementById('root');
+const rootElement = document.getElementById('root');
 
 const config = globalWindow.require(`${globalWindow.STORYBOOK_NAME}/config/environment`);
 const app = globalWindow.require(`${globalWindow.STORYBOOK_NAME}/app`).default.create({
   autoboot: false,
-  rootElement: rootEl,
+  rootElement,
   ...config.APP,
 });
 
@@ -59,7 +59,13 @@ function render(options: OptionsArgs, el: ElementArgs) {
     });
 }
 
-export default function renderMain({ storyFn, kind, name, showMain, showError }: RenderContext) {
+export default function renderMain({
+  storyFn,
+  kind,
+  name,
+  showError,
+  targetDOMNode = rootElement,
+}: RenderContext) {
   const element = storyFn();
 
   if (!element) {
@@ -75,6 +81,5 @@ export default function renderMain({ storyFn, kind, name, showMain, showError }:
     return;
   }
 
-  showMain();
-  render(element, rootEl);
+  render(element, { el: targetDOMNode });
 }

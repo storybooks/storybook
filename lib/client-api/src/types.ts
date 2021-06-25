@@ -113,6 +113,7 @@ export type RenderContextWithoutStoryContext = StoreItem & {
   showMain: () => void;
   showError: (error: { title: string; description: string }) => void;
   showException: (err: Error) => void;
+  targetDOMNode?: ReturnType<Document['getElementById']>;
 };
 
 export type RenderContext = RenderContextWithoutStoryContext & {

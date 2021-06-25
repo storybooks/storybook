@@ -6,7 +6,7 @@ import { StoryContext, RenderContext } from './types';
 
 const { document, FRAMEWORK_OPTIONS } = global;
 
-const rootEl = document ? document.getElementById('root') : null;
+const rootElement = document ? document.getElementById('root') : null;
 
 const render = (node: ReactElement, el: Element) =>
   new Promise((resolve) => {
@@ -53,6 +53,7 @@ export default async function renderMain({
   showMain,
   showException,
   forceRender,
+  targetDOMNode = rootElement,
 }: RenderContext) {
   const Story = unboundStoryFn as FunctionComponent<StoryContext>;
 
@@ -71,8 +72,12 @@ export default async function renderMain({
   // https://github.com/storybookjs/react-storybook/issues/81
   // But forceRender means that it's the same story, so we want too keep the state in that case.
   if (!forceRender) {
-    ReactDOM.unmountComponentAtNode(rootEl);
+    try {
+      ReactDOM.unmountComponentAtNode(targetDOMNode);
+    } catch (e) {
+      //
+    }
   }
 
-  await render(element, rootEl);
+  await render(element, targetDOMNode);
 }

@@ -79,6 +79,7 @@ export async function buildDevStandalone(options: CLIOptions & LoadOptions & Bui
     ...options,
     presets,
     previewCsfV3: features?.previewCsfV3,
+    modernInlineRender: features?.modernInlineRender,
   };
 
   const { address, networkAddress, managerResult, previewResult } = await storybookDevServer(

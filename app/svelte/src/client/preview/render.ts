@@ -7,31 +7,51 @@ const { document } = global;
 type Component = any;
 
 let previousComponent: Component = null;
+const rootElement = document.getElementById('root');
 
 function cleanUpPreviousStory() {
   if (!previousComponent) {
     return;
   }
-  previousComponent.$destroy();
+  try {
+    previousComponent.$destroy();
+  } catch (e) {
+    //
+  }
   previousComponent = null;
 }
 
-export default function render({ storyFn, kind, name, showMain, showError }: RenderContext) {
+export default function renderMain({
+  storyFn,
+  kind,
+  name,
+  showError,
+  targetDOMNode = rootElement,
+}: RenderContext) {
   cleanUpPreviousStory();
 
-  const target = document.getElementById('root');
+  // targetDOMNode.innerHTML = '';
 
-  target.innerHTML = '';
-
-  previousComponent = new PreviewRender({
-    target,
-    props: {
-      storyFn,
-      name,
-      kind,
-      showError,
-    },
-  });
-
-  showMain();
+  if (targetDOMNode === rootElement) {
+    previousComponent = new PreviewRender({
+      targetDOMNode,
+      props: {
+        storyFn,
+        name,
+        kind,
+        showError,
+      },
+    });
+  } else {
+    // eslint-disable-next-line no-new
+    new PreviewRender({
+      targetDOMNode,
+      props: {
+        storyFn,
+        name,
+        kind,
+        showError,
+      },
+    });
+  }
 }

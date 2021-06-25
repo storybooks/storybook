@@ -80,6 +80,7 @@ export async function buildStaticStandalone(options: CLIOptions & LoadOptions & 
     ...options,
     presets,
     previewCsfV3: features?.previewCsfV3,
+    modernInlineRender: features?.modernInlineRender,
   };
 
   const core = await presets.apply<{ builder?: string }>('core');

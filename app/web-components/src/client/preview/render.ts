@@ -14,35 +14,34 @@ export default function renderMain({
   storyFn,
   kind,
   name,
-  showMain,
   showError,
   forceRender,
+  targetDOMNode = rootElement,
 }: RenderContext) {
   const element = storyFn();
 
-  showMain();
   if (isTemplateResult(element)) {
     // `render` stores the TemplateInstance in the Node and tries to update based on that.
     // Since we reuse `rootElement` for all stories, remove the stored instance first.
     // But forceRender means that it's the same story, so we want too keep the state in that case.
     if (!forceRender || !rootElement.querySelector('[id="root-inner"]')) {
-      rootElement.innerHTML = '<div id="root-inner"></div>';
+      targetDOMNode.innerHTML = '<div id="root-inner"></div>';
     }
-    const renderTo = rootElement.querySelector('[id="root-inner"]');
+    const renderTo = targetDOMNode.querySelector<HTMLElement>('[id="root-inner"]');
 
     render(element, renderTo);
-    simulatePageLoad(rootElement);
+    simulatePageLoad(targetDOMNode);
   } else if (typeof element === 'string') {
-    rootElement.innerHTML = element;
-    simulatePageLoad(rootElement);
+    targetDOMNode.innerHTML = element;
+    simulatePageLoad(targetDOMNode);
   } else if (element instanceof Node) {
     // Don't re-mount the element if it didn't change and neither did the story
-    if (rootElement.firstChild === element && forceRender === true) {
+    if (targetDOMNode.firstChild === element && forceRender === true) {
       return;
     }
 
-    rootElement.innerHTML = '';
-    rootElement.appendChild(element);
+    targetDOMNode.innerHTML = '';
+    targetDOMNode.appendChild(element);
     simulateDOMContentLoaded();
   } else {
     showError({

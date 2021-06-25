@@ -65,6 +65,7 @@ export default async ({
   typescriptOptions,
   modern,
   previewCsfV3,
+  modernInlineRender,
 }: Options & Record<string, any>): Promise<Configuration> => {
   const logLevel = await presets.apply('logLevel', undefined);
   const frameworkOptions = await presets.apply(`${framework}Options`, {});
@@ -155,6 +156,7 @@ export default async ({
             LOGLEVEL: logLevel,
             FRAMEWORK_OPTIONS: frameworkOptions,
             PREVIEW_CSF_V3: previewCsfV3,
+            MODERN_INLINE_RENDER: modernInlineRender,
           },
           headHtmlSnippet,
           bodyHtmlSnippet,

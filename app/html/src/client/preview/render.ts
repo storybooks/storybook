@@ -10,23 +10,22 @@ export default function renderMain({
   storyFn,
   kind,
   name,
-  showMain,
   showError,
   forceRender,
+  targetDOMNode = rootElement,
 }: RenderContext) {
   const element = storyFn();
-  showMain();
   if (typeof element === 'string') {
-    rootElement.innerHTML = element;
-    simulatePageLoad(rootElement);
+    targetDOMNode.innerHTML = element;
+    simulatePageLoad(targetDOMNode);
   } else if (element instanceof Node) {
     // Don't re-mount the element if it didn't change and neither did the story
-    if (rootElement.firstChild === element && forceRender === true) {
+    if (targetDOMNode.firstChild === element && forceRender === true) {
       return;
     }
 
-    rootElement.innerHTML = '';
-    rootElement.appendChild(element);
+    targetDOMNode.innerHTML = '';
+    targetDOMNode.appendChild(element);
     simulateDOMContentLoaded();
   } else {
     showError({

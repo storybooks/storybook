@@ -1,9 +1,11 @@
+/* eslint-disable no-param-reassign */
 import dedent from 'ts-dedent';
-import { createApp, h, shallowRef, ComponentPublicInstance } from 'vue';
+import { createApp, h, shallowRef, ComponentPublicInstance, render } from 'vue';
 import { Args } from '@storybook/addons';
 import { RenderContext, StoryFnVueReturnType } from './types';
 
 const activeStoryComponent = shallowRef<StoryFnVueReturnType | null>(null);
+const rootElement = global.document.getElementById('root');
 
 interface Root extends ComponentPublicInstance {
   storyArgs?: Args;
@@ -32,15 +34,15 @@ export const storybookApp = createApp({
   },
 });
 
-export default function render({
+export default function renderMain({
   storyFn,
   kind,
   name,
   args,
-  showMain,
   showError,
   showException,
   forceRender,
+  targetDOMNode = rootElement,
 }: RenderContext) {
   storybookApp.config.errorHandler = showException;
 
@@ -57,14 +59,24 @@ export default function render({
     return;
   }
 
-  showMain();
-
-  if (!forceRender) {
-    activeStoryComponent.value = element;
+  if (!root) {
+    if (!forceRender) {
+      activeStoryComponent.value = element;
+    }
+    root = storybookApp.mount(`#root`);
   }
 
-  if (!root) {
-    root = storybookApp.mount('#root');
+  if (targetDOMNode.id === 'root') {
+    activeStoryComponent.value = element;
+  } else {
+    const vnode = h(element, args);
+    // By attaching the app context from `@storybook/vue3` to the vnode
+    // like this, these stoeis are able to access any app config stuff
+    // the end-user set inside `.storybook/preview.js`
+    vnode.appContext = storybookApp._context; // eslint-disable-line no-underscore-dangle
+
+    targetDOMNode.innerHTML = '';
+    render(vnode, targetDOMNode);
   }
 
   root.storyArgs = args;

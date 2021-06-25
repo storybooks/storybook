@@ -46,6 +46,8 @@ const ansiConverter = new AnsiToHtml({
  * It is very much concerned with drawing to the screen and will do things like change classes
  * on the body etc.
  */
+
+const cache: Record<string, boolean> = {};
 export class StoryRenderer {
   render: RenderStoryFunction;
 
@@ -80,11 +82,72 @@ export class StoryRenderer {
       this.channel.on(Events.STORY_ARGS_UPDATED, () => this.forceReRender());
       this.channel.on(Events.GLOBALS_UPDATED, () => this.forceReRender());
       this.channel.on(Events.FORCE_RE_RENDER, () => this.forceReRender());
+      this.channel.on(Events.DOCS_TARGETTED_RENDER, (data) => {
+        setTimeout(() => {
+          this.renderDocsStoryOutOfContext(data);
+        }, 1);
+      });
     }
   }
 
   forceReRender() {
     this.renderCurrentStory(true);
+  }
+
+  async renderDocsStoryOutOfContext({ id, identifier, name }: Record<string, string>) {
+    // TODO, the channel seems to invoke this twice
+    if (cache[id]) {
+      return;
+    }
+    cache[id] = true;
+
+    const targetDOMNode = document.getElementById(identifier);
+
+    if (!targetDOMNode) {
+      cache[id] = false;
+      return;
+    }
+
+    const {
+      metadata,
+      context,
+    }: {
+      metadata: RenderMetadata;
+      context: RenderContextWithoutStoryContext;
+    } = this.getStoryMetadataAndContext(this.storyStore, id, 'docs', false);
+
+    const { getDecorated } = metadata;
+
+    if (getDecorated) {
+      try {
+        const { applyLoaders, unboundStoryFn } = context;
+        console.time(`applyLoaders_${id}`);
+        const storyContext = await applyLoaders();
+        console.timeEnd(`applyLoaders_${id}`);
+        const storyFn = () => unboundStoryFn(storyContext);
+
+        if (targetDOMNode.querySelector('[data-is-loadering-indicator="true"')) {
+          targetDOMNode.querySelector('[data-is-loadering-indicator="true"').remove();
+        }
+
+        console.time(`render_${id}`);
+        await this.render({
+          ...context,
+          storyContext,
+          storyFn,
+          forceRender: true,
+          targetDOMNode,
+        });
+        console.timeEnd(`render_${id}`);
+
+        this.channel.emit(Events.STORY_RENDERED, id);
+      } catch (err) {
+        this.renderException(err);
+      }
+    } else {
+      console.error('could not find story to render', { id, name });
+    }
+    cache[id] = false;
   }
 
   async renderCurrentStory(forceRender: boolean) {
@@ -98,6 +161,23 @@ export class StoryRenderer {
 
     const { storyId, viewMode: urlViewMode } = storyStore.getSelection() || {};
 
+    const {
+      metadata,
+      context,
+    }: {
+      metadata: RenderMetadata;
+      context: RenderContextWithoutStoryContext;
+    } = this.getStoryMetadataAndContext(storyStore, storyId, urlViewMode, forceRender);
+
+    await this.renderStoryIfChanged({ metadata, context });
+  }
+
+  private getStoryMetadataAndContext(
+    storyStore: StoryStore,
+    storyId: string,
+    urlViewMode: string,
+    forceRender: boolean
+  ) {
     const data = storyStore.fromId(storyId);
     const { kind, id, parameters = {}, getDecorated } = data || {};
     const { docsOnly, layout } = parameters;
@@ -105,14 +185,14 @@ export class StoryRenderer {
     const metadata: RenderMetadata = {
       id,
       kind,
-      viewMode: docsOnly ? 'docs' : urlViewMode,
+      viewMode: (docsOnly ? 'docs' : urlViewMode) as RenderMetadata['viewMode'],
       getDecorated,
     };
 
     this.applyLayout(metadata.viewMode === 'docs' ? 'fullscreen' : layout);
 
     const context: RenderContextWithoutStoryContext = {
-      id: storyId, // <- in case data is null, at least we'll know what we tried to render
+      id: storyId,
       ...data,
       forceRender,
       showMain: () => this.showMain(),
@@ -120,8 +200,7 @@ export class StoryRenderer {
         this.renderError({ title, description }),
       showException: (err: Error) => this.renderException(err),
     };
-
-    await this.renderStoryIfChanged({ metadata, context });
+    return { metadata, context };
   }
 
   async renderStoryIfChanged({
@@ -161,6 +240,7 @@ export class StoryRenderer {
       case 'docs':
         if (kindChanged || viewModeChanged) {
           this.storyStore.cleanHooksForKind(previousMetadata.kind);
+          // debugger;
           ReactDOM.unmountComponentAtNode(document.getElementById('docs-root'));
         }
         break;
@@ -168,6 +248,7 @@ export class StoryRenderer {
       default:
         if (previousMetadata && (storyChanged || viewModeChanged)) {
           this.storyStore.cleanHooks(previousMetadata.id);
+          // debugger;
           ReactDOM.unmountComponentAtNode(document.getElementById('root'));
         }
     }
@@ -312,12 +393,14 @@ export class StoryRenderer {
       throw new Error('No `docs.container` set, did you run `addon-docs/preset`?');
     }
 
+    // console.log('renderDocs', { context });
+
     const DocsContainer =
       docs.container || (({ children }: { children: Element }) => <>{children}</>);
     const Page = docs.page || NoDocs;
     // Docs context includes the storyStore. Probably it would be better if it didn't but that can be fixed in a later refactor
     ReactDOM.render(
-      <DocsContainer context={{ storyStore, ...context }}>
+      <DocsContainer context={{ storyStore, ...context, channel: this.channel }}>
         <Page />
       </DocsContainer>,
       document.getElementById('docs-root'),
