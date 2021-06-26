@@ -49,7 +49,11 @@
     "core-js": "^3.8.2",
     "global": "^4.4.0",
     "regenerator-runtime": "^0.13.7",
-    "resize-observer": "^1.0.2"
+    "resize-observer": "^1.0.2",
+    "window-or-global": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/window-or-global": "^1.0.4"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0",

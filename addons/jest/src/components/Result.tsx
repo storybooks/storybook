@@ -6,7 +6,7 @@ import Message from './Message';
 const Wrapper = styled.div<{ status: string }>(({ theme, status }) => ({
   display: 'flex',
   width: '100%',
-  borderTop: `1px solid ${theme.appBorderColor}`,
+  borderBottom: `1px solid ${theme.appBorderColor}`,
   '&:hover': {
     background: status === `failed` ? theme.background.hoverable : null,
   },

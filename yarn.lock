@@ -2598,6 +2598,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.13.10":
+  version: 7.14.6
+  resolution: "@babel/runtime@npm:7.14.6"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 16085786980d105929bbf3fbab388b53378fab380c82c47c354363be2b8d760ec1d5dd6170b1ffd8998ac070fda08050588facf0eeb378494729055721d72c96
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:7.12.7":
   version: 7.12.7
   resolution: "@babel/template@npm:7.12.7"
@@ -5544,7 +5553,6 @@ __metadata:
     core-js: ^3.8.2
     global: ^4.4.0
     lodash: ^4.17.20
-    react-sizeme: ^3.0.1
     regenerator-runtime: ^0.13.7
     ts-dedent: ^2.0.0
     util-deprecate: ^1.0.2
@@ -5826,7 +5834,6 @@ __metadata:
     "@types/webpack-env": ^1.16.0
     core-js: ^3.8.2
     global: ^4.4.0
-    react-sizeme: ^3.0.1
     regenerator-runtime: ^0.13.7
     upath: ^1.2.0
   peerDependencies:
@@ -6100,10 +6107,12 @@ __metadata:
     "@storybook/core-events": 6.4.0-alpha.3
     "@storybook/router": 6.4.0-alpha.3
     "@storybook/theming": 6.4.0-alpha.3
+    "@types/window-or-global": ^1.0.4
     core-js: ^3.8.2
     global: ^4.4.0
     regenerator-runtime: ^0.13.7
     resize-observer: ^1.0.2
+    window-or-global: ^1.0.1
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
@@ -6610,18 +6619,19 @@ __metadata:
     "@storybook/csf": 0.0.1
     "@storybook/theming": 6.4.0-alpha.3
     "@types/color-convert": ^2.0.0
-    "@types/overlayscrollbars": ^1.12.0
     "@types/react-syntax-highlighter": 11.0.5
+    "@types/window-or-global": ^1.0.4
     color-convert: ^2.0.1
     core-js: ^3.8.2
     css: ^3.0.0
+    downshift: ^6.1.3
     fast-deep-equal: ^3.1.3
     global: ^4.4.0
     jest: ^26.6.3
     lodash: ^4.17.20
     markdown-to-jsx: ^7.1.3
     memoizerific: ^1.11.3
-    overlayscrollbars: ^1.13.1
+    nanoid: ^3.1.23
     polished: ^4.0.5
     prop-types: ^15.7.2
     react-colorful: ^5.1.2
@@ -6631,6 +6641,7 @@ __metadata:
     regenerator-runtime: ^0.13.7
     ts-dedent: ^2.0.0
     util-deprecate: ^1.0.2
+    window-or-global: ^1.0.1
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
@@ -7751,7 +7762,6 @@ __metadata:
     qs: ^6.10.0
     react-draggable: ^4.4.3
     react-helmet-async: ^1.0.7
-    react-sizeme: ^3.0.1
     regenerator-runtime: ^0.13.7
     resolve-from: ^5.0.0
     store2: ^2.12.0
@@ -9512,6 +9522,15 @@ __metadata:
     "@types/webpack-sources": "*"
     source-map: ^0.6.0
   checksum: 0de91dfacb7b82a8a32db58390bab1c4bb7aa470d80499c93bec03d86d8288e5f365425a651f7581b4d1c3d6f8b884138b1ac90faac5b3d3fe5db4d2bdca2794
+  languageName: node
+  linkType: hard
+
+"@types/window-or-global@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@types/window-or-global@npm:1.0.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: 9177287f42adfddd43ee5732a1fb6f1a624446b9e3f640bbedf1300577b9c8923fe6bfbee1b6416a54a51f36ac80006d3b1507fb1f61a731c71bd4277a92ef06
   languageName: node
   linkType: hard
 
@@ -13151,13 +13170,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"batch-processor@npm:1.0.0":
-  version: 1.0.0
-  resolution: "batch-processor@npm:1.0.0"
-  checksum: 048b868811bed4cd03a0eec35264055f0f3fe4ab62f501809dce4a8a7b845d905fa5051b4af8b3c5123181116b1e2b6dfabf608829043b60cf61f4da3a359b60
-  languageName: node
-  linkType: hard
-
 "batch@npm:0.6.1":
   version: 0.6.1
   resolution: "batch@npm:0.6.1"
@@ -15809,7 +15821,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compute-scroll-into-view@npm:^1.0.16":
+"compute-scroll-into-view@npm:^1.0.16, compute-scroll-into-view@npm:^1.0.17":
   version: 1.0.17
   resolution: "compute-scroll-into-view@npm:1.0.17"
   checksum: 98ba88a3af2e4d9c39e1a329f9d1615eeed0e528350ce01b63fb43d1c611dfc31c0639f47844dc8e7bf4d429745bce88efbb035ee2116d51d33b33d55d794f0c
@@ -18417,6 +18429,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"downshift@npm:^6.1.3":
+  version: 6.1.3
+  resolution: "downshift@npm:6.1.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    compute-scroll-into-view: ^1.0.17
+    prop-types: ^15.7.2
+    react-is: ^17.0.2
+  peerDependencies:
+    react: ">=16.12.0"
+  checksum: c0aa401c3627eac6358608354b8e724dd42e0aea758ff27463fa1020926182934ad389841788495af0c9ba1984dd1e0cc0e0c4dafbc1a7f243a3b98446aead31
+  languageName: node
+  linkType: hard
+
 "dtrace-provider@npm:~0.8":
   version: 0.8.8
   resolution: "dtrace-provider@npm:0.8.8"
@@ -18562,15 +18588,6 @@ __metadata:
   version: 1.0.1
   resolution: "elegant-spinner@npm:1.0.1"
   checksum: df607c83c20fc3ce56c514175dd5d1ee7f667da00cee13d04d32c70d55e76555091fa236689e691cf7dedba17b0020fec635e499cdde84dbea2ef8639314e5f8
-  languageName: node
-  linkType: hard
-
-"element-resize-detector@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "element-resize-detector@npm:1.2.2"
-  dependencies:
-    batch-processor: 1.0.0
-  checksum: 1df68352be4825168513ca782fd4520ec2986a228f66abe49c5f5fefc64c6955b86b114efabaf46e32fde2f9a591e6bf40769b153ebb878d205d454edd68485d
   languageName: node
   linkType: hard
 
@@ -30640,6 +30657,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.1.23":
+  version: 3.1.23
+  resolution: "nanoid@npm:3.1.23"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: a3207f946e2db59f8095118d5c57615f217e7f8a743bdb83212e222bd263516dbd83db226675d9b8634ed928ff2019db96ca06825a391af4256b02f7bec4b443
+  languageName: node
+  linkType: hard
+
 "nanomatch@npm:^1.2.9":
   version: 1.2.13
   resolution: "nanomatch@npm:1.2.13"
@@ -35973,6 +35999,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-is@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react-is@npm:17.0.2"
+  checksum: 2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
+  languageName: node
+  linkType: hard
+
 "react-lifecycles-compat@npm:^3.0.0, react-lifecycles-compat@npm:^3.0.4":
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
@@ -36227,21 +36260,6 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0
   checksum: b95f7ee2d88cf093e5b370663943ceb9199b8dff4217cb8cbffdf5e60966286f898a3ce7257b3c31bab54d698a3c80e70e92b0a8320bc69bdcf4d565678261c9
-  languageName: node
-  linkType: hard
-
-"react-sizeme@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "react-sizeme@npm:3.0.1"
-  dependencies:
-    element-resize-detector: ^1.2.2
-    invariant: ^2.2.4
-    shallowequal: ^1.1.0
-    throttle-debounce: ^3.0.1
-  peerDependencies:
-    react: ^0.14.0 || ^15.0.0-0 || ^16.0.0 || ^17.0.0
-    react-dom: ^0.14.0 || ^15.0.0-0 || ^16.0.0 || ^17.0.0
-  checksum: 80ba5b25dd26ce72e3597ad5ff05718ac90e5778ae270f0c6a196a643773d6b0ac9fbcef3ba3785b29505594c7323f3df28fb29aa18030ddb72f04ee9ac0465b
   languageName: node
   linkType: hard
 
@@ -41195,13 +41213,6 @@ resolve@1.19.0:
   languageName: node
   linkType: hard
 
-"throttle-debounce@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "throttle-debounce@npm:3.0.1"
-  checksum: c8e558479463b7ed8bac30d6b10cc87abd1c9fc64edfce2db4109be1a04acaef5d2d0557f49c1a3845ea07d9f79e6e0389b1b60db0a77c44e5b7a1216596f285
-  languageName: node
-  linkType: hard
-
 "throttleit@npm:^1.0.0":
   version: 1.0.0
   resolution: "throttleit@npm:1.0.0"
@@ -44476,6 +44487,13 @@ typescript@2.9.1:
   version: 2.0.0
   resolution: "wildcard@npm:2.0.0"
   checksum: 4e22a45f4fa7f0f0d3e11860ee9ce9225246d41af6ec507e6a7d64c2692afb40d695b92c8f801deda8d3536007c2ec07981079fd0c8bb38b8521de072b33ab7a
+  languageName: node
+  linkType: hard
+
+"window-or-global@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "window-or-global@npm:1.0.1"
+  checksum: 55af1894c52d9a769444477d8153d953163d6e60f64a25958c09cbc632c00faadd14e32b101310a0eee47b17e540a66c8fc3a069d9c2ada32a5aff553c20f5c5
   languageName: node
   linkType: hard
 

@@ -65,7 +65,6 @@
     "qs": "^6.10.0",
     "react-draggable": "^4.4.3",
     "react-helmet-async": "^1.0.7",
-    "react-sizeme": "^3.0.1",
     "regenerator-runtime": "^0.13.7",
     "resolve-from": "^5.0.0",
     "store2": "^2.12.0"

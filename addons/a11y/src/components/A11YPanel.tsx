@@ -1,14 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
-
 import { styled } from '@storybook/theming';
-
-import { ActionBar, Icons, ScrollArea } from '@storybook/components';
-
+import { ActionBar, Icons } from '@storybook/components';
 import { AxeResults } from 'axe-core';
 import { useChannel, useParameter, useStorybookState } from '@storybook/api';
 import { Report } from './Report';
 import { Tabs } from './Tabs';
-
 import { useA11yContext } from './A11yContext';
 import { EVENTS } from '../constants';
 import { A11yParameters } from '../params';
@@ -167,9 +163,7 @@ export const A11YPanel: React.FC = () => {
       )}
       {(status === 'ready' || status === 'ran') && (
         <>
-          <ScrollArea vertical horizontal>
-            <Tabs key="tabs" tabs={tabs} />
-          </ScrollArea>
+          <Tabs key="tabs" tabs={tabs} />
           <ActionBar key="actionbar" actionItems={readyActionItems} />
         </>
       )}

@@ -2,7 +2,7 @@ import global from 'global';
 import React, { FunctionComponent, useMemo } from 'react';
 
 import { styled } from '@storybook/theming';
-import { ScrollArea, Spaced } from '@storybook/components';
+import { Spaced, ScrollArea } from '@storybook/components';
 import type { StoriesHash, State } from '@storybook/api';
 
 import { Heading } from './Heading';
@@ -16,29 +16,8 @@ import { useLastViewed } from './useLastViewed';
 
 const { DOCS_MODE } = global;
 
-const Container = styled.nav({
-  position: 'absolute',
-  zIndex: 1,
-  left: 0,
-  top: 0,
-  bottom: 0,
-  right: 0,
-  width: '100%',
-  height: '100%',
-});
-
 const StyledSpaced = styled(Spaced)({
-  paddingBottom: '2.5rem',
-});
-
-const CustomScrollArea = styled(ScrollArea)({
-  '&&&&& .os-scrollbar-handle:before': {
-    left: -12,
-  },
-  '&&&&& .os-scrollbar-vertical': {
-    right: 5,
-  },
-  padding: 20,
+  padding: '20px 20px 2.5rem 20px',
 });
 
 const Swap = React.memo<{ children: React.ReactNode; condition: boolean }>(
@@ -110,49 +89,47 @@ export const Sidebar: FunctionComponent<SidebarProps> = React.memo(
     const lastViewedProps = useLastViewed(selected);
 
     return (
-      <Container className="container sidebar-container">
-        <CustomScrollArea vertical>
-          <StyledSpaced row={1.6}>
-            <Heading className="sidebar-header" menuHighlighted={menuHighlighted} menu={menu} />
+      <ScrollArea vertical absolute sliderPadding={8} className="container sidebar-container">
+        <StyledSpaced row={1.6}>
+          <Heading className="sidebar-header" menuHighlighted={menuHighlighted} menu={menu} />
 
-            <Search
-              dataset={dataset}
-              isLoading={isLoading}
-              enableShortcuts={enableShortcuts}
-              {...lastViewedProps}
-            >
-              {({
-                query,
-                results,
-                isBrowsing,
-                closeMenu,
-                getMenuProps,
-                getItemProps,
-                highlightedIndex,
-              }) => (
-                <Swap condition={isBrowsing}>
-                  <Explorer
-                    dataset={dataset}
-                    selected={selected}
-                    isLoading={isLoading}
-                    isBrowsing={isBrowsing}
-                  />
-                  <SearchResults
-                    query={query}
-                    results={results}
-                    closeMenu={closeMenu}
-                    getMenuProps={getMenuProps}
-                    getItemProps={getItemProps}
-                    highlightedIndex={highlightedIndex}
-                    enableShortcuts={enableShortcuts}
-                    isLoading={isLoading}
-                  />
-                </Swap>
-              )}
-            </Search>
-          </StyledSpaced>
-        </CustomScrollArea>
-      </Container>
+          <Search
+            dataset={dataset}
+            isLoading={isLoading}
+            enableShortcuts={enableShortcuts}
+            {...lastViewedProps}
+          >
+            {({
+              query,
+              results,
+              isBrowsing,
+              closeMenu,
+              getMenuProps,
+              getItemProps,
+              highlightedIndex,
+            }) => (
+              <Swap condition={isBrowsing}>
+                <Explorer
+                  dataset={dataset}
+                  selected={selected}
+                  isLoading={isLoading}
+                  isBrowsing={isBrowsing}
+                />
+                <SearchResults
+                  query={query}
+                  results={results}
+                  closeMenu={closeMenu}
+                  getMenuProps={getMenuProps}
+                  getItemProps={getItemProps}
+                  highlightedIndex={highlightedIndex}
+                  enableShortcuts={enableShortcuts}
+                  isLoading={isLoading}
+                />
+              </Swap>
+            )}
+          </Search>
+        </StyledSpaced>
+      </ScrollArea>
     );
   }
 );

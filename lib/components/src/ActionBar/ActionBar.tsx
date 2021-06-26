@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import React, { FunctionComponent, MouseEvent, HTMLAttributes } from 'react';
 
 import { styled } from '@storybook/theming';
 
@@ -60,9 +60,9 @@ export interface ActionItem {
   disabled?: boolean;
 }
 
-export interface ActionBarProps {
+export type ActionBarProps = {
   actionItems: ActionItem[];
-}
+} & HTMLAttributes<HTMLDivElement>;
 
 export const ActionBar: FunctionComponent<ActionBarProps> = ({ actionItems, ...props }) => (
   <Container {...props}>

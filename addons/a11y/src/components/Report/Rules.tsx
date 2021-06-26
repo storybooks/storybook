@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import { styled } from '@storybook/theming';
+import { useDOMRect } from '@storybook/addons';
 import { Badge } from '@storybook/components';
+import { styled } from '@storybook/theming';
 import { CheckResult } from 'axe-core';
-import { SizeMe } from 'react-sizeme';
+import React, { FC } from 'react';
 
 const List = styled.div({
   display: 'flex',
@@ -51,7 +51,12 @@ const formatSeverityText = (severity: string) => {
   return severity.charAt(0).toUpperCase().concat(severity.slice(1));
 };
 
-const Rule: FunctionComponent<RuleProps> = ({ rule }) => {
+const Rule: FC<RuleProps> = ({ rule }) => {
+  const {
+    ref: rectRef,
+    rect: { width },
+  } = useDOMRect({ live: true });
+
   let badgeType: any = null;
   switch (rule.impact) {
     case ImpactValue.CRITICAL:
@@ -70,14 +75,10 @@ const Rule: FunctionComponent<RuleProps> = ({ rule }) => {
       break;
   }
   return (
-    <SizeMe refreshMode="debounce">
-      {({ size }) => (
-        <Item elementWidth={size.width || 0}>
-          <StyledBadge status={badgeType}>{formatSeverityText(rule.impact)}</StyledBadge>
-          <Message>{rule.message}</Message>
-        </Item>
-      )}
-    </SizeMe>
+    <Item ref={rectRef} elementWidth={width}>
+      <StyledBadge status={badgeType}>{formatSeverityText(rule.impact)}</StyledBadge>
+      <Message>{rule.message}</Message>
+    </Item>
   );
 };
 
@@ -85,7 +86,7 @@ interface RulesProps {
   rules: CheckResult[];
 }
 
-export const Rules: FunctionComponent<RulesProps> = ({ rules }) => {
+export const Rules: FC<RulesProps> = ({ rules }) => {
   return (
     <List>
       {rules.map((rule, index) => (

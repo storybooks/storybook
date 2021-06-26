@@ -57,7 +57,6 @@
     "core-js": "^3.8.2",
     "global": "^4.4.0",
     "lodash": "^4.17.20",
-    "react-sizeme": "^3.0.1",
     "regenerator-runtime": "^0.13.7",
     "ts-dedent": "^2.0.0",
     "util-deprecate": "^1.0.2"
