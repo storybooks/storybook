@@ -56,7 +56,7 @@ export async function createPreviewEntry(options: { configDir: string; presets: 
   }
 
   if (stories && stories.length) {
-    entries.push(path.resolve(path.join(configDir, `generated-stories-entry.js`)));
+    entries.push(path.resolve(path.join(configDir, `generated-stories-entry.cjs`)));
 
     const files = (
       await Promise.all(stories.map((g) => glob(path.isAbsolute(g) ? g : path.join(configDir, g))))

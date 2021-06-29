@@ -16,7 +16,7 @@ Object {
     "ROOT/addons/backgrounds/dist/esm/preset/addParameter.js-generated-other-entry.js",
     "ROOT/addons/links/dist/esm/preset/addDecorator.js-generated-other-entry.js",
     "ROOT/examples/html-kitchen-sink/.storybook/preview.js-generated-config-entry.js",
-    "ROOT/examples/html-kitchen-sink/.storybook/generated-stories-entry.js",
+    "ROOT/examples/html-kitchen-sink/.storybook/generated-stories-entry.cjs",
     "NODE_MODULES/webpack-hot-middleware/client.js?reload=true&quiet=false&noInfo=undefined",
   ],
   "keys": Array [

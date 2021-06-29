@@ -570,7 +570,7 @@ const newWebpackConfiguration = (
       '/Users/joe/storybook/addons/a11y/dist/esm/a11yRunner.js-generated-other-entry.js',
       '/Users/joe/storybook/addons/a11y/dist/esm/a11yHighlight.js-generated-other-entry.js',
       '/Users/joe/storybook/examples/angular-cli/.storybook/preview.ts-generated-config-entry.js',
-      '/Users/joe/storybook/examples/angular-cli/.storybook/generated-stories-entry.js',
+      '/Users/joe/storybook/examples/angular-cli/.storybook/generated-stories-entry.cjs',
       '/Users/joe/storybook/node_modules/webpack-hot-middleware/client.js?reload=true&quiet=false&noInfo=undefined',
     ],
     output: {

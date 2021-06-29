@@ -47,7 +47,7 @@ describe('sortEntries', () => {
       'addons/knobs/dist/preset/addDecorator.js-generated-other-entry.js',
       'addons/a11y/dist/preset/addDecorator.js-generated-other-entry.js',
       'addons/queryparams/dist/preset/addDecorator.js-generated-other-entry.js',
-      'examples/official-storybook/generated-stories-entry.js',
+      'examples/official-storybook/generated-stories-entry.cjs',
     ];
     const output = sortEntries(input);
     expect(output).toEqual([
@@ -62,7 +62,7 @@ describe('sortEntries', () => {
       'addons/a11y/dist/preset/addDecorator.js-generated-other-entry.js',
       'addons/queryparams/dist/preset/addDecorator.js-generated-other-entry.js',
       'examples/official-storybook/preview.js-generated-config-entry.js',
-      'examples/official-storybook/generated-stories-entry.js',
+      'examples/official-storybook/generated-stories-entry.cjs',
     ]);
   });
 });
