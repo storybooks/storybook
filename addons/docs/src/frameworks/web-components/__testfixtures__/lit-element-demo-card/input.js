@@ -118,8 +118,8 @@ export class DemoWcCard extends LitElement {
         reflect: true,
         attribute: 'back-side',
       },
-      header: { type: String },
-      rows: { type: Object },
+      header: { type: String, attribute: false },
+      rows: { type: Object, attribute: false },
     };
   }
 

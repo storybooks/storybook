@@ -11,18 +11,6 @@ Object {
           "name": "back-side",
           "type": "boolean",
         },
-        Object {
-          "default": "\\"Your Message\\"",
-          "description": "Header message",
-          "name": "header",
-          "type": "string",
-        },
-        Object {
-          "default": "[]",
-          "description": "Data rows",
-          "name": "rows",
-          "type": "object",
-        },
       ],
       "cssParts": Array [
         Object {
@@ -66,14 +54,12 @@ Object {
           "type": "boolean",
         },
         Object {
-          "attribute": "header",
           "default": "\\"Your Message\\"",
           "description": "Header message",
           "name": "header",
           "type": "string",
         },
         Object {
-          "attribute": "rows",
           "default": "[]",
           "description": "Data rows",
           "name": "rows",

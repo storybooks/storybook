@@ -40,8 +40,12 @@ function mapData(data: TagItem[], category: string) {
     data &&
     data.reduce((acc, item) => {
       const type = category === 'properties' ? { name: item.type } : { name: 'void' };
-      acc[item.name] = {
-        name: item.name,
+      let { name } = item;
+      if (category === 'slots' && name === '') {
+        name = 'unnamed (default slot)';
+      }
+      acc[`${category}:${item.name}`] = {
+        name,
         required: false,
         description: item.description,
         type,
