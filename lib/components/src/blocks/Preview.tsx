@@ -19,9 +19,9 @@ export interface PreviewProps {
   additionalActions?: ActionItem[];
 }
 
-type layout = 'padded' | 'fullscreen' | 'centered';
+type Layout = 'padded' | 'fullscreen' | 'centered';
 
-const ChildrenContainer = styled.div<PreviewProps & { layout: layout }>(
+const ChildrenContainer = styled.div<PreviewProps & { layout: Layout }>(
   ({ isColumn, columns, layout }) => ({
     display: isColumn || !columns ? 'block' : 'flex',
     position: 'relative',
@@ -66,7 +66,7 @@ const ChildrenContainer = styled.div<PreviewProps & { layout: layout }>(
       : {}
 );
 
-const StyledSource = styled(Source)<{}>(({ theme }) => ({
+const StyledSource = styled(Source)(({ theme }) => ({
   margin: 0,
   borderTopLeftRadius: 0,
   borderTopRightRadius: 0,
@@ -104,6 +104,7 @@ interface SourceItem {
 const getSource = (
   withSource: SourceProps,
   expanded: boolean,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   setExpanded: Function
 ): SourceItem => {
   switch (true) {
@@ -163,8 +164,8 @@ const Relative = styled.div({
   position: 'relative',
 });
 
-const getLayout = (children: ReactElement[]): layout => {
-  return children.reduce((result, c) => {
+const getLayout = (children: ReactElement[]): Layout =>
+  children.reduce((result, c) => {
     if (result) {
       return result;
     }
@@ -173,7 +174,6 @@ const getLayout = (children: ReactElement[]): layout => {
     }
     return (c.props && c.props.parameters && c.props.parameters.layout) || 'padded';
   }, undefined);
-};
 
 /**
  * A preview component for showing one or more component `Story`

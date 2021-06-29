@@ -12,16 +12,12 @@ interface IBProps {
 /**
  * A component
  */
-const A = (props: IAProps): JSX.Element => {
-  return <>Hi {props.aProperty}</>;
-};
+const A = (props: IAProps): JSX.Element => <>Hi {props.aProperty}</>;
 
 /**
  * B component
  */
-const B = (props: IBProps): JSX.Element => {
-  return <>Hi {props.bProperty}</>;
-};
+const B = (props: IBProps): JSX.Element => <>Hi {props.bProperty}</>;
 
 export { A, B };
 export const component = A;

@@ -138,6 +138,7 @@ const defaultOpts = {
 
 export const skipJsxRender = (context: StoryContext) => {
   const sourceParams = context?.parameters.docs?.source;
+  // eslint-disable-next-line no-underscore-dangle
   const isArgsStory = context?.parameters.__isArgsStory;
 
   // always render if the user forces it

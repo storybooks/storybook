@@ -8,6 +8,7 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
   const globalsBackgroundColor = globals[BACKGROUNDS_PARAM_KEY]?.value;
   const backgroundsConfig = parameters[BACKGROUNDS_PARAM_KEY];
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const selectedBackgroundColor = useMemo(() => {
     if (backgroundsConfig.disable) {
       return 'transparent';
@@ -20,6 +21,7 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
     );
   }, [backgroundsConfig, globalsBackgroundColor]);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const isActive = useMemo(
     () => selectedBackgroundColor && selectedBackgroundColor !== 'transparent',
     [selectedBackgroundColor]
@@ -28,15 +30,18 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
   const selector =
     context.viewMode === 'docs' ? `#anchor--${context.id} .docs-story` : '.sb-show-main';
 
-  const backgroundStyles = useMemo(() => {
-    return `
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const backgroundStyles = useMemo(
+    () => `
       ${selector} {
         background: ${selectedBackgroundColor} !important;
         transition: background-color 0.3s;
       }
-    `;
-  }, [selectedBackgroundColor, selector]);
+    `,
+    [selectedBackgroundColor, selector]
+  );
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const selectorId =
       context.viewMode === 'docs'

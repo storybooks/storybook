@@ -169,17 +169,15 @@ function renderSwatchSpecimen(colors: Colors) {
  * A single color row your styleguide showing title, subtitle and one or more colors, used
  * as a child of `ColorPalette`.
  */
-export const ColorItem: FunctionComponent<ColorProps> = ({ title, subtitle, colors }) => {
-  return (
-    <Item>
-      <ItemDescription>
-        <ItemTitle>{title}</ItemTitle>
-        <ItemSubtitle>{subtitle}</ItemSubtitle>
-      </ItemDescription>
-      <Swatches>{renderSwatchSpecimen(colors)}</Swatches>
-    </Item>
-  );
-};
+export const ColorItem: FunctionComponent<ColorProps> = ({ title, subtitle, colors }) => (
+  <Item>
+    <ItemDescription>
+      <ItemTitle>{title}</ItemTitle>
+      <ItemSubtitle>{subtitle}</ItemSubtitle>
+    </ItemDescription>
+    <Swatches>{renderSwatchSpecimen(colors)}</Swatches>
+  </Item>
+);
 
 /**
  * Styleguide documentation for colors, including names, captions, and color swatches,

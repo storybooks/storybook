@@ -84,9 +84,8 @@ export const extractArgTypesFromElements = (tagName: string, customElements: Cus
   );
 };
 
-export const extractArgTypes = (tagName: string) => {
-  return extractArgTypesFromElements(tagName, getCustomElements());
-};
+export const extractArgTypes = (tagName: string) =>
+  extractArgTypesFromElements(tagName, getCustomElements());
 
 export const extractComponentDescription = (tagName: string) => {
   const metaData = getMetaData(tagName, getCustomElements());

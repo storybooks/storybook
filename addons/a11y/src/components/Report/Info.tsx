@@ -21,13 +21,11 @@ interface InfoProps {
   item: Result;
 }
 
-export const Info: FunctionComponent<InfoProps> = ({ item }) => {
-  return (
-    <Wrapper>
-      <Help>{item.help}</Help>
-      <Link href={item.helpUrl} target="_blank">
-        More info...
-      </Link>
-    </Wrapper>
-  );
-};
+export const Info: FunctionComponent<InfoProps> = ({ item }) => (
+  <Wrapper>
+    <Help>{item.help}</Help>
+    <Link href={item.helpUrl} target="_blank">
+      More info...
+    </Link>
+  </Wrapper>
+);

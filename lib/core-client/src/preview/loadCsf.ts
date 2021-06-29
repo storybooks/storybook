@@ -86,6 +86,7 @@ const loadStories = (
       );
     }
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { default: meta, __namedExportsOrder, ...namedExports } = fileExports;
     let exports = namedExports;
 

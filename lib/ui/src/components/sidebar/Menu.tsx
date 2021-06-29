@@ -82,34 +82,34 @@ export const SidebarMenuList: FunctionComponent<{
   menu: MenuList;
   onHide: () => void;
 }> = ({ menu, onHide }) => {
-  const links = useMemo(() => {
-    return menu.map(({ onClick, ...rest }) => ({
-      ...rest,
-      onClick: ((event, item) => {
-        if (onClick) {
-          onClick(event, item);
-        }
-        onHide();
-      }) as ClickHandler,
-    }));
-  }, [menu]);
+  const links = useMemo(
+    () =>
+      menu.map(({ onClick, ...rest }) => ({
+        ...rest,
+        onClick: ((event, item) => {
+          if (onClick) {
+            onClick(event, item);
+          }
+          onHide();
+        }) as ClickHandler,
+      })),
+    [menu, onHide]
+  );
   return <TooltipLinkList links={links} />;
 };
 
 export const SidebarMenu: FunctionComponent<{
   menu: MenuList;
   isHighlighted: boolean;
-}> = ({ isHighlighted, menu }) => {
-  return (
-    <WithTooltip
-      placement="top"
-      trigger="click"
-      closeOnClick
-      tooltip={({ onHide }) => <SidebarMenuList onHide={onHide} menu={menu} />}
-    >
-      <MenuButton outline small containsIcon highlighted={isHighlighted} title="Shortcuts">
-        <Icons icon="ellipsis" />
-      </MenuButton>
-    </WithTooltip>
-  );
-};
+}> = ({ isHighlighted, menu }) => (
+  <WithTooltip
+    placement="top"
+    trigger="click"
+    closeOnClick
+    tooltip={({ onHide }) => <SidebarMenuList onHide={onHide} menu={menu} />}
+  >
+    <MenuButton outline small containsIcon highlighted={isHighlighted} title="Shortcuts">
+      <Icons icon="ellipsis" />
+    </MenuButton>
+  </WithTooltip>
+);

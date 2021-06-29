@@ -101,6 +101,9 @@
   "resolutions": {
     "serialize-javascript": "^3.1.0"
   },
+  "dependencies": {
+    "jest-environment-jsdom": "^27.0.6"
+  },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
@@ -226,8 +229,6 @@
     "husky": "^4.3.7",
     "jest": "^26.6.3",
     "jest-emotion": "^10.0.32",
-    "jest-environment-jsdom": "^26.6.2",
-    "jest-environment-jsdom-thirteen": "^1.0.1",
     "jest-enzyme": "^7.1.2",
     "jest-image-snapshot": "^4.3.0",
     "jest-jasmine2": "^26.6.3",
@@ -268,6 +269,42 @@
     "webpack": "4",
     "webpack-dev-middleware": "^3.7.3",
     "window-size": "^1.1.1"
+  },
+  "dependenciesMeta": {
+    "@compodoc/compodoc": {
+      "built": false
+    },
+    "core-js": {
+      "built": false
+    },
+    "core-js-pure": {
+      "built": false
+    },
+    "ejs": {
+      "built": false
+    },
+    "level": {
+      "built": false
+    },
+    "node-uuid": {
+      "built": false,
+      "unplugged": false
+    },
+    "nodemon": {
+      "built": false
+    },
+    "parcel": {
+      "built": false
+    },
+    "preact": {
+      "built": false
+    },
+    "styled-components": {
+      "built": false
+    },
+    "yorkie": {
+      "built": false
+    }
   },
   "optionalDependencies": {
     "@cypress/webpack-preprocessor": "^5.7.0",
@@ -322,41 +359,5 @@
         "Other"
       ]
     ]
-  },
-  "dependenciesMeta": {
-    "@compodoc/compodoc": {
-      "built": false
-    },
-    "core-js": {
-      "built": false
-    },
-    "core-js-pure": {
-      "built": false
-    },
-    "ejs": {
-      "built": false
-    },
-    "level": {
-      "built": false
-    },
-    "node-uuid": {
-      "built": false,
-      "unplugged": false
-    },
-    "nodemon": {
-      "built": false
-    },
-    "parcel": {
-      "built": false
-    },
-    "preact": {
-      "built": false
-    },
-    "styled-components": {
-      "built": false
-    },
-    "yorkie": {
-      "built": false
-    }
   }
 }

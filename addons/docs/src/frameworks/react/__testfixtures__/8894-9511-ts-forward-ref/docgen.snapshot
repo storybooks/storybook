@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`react component properties 8894-9511-ts-forward-ref 1`] = `
-"import React, { forwardRef } from 'react';
+"/* eslint-disable react/display-name */
+import React, { forwardRef } from 'react';
 const Button = /*#__PURE__*/forwardRef(({
   disabled = false,
   variant = 'small',
