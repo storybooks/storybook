@@ -436,3 +436,4 @@ export function useGlobals(): [Args, (newGlobals: Args) => void] {
 }
 
 export { useDOMRect } from './hooks/use-dom-rect/useDOMRect';
+export { useWindowSize } from './hooks/useWindowSize';
