@@ -9,14 +9,12 @@ import {
 import { queryFromLocation, navigate as queryNavigate, buildArgsParam } from '@storybook/router';
 import { toId, sanitize } from '@storybook/csf';
 import deepEqual from 'fast-deep-equal';
-import global from 'global';
+import root from '@storybook/global-root';
 import dedent from 'ts-dedent';
 
 import { ModuleArgs, ModuleFn } from '../index';
 import { Layout, UI } from './layout';
 import { isStory } from '../lib/stories';
-
-const { window: globalWindow } = global;
 
 export interface SubState {
   customQueryParams: QueryParams;
@@ -191,9 +189,9 @@ export const init: ModuleFn = ({ store, navigate, state, provider, fullAPI, ...r
 
     let handleOrId: any;
     fullAPI.on(STORY_ARGS_UPDATED, () => {
-      if ('requestIdleCallback' in globalWindow) {
-        if (handleOrId) globalWindow.cancelIdleCallback(handleOrId);
-        handleOrId = globalWindow.requestIdleCallback(updateArgsParam, { timeout: 1000 });
+      if ('requestIdleCallback' in root) {
+        if (handleOrId) root.cancelIdleCallback(handleOrId);
+        handleOrId = root.requestIdleCallback(updateArgsParam, { timeout: 1000 });
       } else {
         if (handleOrId) clearTimeout(handleOrId);
         setTimeout(updateArgsParam, 100);

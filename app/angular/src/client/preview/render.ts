@@ -1,4 +1,5 @@
 import { StoryFn } from '@storybook/addons';
+import root from '@storybook/global-root';
 
 import { renderNgApp } from './angular/helpers';
 import { StoryFnAngularReturnType } from './types';
@@ -6,7 +7,7 @@ import { Parameters } from './types-6-0';
 
 import { RendererFactory } from './angular-beta/RendererFactory';
 
-const rootElement = global.document.getElementById('root');
+const rootElement = root.document.getElementById('root');
 
 export const rendererFactory = new RendererFactory();
 

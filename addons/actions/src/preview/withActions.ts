@@ -1,22 +1,20 @@
 // Based on http://backbonejs.org/docs/backbone.html#section-164
-import global from 'global';
+import root from '@storybook/global-root';
 import { useEffect } from '@storybook/client-api';
 import deprecate from 'util-deprecate';
 import dedent from 'ts-dedent';
-
 import { makeDecorator } from '@storybook/addons';
 import { actions } from './actions';
-
 import { PARAM_KEY } from '../constants';
 
-const { document, Element } = global;
+const { document, Element } = root;
 
 const delegateEventSplitter = /^(\S+)\s*(.*)$/;
 
 const isIE = Element != null && !Element.prototype.matches;
 const matchesMethod = isIE ? 'msMatchesSelector' : 'matches';
 
-const root = document && document.getElementById('root');
+const rootEl = document && document.getElementById('root');
 
 const hasMatchInAncestry = (element: any, selector: any): boolean => {
   if (element[matchesMethod](selector)) {
@@ -47,16 +45,16 @@ const createHandlers = (actionsFn: (...arg: any[]) => object, ...handles: any[])
 const applyEventHandlers = deprecate(
   (actionsFn: any, ...handles: any[]) => {
     useEffect(() => {
-      if (root != null) {
+      if (rootEl != null) {
         const handlers = createHandlers(actionsFn, ...handles);
-        handlers.forEach(({ eventName, handler }) => root.addEventListener(eventName, handler));
+        handlers.forEach(({ eventName, handler }) => rootEl.addEventListener(eventName, handler));
         return () =>
           handlers.forEach(({ eventName, handler }) =>
-            root.removeEventListener(eventName, handler)
+            rootEl.removeEventListener(eventName, handler)
           );
       }
       return undefined;
-    }, [root, actionsFn, handles]);
+    }, [rootEl, actionsFn, handles]);
   },
   dedent`
     withActions(options) is deprecated, please configure addon-actions using the addParameter api:

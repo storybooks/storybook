@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import global from 'global';
-import React, { Fragment } from 'react';
 import { action, actions, configureActions } from '@storybook/addon-actions';
 import { Form } from '@storybook/components';
+import root from '@storybook/global-root';
+import React, { Fragment } from 'react';
 
-const { window: globalWindow, File } = global;
+const { File } = root;
+
 const { Button } = Form;
 
 export default {
@@ -123,7 +124,7 @@ export const AllTypes = () => {
             null,
             undefined,
             { foo: 'bar' },
-            globalWindow
+            root
           )
         }
       >
@@ -144,7 +145,7 @@ export const AllTypes = () => {
       <Button onClick={() => action('Symbol')(Symbol('A_SYMBOL'))}>Symbol</Button>
       <Button onClick={action('SyntheticMouseEvent')}>SyntheticEvent</Button>
       <Button onClick={() => action('undefined')(undefined)}>undefined</Button>
-      <Button onClick={() => action('window')(globalWindow)}>Window</Button>
+      <Button onClick={() => action('window')(root)}>Window</Button>
     </Fragment>
   );
 };

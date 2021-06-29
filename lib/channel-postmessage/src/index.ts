@@ -1,11 +1,11 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import * as EVENTS from '@storybook/core-events';
 import Channel, { ChannelEvent, ChannelHandler } from '@storybook/channels';
 import { logger, pretty } from '@storybook/client-logger';
 import { isJSON, parse, stringify } from 'telejson';
 import qs from 'qs';
 
-const { window: globalWindow, document, location } = global;
+const { document, location } = root;
 
 interface Config {
   page: 'manager' | 'preview';
@@ -18,6 +18,18 @@ interface BufferedEvent {
 }
 
 export const KEY = 'storybook-channel';
+
+const nodeListToArray = <T extends HTMLElement = HTMLElement>(nodeList: NodeListOf<T>) => {
+  const nodeArray = Array.prototype.slice.call(nodeList) as T[];
+  return nodeArray;
+};
+
+const getNodeArray = <T extends HTMLElement = HTMLElement>(selector: string) => {
+  const nodeList = document.querySelectorAll<T>(selector);
+  const nodeArray = nodeListToArray<T>(nodeList);
+
+  return nodeArray;
+};
 
 // TODO: we should export a method for opening child windows here and keep track of em.
 // that way we can send postMessage to child windows as well, not just iframe
@@ -33,7 +45,7 @@ export class PostmsgTransport {
   constructor(private readonly config: Config) {
     this.buffer = [];
     this.handler = null;
-    globalWindow.addEventListener('message', this.handleEvent.bind(this), false);
+    root.addEventListener('message', this.handleEvent.bind(this), false);
 
     // Check whether the config.page parameter has a valid value
     if (config.page !== 'manager' && config.page !== 'preview') {
@@ -115,11 +127,11 @@ export class PostmsgTransport {
 
   private getFrames(target?: string): Window[] {
     if (this.config.page === 'manager') {
-      const nodes: HTMLIFrameElement[] = [
-        ...document.querySelectorAll('iframe[data-is-storybook][data-is-loaded]'),
-      ];
+      const nodeArray = getNodeArray<HTMLIFrameElement>(
+        'iframe[data-is-storybook][data-is-loaded]'
+      );
 
-      const list = nodes
+      const list = nodeArray
         .filter((e) => {
           try {
             return !!e.contentWindow && e.dataset.isStorybook !== undefined && e.id === target;
@@ -131,8 +143,8 @@ export class PostmsgTransport {
 
       return list.length ? list : this.getCurrentFrames();
     }
-    if (globalWindow && globalWindow.parent && globalWindow.parent !== globalWindow) {
-      return [globalWindow.parent];
+    if (root && root.parent && root.parent !== root) {
+      return [root.parent];
     }
 
     return [];
@@ -140,13 +152,11 @@ export class PostmsgTransport {
 
   private getCurrentFrames(): Window[] {
     if (this.config.page === 'manager') {
-      const list: HTMLIFrameElement[] = [
-        ...document.querySelectorAll('[data-is-storybook="true"]'),
-      ];
+      const list = getNodeArray<HTMLIFrameElement>('[data-is-storybook="true"]');
       return list.map((e) => e.contentWindow);
     }
-    if (globalWindow && globalWindow.parent) {
-      return [globalWindow.parent];
+    if (root && root.parent) {
+      return [root.parent];
     }
 
     return [];
@@ -154,11 +164,11 @@ export class PostmsgTransport {
 
   private getLocalFrame(): Window[] {
     if (this.config.page === 'manager') {
-      const list: HTMLIFrameElement[] = [...document.querySelectorAll('#storybook-preview-iframe')];
+      const list = getNodeArray<HTMLIFrameElement>('#storybook-preview-iframe');
       return list.map((e) => e.contentWindow);
     }
-    if (globalWindow && globalWindow.parent) {
-      return [globalWindow.parent];
+    if (root && root.parent) {
+      return [root.parent];
     }
 
     return [];
@@ -210,7 +220,7 @@ export class PostmsgTransport {
 }
 
 const getEventSourceUrl = (event: MessageEvent) => {
-  const frames = [...document.querySelectorAll('iframe[data-is-storybook]')];
+  const frames = getNodeArray<HTMLIFrameElement>('iframe[data-is-storybook]');
   // try to find the originating iframe by matching it's contentWindow
   // This might not be cross-origin safe
   const [frame, ...remainder] = frames.filter((element) => {
@@ -224,7 +234,7 @@ const getEventSourceUrl = (event: MessageEvent) => {
     let origin;
 
     try {
-      ({ origin } = new URL(src, document.location));
+      ({ origin } = new URL(src, document.location.toString()));
     } catch (err) {
       return false;
     }
@@ -233,7 +243,7 @@ const getEventSourceUrl = (event: MessageEvent) => {
 
   if (frame && remainder.length === 0) {
     const src = frame.getAttribute('src');
-    const { protocol, host, pathname } = new URL(src, document.location);
+    const { protocol, host, pathname } = new URL(src, document.location.toString());
     return `${protocol}//${host}${pathname}`;
   }
 

@@ -1,12 +1,10 @@
-import global from 'global';
-
-const { document } = global;
+import root from '@storybook/global-root';
 
 export default function addCssWarning() {
-  const warning = document.createElement('h1');
+  const warning = root.document.createElement('h1');
   warning.textContent = 'CSS rules are not configured as needed';
   warning.className = 'css-rules-warning';
   warning.style.color = 'red';
 
-  document.body.insertBefore(warning, document.body.firstChild);
+  root.document.body.insertBefore(warning, root.document.body.firstChild);
 }

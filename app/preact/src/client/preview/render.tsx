@@ -1,9 +1,10 @@
+import root from '@storybook/global-root';
 import * as preact from 'preact';
-import global from 'global';
 import dedent from 'ts-dedent';
 import { RenderContext, StoryFnPreactReturnType } from './types';
 
-const { document } = global;
+const { document } = root;
+
 const rootElement = document ? document.getElementById('root') : null;
 
 let renderedStory: Element;

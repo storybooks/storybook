@@ -1,10 +1,10 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import axe from 'axe-core';
 import { addons } from '@storybook/addons';
 import { EVENTS } from './constants';
 import { A11yParameters } from './params';
 
-const { document, window: globalWindow } = global;
+const { document } = root;
 
 if (module && module.hot && module.hot.decline) {
   module.hot.decline();
@@ -47,7 +47,7 @@ const run = async (storyId: string) => {
         axe.configure(config);
       }
 
-      const result = await axe.run(element, options);
+      const result = await axe.run(element as axe.ElementContext, options);
       // It's possible that we requested a new run on a different story.
       // Unfortunately, axe doesn't support a cancel method to abort current run.
       // We check if the story we run against is still the current one,
@@ -68,15 +68,21 @@ const run = async (storyId: string) => {
 
 /** Returns story parameters or default ones. */
 const getParams = (storyId: string): A11yParameters => {
-  const { parameters } = globalWindow.__STORYBOOK_STORY_STORE__.fromId(storyId) || {};
-  return (
-    parameters.a11y || {
-      config: {},
-      options: {
-        restoreScroll: true,
-      },
+  const { __STORYBOOK_STORY_STORE__ } = root;
+
+  let a11yParameters: A11yParameters = {
+    config: {},
+    options: {},
+  };
+
+  if (__STORYBOOK_STORY_STORE__) {
+    const { parameters = {} } = __STORYBOOK_STORY_STORE__.fromId(storyId) || {};
+    if (parameters.a11y) {
+      a11yParameters = parameters.a11y;
     }
-  );
+  }
+
+  return a11yParameters;
 };
 
 channel.on(EVENTS.REQUEST, handleRequest);

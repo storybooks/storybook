@@ -36,8 +36,7 @@ jest.mock('@storybook/client-logger', () => ({
   },
 }));
 
-jest.mock('global', () => ({
-  // @ts-ignore
+jest.mock('@storybook/global-root', () => ({
   ...global,
   FEATURES: { previewCsfV3: true },
 }));

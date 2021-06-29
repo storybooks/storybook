@@ -1,6 +1,8 @@
-import { styled } from '@storybook/theming';
 import { Icons } from '@storybook/components';
-import global from 'global';
+import root from '@storybook/global-root';
+import { styled } from '@storybook/theming';
+import { ControllerStateAndHelpers } from 'downshift';
+import { transparentize } from 'polished';
 import React, {
   FunctionComponent,
   MouseEventHandler,
@@ -8,22 +10,19 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
-import { ControllerStateAndHelpers } from 'downshift';
-import { transparentize } from 'polished';
-
+import { matchesKeyCode, matchesModifiers } from '../../keybinding';
 import { ComponentNode, DocumentNode, Path, RootNode, StoryNode } from './TreeNode';
 import {
-  Match,
   DownshiftItem,
-  isCloseType,
   isClearType,
+  isCloseType,
   isExpandType,
+  Match,
   SearchResult,
 } from './types';
 import { getLink } from './utils';
-import { matchesKeyCode, matchesModifiers } from '../../keybinding';
 
-const { document, DOCS_MODE } = global;
+const { document, DOCS_MODE } = root;
 
 const ResultsList = styled.ol({
   listStyle: 'none',

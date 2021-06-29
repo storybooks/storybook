@@ -6,7 +6,7 @@ import { SELECT_STORY } from '@storybook/core-events';
 import LinkTo from './link';
 
 jest.mock('@storybook/addons');
-jest.mock('global', () => ({
+jest.mock('@storybook/global-root', () => ({
   document: {
     location: {
       origin: 'origin',

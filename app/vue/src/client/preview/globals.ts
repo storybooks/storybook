@@ -1,6 +1,4 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { window: globalWindow } = global;
-
-globalWindow.STORYBOOK_REACT_CLASSES = {};
-globalWindow.STORYBOOK_ENV = 'vue';
+root.STORYBOOK_REACT_CLASSES = {};
+root.STORYBOOK_ENV = 'vue';

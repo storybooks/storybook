@@ -225,6 +225,9 @@
     },
     "@storybook/ui": {
       "implicitDependencies": []
+    },
+    "@storybook/global-root": {
+      "implicitDependencies": []
     }
   },
   "affected": {

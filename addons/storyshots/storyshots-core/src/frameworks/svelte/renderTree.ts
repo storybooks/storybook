@@ -1,7 +1,5 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import { set_current_component } from 'svelte/internal';
-
-const { document } = global;
 
 /**
  * Provides functionality to convert your raw story to the resulting markup.
@@ -23,7 +21,7 @@ function getRenderedTree(story: any) {
   const DefaultCompatComponent = Component.default || Component;
 
   // We need to create a target to mount onto.
-  const target = document.createElement('section');
+  const target = root.document.createElement('section');
 
   new DefaultCompatComponent({ target, props }); // eslint-disable-line
 

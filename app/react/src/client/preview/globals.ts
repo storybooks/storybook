@@ -1,7 +1,3 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { window: globalWindow } = global;
-
-if (globalWindow) {
-  globalWindow.STORYBOOK_ENV = 'react';
-}
+root.STORYBOOK_ENV = 'react';

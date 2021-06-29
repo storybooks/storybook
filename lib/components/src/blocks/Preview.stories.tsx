@@ -1,14 +1,13 @@
-import React from 'react';
+import root from '@storybook/global-root';
 import { styled } from '@storybook/theming';
-import global from 'global';
-
+import React from 'react';
+import { Button } from '../Button/Button';
 import { Spaced } from '../spaced/Spaced';
 import { Preview } from './Preview';
-import { Story } from './Story';
-import { Button } from '../Button/Button';
 import * as Source from './Source.stories';
+import { Story } from './Story';
 
-const { window: globalWindow } = global;
+const { location } = root;
 
 export default {
   title: 'Docs/Preview',
@@ -146,7 +145,7 @@ export const WithAdditionalActions = () => (
       {
         title: 'Open on GitHub',
         onClick: () => {
-          globalWindow.location.href =
+          location.href =
             'https://github.com/storybookjs/storybook/blob/next/lib/components/src/blocks/Preview.stories.tsx#L140-L147';
         },
       },

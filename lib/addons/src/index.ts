@@ -1,11 +1,13 @@
-import global from 'global';
-import { ReactElement } from 'react';
-import { Channel } from '@storybook/channels';
 import { API } from '@storybook/api';
-import { RenderData as RouterData } from '@storybook/router';
+import { Channel } from '@storybook/channels';
 import { logger } from '@storybook/client-logger';
+import _root from '@storybook/global-root';
+import { RenderData as RouterData } from '@storybook/router';
 import { ThemeVars } from '@storybook/theming';
+import { ReactElement } from 'react';
 import { types, Types } from './types';
+
+const root = _root as typeof _root & { __STORYBOOK_ADDONS?: AddonStore };
 
 export { Channel };
 
@@ -129,10 +131,10 @@ export class AddonStore {
 const KEY = '__STORYBOOK_ADDONS';
 
 function getAddonsStore(): AddonStore {
-  if (!global[KEY]) {
-    global[KEY] = new AddonStore();
+  if (!root[KEY]) {
+    root[KEY] = new AddonStore();
   }
-  return global[KEY];
+  return root[KEY];
 }
 
 // Exporting this twice in order to to be able to import it like { addons } instead of 'addons'

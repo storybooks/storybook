@@ -1,6 +1,4 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { window: globalWindow } = global;
-
-globalWindow.STORYBOOK_NAME = process.env.STORYBOOK_NAME;
-globalWindow.STORYBOOK_ENV = 'ember';
+root.STORYBOOK_NAME = process.env.STORYBOOK_NAME;
+root.STORYBOOK_ENV = 'ember';

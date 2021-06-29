@@ -4,7 +4,7 @@ import { StoryshotsTestMethod, TestMethodOptions } from './api/StoryshotsOptions
 const isFunction = (obj: any) => !!(obj && obj.constructor && obj.call && obj.apply);
 const optionsOrCallOptions = (opts: any, story: any) => (isFunction(opts) ? opts(story) : opts);
 
-type SnapshotsWithOptionsReturnType = (
+export type SnapshotsWithOptionsReturnType = (
   options: Pick<TestMethodOptions, 'story' | 'context' | 'renderTree' | 'snapshotFileName'>
 ) => any;
 

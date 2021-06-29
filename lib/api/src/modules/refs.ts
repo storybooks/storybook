@@ -1,4 +1,4 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import dedent from 'ts-dedent';
 import {
   transformStoriesRawToStoriesHash,
@@ -9,7 +9,7 @@ import {
 
 import { ModuleFn } from '../index';
 
-const { location, fetch } = global;
+const { location, fetch } = root;
 
 export interface SubState {
   refs: Refs;
@@ -187,7 +187,8 @@ export const init: ModuleFn = ({ store, provider, singleStory }, { runCheck = tr
               },
               credentials,
               cache: 'no-cache',
-            }).catch(() => false)
+              // @todo - need help here shilman
+            }).catch(() => false) as any
           ),
         ]);
 

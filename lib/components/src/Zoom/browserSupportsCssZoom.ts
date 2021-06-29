@@ -1,12 +1,8 @@
-import global from 'global';
-
-const { window: globalWindow } = global;
+import root from '@storybook/global-root';
 
 export function browserSupportsCssZoom(): boolean {
   try {
-    return (
-      globalWindow.document.implementation.createHTMLDocument('').body.style.zoom !== undefined
-    );
+    return root.document.implementation.createHTMLDocument('').body.style.zoom !== undefined;
   } catch (error) {
     return false;
   }

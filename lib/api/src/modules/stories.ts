@@ -1,37 +1,35 @@
-import global from 'global';
-import { toId, sanitize } from '@storybook/csf';
 import {
-  UPDATE_STORY_ARGS,
   RESET_STORY_ARGS,
-  STORY_ARGS_UPDATED,
-  STORY_CHANGED,
   SELECT_STORY,
   SET_STORIES,
+  STORY_ARGS_UPDATED,
+  STORY_CHANGED,
   STORY_SPECIFIED,
+  UPDATE_STORY_ARGS,
 } from '@storybook/core-events';
+import { sanitize, toId } from '@storybook/csf';
+import root from '@storybook/global-root';
 import deprecate from 'util-deprecate';
-
+import { Args, ModuleFn } from '../index';
 import { getEventMetadata } from '../lib/events';
+import type {
+  Group,
+  Root,
+  SetStoriesPayload,
+  StoriesHash,
+  StoriesRaw,
+  Story,
+  StoryId,
+} from '../lib/stories';
 import {
   denormalizeStoryParameters,
-  transformStoriesRawToStoriesHash,
-  isStory,
   isRoot,
+  isStory,
+  transformStoriesRawToStoriesHash,
 } from '../lib/stories';
-import type {
-  StoriesHash,
-  Story,
-  Group,
-  StoryId,
-  Root,
-  StoriesRaw,
-  SetStoriesPayload,
-} from '../lib/stories';
-
-import { Args, ModuleFn } from '../index';
 import { ComposedRef } from './refs';
 
-const { DOCS_MODE } = global;
+const { DOCS_MODE } = root;
 
 type Direction = -1 | 1;
 type ParameterName = string;

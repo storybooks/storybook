@@ -1,18 +1,16 @@
+import { Channel, StoryFn, StoryId, StoryKind, ViewMode } from '@storybook/addons';
+import { StoryStore } from '@storybook/client-api';
+import { logger } from '@storybook/client-logger';
+import Events from '@storybook/core-events';
+import AnsiToHtml from 'ansi-to-html';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import global from 'global';
-import AnsiToHtml from 'ansi-to-html';
 import dedent from 'ts-dedent';
-
-import { StoryId, StoryKind, StoryFn, ViewMode, Channel } from '@storybook/addons';
-import Events from '@storybook/core-events';
-import { logger } from '@storybook/client-logger';
-import { StoryStore } from '@storybook/client-api';
-
+import root from '@storybook/global-root';
 import { NoDocs } from './NoDocs';
-import { RenderStoryFunction, RenderContextWithoutStoryContext } from './types';
+import { RenderContextWithoutStoryContext, RenderStoryFunction } from './types';
 
-const { document, FEATURES = {} } = global;
+const { document, FEATURES = {} } = root;
 
 // We have "changed" story if this changes
 interface RenderMetadata {

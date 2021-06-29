@@ -1,4 +1,4 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import dedent from 'ts-dedent';
 import { render } from 'lit-html';
 // Keep `.js` extension to avoid issue with Webpack (related to export map?)
@@ -7,7 +7,8 @@ import { isTemplateResult } from 'lit-html/directive-helpers.js';
 import { simulatePageLoad, simulateDOMContentLoaded } from '@storybook/client-api';
 import { RenderContext } from './types';
 
-const { document, Node } = global;
+const { document, Node } = root;
+
 const rootElement = document.getElementById('root');
 
 export default function renderMain({
@@ -28,7 +29,7 @@ export default function renderMain({
     if (!forceRender || !rootElement.querySelector('[id="root-inner"]')) {
       rootElement.innerHTML = '<div id="root-inner"></div>';
     }
-    const renderTo = rootElement.querySelector('[id="root-inner"]');
+    const renderTo: HTMLElement = rootElement.querySelector('[id="root-inner"]');
 
     render(element, renderTo);
     simulatePageLoad(rootElement);

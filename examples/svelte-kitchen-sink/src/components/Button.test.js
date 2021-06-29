@@ -1,7 +1,7 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import Button from './Button.svelte';
 
-const { document } = global;
+const { document } = root;
 
 let target;
 let component;

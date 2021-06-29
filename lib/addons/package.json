@@ -44,10 +44,10 @@
     "@storybook/channels": "6.4.0-alpha.6",
     "@storybook/client-logger": "6.4.0-alpha.6",
     "@storybook/core-events": "6.4.0-alpha.6",
+    "@storybook/global-root": "6.4.0-alpha.6",
     "@storybook/router": "6.4.0-alpha.6",
     "@storybook/theming": "6.4.0-alpha.6",
     "core-js": "^3.8.2",
-    "global": "^4.4.0",
     "regenerator-runtime": "^0.13.7"
   },
   "peerDependencies": {

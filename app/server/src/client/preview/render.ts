@@ -1,17 +1,18 @@
-import global from 'global';
-import dedent from 'ts-dedent';
 import { Args, ArgTypes } from '@storybook/api';
-import { simulatePageLoad, simulateDOMContentLoaded } from '@storybook/client-api';
-import { RenderContext, FetchStoryHtmlType } from './types';
+import { simulateDOMContentLoaded, simulatePageLoad } from '@storybook/client-api';
+import dedent from 'ts-dedent';
+import root from '@storybook/global-root';
+import { FetchStoryHtmlType, RenderContext } from './types';
 
-const { document, fetch, Node } = global;
+const { document, fetch, Node } = root;
+
 const rootElement = document.getElementById('root');
 
 const defaultFetchStoryHtml: FetchStoryHtmlType = async (url, path, params, storyContext) => {
   const fetchUrl = new URL(`${url}/${path}`);
   fetchUrl.search = new URLSearchParams({ ...storyContext.globals, ...params }).toString();
 
-  const response = await fetch(fetchUrl);
+  const response = await fetch(fetchUrl.toString());
   return response.text();
 };
 

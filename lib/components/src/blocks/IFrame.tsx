@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import global from 'global';
-
-const { window: globalWindow } = global;
+import root from '@storybook/global-root';
 
 interface IFrameProps {
   id: string;
@@ -21,11 +19,11 @@ interface BodyStyle {
 }
 
 export class IFrame extends Component<IFrameProps> {
-  iframe: any = null;
+  iframe: HTMLIFrameElement | null = null;
 
   componentDidMount() {
     const { id } = this.props;
-    this.iframe = globalWindow.document.getElementById(id);
+    this.iframe = root.document.getElementById(id) as HTMLIFrameElement;
   }
 
   shouldComponentUpdate(nextProps: IFrameProps) {

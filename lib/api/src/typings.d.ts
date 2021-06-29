@@ -1,6 +1,7 @@
-declare module 'global';
 declare module '@storybook/semver';
 declare module 'preval.macro';
 
-// provided by the webpack define plugin
-declare var DOCS_MODE: string | undefined;
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
+declare var requestIdleCallback: (callback: Function, options: { timeout?: number }) => string;
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
+declare var cancelIdleCallback: (handle: string) => undefined;

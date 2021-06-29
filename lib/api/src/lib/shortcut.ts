@@ -1,9 +1,9 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
 // The shortcut is our JSON-ifiable representation of a shortcut combination
 import { KeyCollection, Event } from '../modules/shortcuts';
 
-const { navigator } = global;
+const { navigator } = root;
 
 export const isMacLike = () =>
   navigator && navigator.platform ? !!navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i) : false;

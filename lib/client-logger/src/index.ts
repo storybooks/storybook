@@ -1,10 +1,8 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { LOGLEVEL, console } = global;
+const { LOGLEVEL, console } = root;
 
-type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'silent';
-
-const levels: Record<LogLevel, number> = {
+const levels: Record<typeof LOGLEVEL, number> = {
   trace: 1,
   debug: 2,
   info: 3,
@@ -13,7 +11,7 @@ const levels: Record<LogLevel, number> = {
   silent: 10,
 };
 
-const currentLogLevelString: LogLevel = LOGLEVEL as LogLevel;
+const currentLogLevelString = LOGLEVEL;
 const currentLogLevelNumber: number = levels[currentLogLevelString] || levels.info;
 
 export const logger = {

@@ -1,12 +1,3 @@
-export type SupportedFramework =
-  | 'angular'
-  | 'html'
-  | 'preact'
-  | 'react'
-  | 'riot'
-  | 'react-native'
-  | 'svelte'
-  | 'vue'
-  | 'vue3'
-  | 'web-components'
-  | 'rax';
+import root from '@storybook/global-root';
+
+export type SupportedFramework = typeof root['STORYBOOK_ENV'];

@@ -1,9 +1,10 @@
-import global from 'global';
+import { simulateDOMContentLoaded, simulatePageLoad } from '@storybook/client-api';
+import root from '@storybook/global-root';
 import dedent from 'ts-dedent';
-import { simulatePageLoad, simulateDOMContentLoaded } from '@storybook/client-api';
 import { RenderContext } from './types';
 
-const { document, Node } = global;
+const { document, Node } = root;
+
 const rootElement = document.getElementById('root');
 
 export default function renderMain({

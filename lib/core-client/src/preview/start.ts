@@ -1,16 +1,15 @@
-import global from 'global';
-
-import { addons, DecorateStoryFunction, Channel } from '@storybook/addons';
+import { addons, Channel, DecorateStoryFunction } from '@storybook/addons';
 import createChannel from '@storybook/channel-postmessage';
 import { ClientApi, ConfigApi, StoryStore } from '@storybook/client-api';
 import Events from '@storybook/core-events';
-
-import { getSelectionSpecifierFromPath, setPath } from './url';
-import { RenderStoryFunction } from './types';
+import root from '@storybook/global-root';
 import { loadCsf } from './loadCsf';
 import { StoryRenderer } from './StoryRenderer';
+import { RenderStoryFunction } from './types';
+import { getSelectionSpecifierFromPath, setPath } from './url';
 
-const { navigator, window: globalWindow } = global;
+const { navigator } = root;
+
 const isBrowser =
   navigator &&
   navigator.userAgent &&
@@ -36,12 +35,12 @@ function getClientApi(decorateStory: DecorateStoryFunction, channel?: Channel) {
   let storyStore: StoryStore;
   let clientApi: ClientApi;
   if (
-    typeof globalWindow !== 'undefined' &&
-    globalWindow.__STORYBOOK_CLIENT_API__ &&
-    globalWindow.__STORYBOOK_STORY_STORE__
+    typeof root !== 'undefined' &&
+    root.__STORYBOOK_CLIENT_API__ &&
+    root.__STORYBOOK_STORY_STORE__
   ) {
-    clientApi = globalWindow.__STORYBOOK_CLIENT_API__;
-    storyStore = globalWindow.__STORYBOOK_STORY_STORE__;
+    clientApi = root.__STORYBOOK_CLIENT_API__;
+    storyStore = root.__STORYBOOK_STORY_STORE__;
   } else {
     storyStore = new StoryStore({ channel });
     clientApi = new ClientApi({ storyStore, decorateStory });
@@ -74,7 +73,7 @@ export default function start(
     channel.on(Events.CURRENT_STORY_WAS_SET, setPath);
 
     // Handle keyboard shortcuts
-    globalWindow.onkeydown = (event: KeyboardEvent) => {
+    global.onkeydown = (event: KeyboardEvent) => {
       if (!focusInInput(event)) {
         // We have to pick off the keys of the event that we need on the other side
         const { altKey, ctrlKey, metaKey, shiftKey, key, code, keyCode } = event;
@@ -85,10 +84,10 @@ export default function start(
     };
   }
 
-  if (typeof globalWindow !== 'undefined') {
-    globalWindow.__STORYBOOK_CLIENT_API__ = clientApi;
-    globalWindow.__STORYBOOK_STORY_STORE__ = storyStore;
-    globalWindow.__STORYBOOK_ADDONS_CHANNEL__ = channel; // may not be defined
+  if (typeof root !== 'undefined') {
+    root.__STORYBOOK_CLIENT_API__ = clientApi;
+    root.__STORYBOOK_STORY_STORE__ = storyStore;
+    root.__STORYBOOK_ADDONS_CHANNEL__ = channel; // may not be defined
   }
 
   const configure = loadCsf({ clientApi, storyStore, configApi });

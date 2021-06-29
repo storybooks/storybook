@@ -1,8 +1,8 @@
-import global from 'global';
-import hasDependency from '../hasDependency';
-import configure from '../configure';
-import { Loader } from '../Loader';
+import root from '@storybook/global-root';
 import { StoryshotsOptions } from '../../api/StoryshotsOptions';
+import configure from '../configure';
+import hasDependency from '../hasDependency';
+import { Loader } from '../Loader';
 
 function mockVueToIncludeCompiler() {
   jest.mock('vue', () => jest.requireActual('vue/dist/vue.common.js'));
@@ -13,7 +13,7 @@ function test(options: StoryshotsOptions): boolean {
 }
 
 function load(options: StoryshotsOptions) {
-  global.STORYBOOK_ENV = 'vue';
+  root.STORYBOOK_ENV = 'vue';
   mockVueToIncludeCompiler();
 
   const storybook = jest.requireActual('@storybook/vue');

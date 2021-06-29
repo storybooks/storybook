@@ -1,20 +1,17 @@
-import global from 'global';
-import React, { FunctionComponent, useMemo } from 'react';
-
-import { styled } from '@storybook/theming';
+import type { State, StoriesHash } from '@storybook/api';
 import { ScrollArea, Spaced } from '@storybook/components';
-import type { StoriesHash, State } from '@storybook/api';
-
-import { Heading } from './Heading';
-
-import { DEFAULT_REF_ID, collapseAllStories, collapseDocsOnlyStories } from './data';
+import root from '@storybook/global-root';
+import { styled } from '@storybook/theming';
+import React, { FunctionComponent, useMemo } from 'react';
+import { collapseAllStories, collapseDocsOnlyStories, DEFAULT_REF_ID } from './data';
 import { Explorer } from './Explorer';
+import { Heading } from './Heading';
 import { Search } from './Search';
 import { SearchResults } from './SearchResults';
-import { Refs, CombinedDataset, Selection } from './types';
+import { CombinedDataset, Refs, Selection } from './types';
 import { useLastViewed } from './useLastViewed';
 
-const { DOCS_MODE } = global;
+const { DOCS_MODE } = root;
 
 const Container = styled.nav({
   position: 'absolute',

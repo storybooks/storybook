@@ -1,9 +1,8 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import memoize from 'memoizerific';
-
 import { ModuleFn } from '../index';
 
-const { RELEASE_NOTES_DATA } = global;
+const { RELEASE_NOTES_DATA } = root;
 
 export interface ReleaseNotes {
   success?: boolean;

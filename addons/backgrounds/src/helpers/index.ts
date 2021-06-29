@@ -1,11 +1,9 @@
-import global from 'global';
-import dedent from 'ts-dedent';
-
 import { logger } from '@storybook/client-logger';
-
+import root from '@storybook/global-root';
+import dedent from 'ts-dedent';
 import { Background } from '../types';
 
-const { document } = global;
+const { document } = root;
 
 export const getBackgroundColorByName = (
   currentSelectedValue: string,

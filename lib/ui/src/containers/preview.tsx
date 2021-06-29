@@ -1,12 +1,10 @@
-import global from 'global';
-import React from 'react';
-
 import type { Combo, StoriesHash } from '@storybook/api';
-import { Consumer, isRoot, isGroup, isStory } from '@storybook/api';
-
+import { Consumer, isGroup, isRoot, isStory } from '@storybook/api';
+import root from '@storybook/global-root';
+import React from 'react';
 import { Preview } from '../components/preview/preview';
 
-const { PREVIEW_URL } = global;
+const { PREVIEW_URL } = root;
 
 export type Item = StoriesHash[keyof StoriesHash];
 

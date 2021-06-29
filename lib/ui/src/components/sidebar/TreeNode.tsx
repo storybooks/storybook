@@ -1,10 +1,10 @@
-import { styled, Color, Theme } from '@storybook/theming';
 import { Icons } from '@storybook/components';
-import global from 'global';
+import root from '@storybook/global-root';
+import { Color, styled, Theme } from '@storybook/theming';
 import { transparentize } from 'polished';
-import React, { FunctionComponent, ComponentProps } from 'react';
+import React, { ComponentProps, FunctionComponent } from 'react';
 
-const { DOCS_MODE } = global;
+const { DOCS_MODE } = root;
 
 export const CollapseIcon = styled.span<{ isExpanded: boolean }>(({ theme, isExpanded }) => ({
   display: 'inline-block',

@@ -1,9 +1,9 @@
-import global from 'global';
-import qs from 'qs';
 import { addons, makeDecorator } from '@storybook/addons';
-import { STORY_CHANGED, SELECT_STORY } from '@storybook/core-events';
-import { toId } from '@storybook/csf';
 import { logger } from '@storybook/client-logger';
+import { SELECT_STORY, STORY_CHANGED } from '@storybook/core-events';
+import { toId } from '@storybook/csf';
+import root from '@storybook/global-root';
+import qs from 'qs';
 import { PARAM_KEY } from './constants';
 
 const {
@@ -11,7 +11,7 @@ const {
   HTMLElement,
   __STORYBOOK_STORY_STORE__: storyStore,
   __STORYBOOK_CLIENT_API__: clientApi,
-} = global;
+} = root;
 
 interface ParamsId {
   storyId: string;
@@ -37,12 +37,12 @@ const valueOrCall = (args: string[]) => (value: string | ((...args: string[]) =>
   typeof value === 'function' ? value(...args) : value;
 
 export const linkTo = (
-  idOrKindInput: string,
+  idOrKindInput: string | ((...args: any[]) => string),
   storyInput?: string | ((...args: any[]) => string)
 ) => (...args: any[]) => {
   const resolver = valueOrCall(args);
   const { storyId } = storyStore.getSelection();
-  const current = storyStore.fromId(storyId) || {};
+  const current = storyStore.fromId(storyId);
   const kindVal = resolver(idOrKindInput);
   const storyVal = resolver(storyInput);
 
@@ -52,10 +52,10 @@ export const linkTo = (
     fromid ||
     clientApi.raw().find((i: any) => {
       if (kindVal && storyVal) {
-        return i.kind === kindVal && i.story === storyVal;
+        return i.kind === kindVal && i.name === storyVal;
       }
       if (!kindVal && storyVal) {
-        return i.kind === current.kind && i.story === storyVal;
+        return i.kind === current.kind && i.name === storyVal;
       }
       if (kindVal && !storyVal) {
         return i.kind === kindVal;
@@ -69,7 +69,7 @@ export const linkTo = (
   if (item) {
     navigate({
       kind: item.kind,
-      story: item.story,
+      story: item.name,
     });
   } else {
     logger.error('could not navigate to provided story');

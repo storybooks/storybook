@@ -1,9 +1,8 @@
-import global from 'global';
-
-import './header.css';
+import root from '@storybook/global-root';
 import { createButton } from './Button';
+import './header.css';
 
-const { document } = global;
+const { document } = root;
 
 export interface HeaderProps {
   user?: {};

@@ -1,6 +1,7 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { document, setTimeout } = global;
+const { document, setTimeout } = root;
+
 const text = 'Testing the a11y addon';
 
 export default {

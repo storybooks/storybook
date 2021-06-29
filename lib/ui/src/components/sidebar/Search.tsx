@@ -1,28 +1,27 @@
 import { useStorybookApi } from '@storybook/api';
-import { styled } from '@storybook/theming';
 import { Icons } from '@storybook/components';
+import root from '@storybook/global-root';
+import { styled } from '@storybook/theming';
 import Downshift, { DownshiftState, StateChangeOptions } from 'downshift';
 import Fuse, { FuseOptions } from 'fuse.js';
-import global from 'global';
 import { transparentize } from 'polished';
-import React, { useMemo, useRef, useState, useCallback } from 'react';
-
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { DEFAULT_REF_ID } from './data';
 import {
   CombinedDataset,
-  SearchItem,
-  SearchResult,
   DownshiftItem,
-  SearchChildrenFn,
-  Selection,
-  isSearchResult,
-  isExpandType,
   isClearType,
   isCloseType,
+  isExpandType,
+  isSearchResult,
+  SearchChildrenFn,
+  SearchItem,
+  SearchResult,
+  Selection,
 } from './types';
 import { searchItem } from './utils';
 
-const { document } = global;
+const { document } = root;
 
 const DEFAULT_MAX_SEARCH_RESULTS = 50;
 

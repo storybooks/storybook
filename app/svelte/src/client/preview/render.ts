@@ -1,8 +1,8 @@
-import global from 'global';
-import { RenderContext } from './types';
+import root from '@storybook/global-root';
 import PreviewRender from './PreviewRender.svelte';
+import { RenderContext } from './types';
 
-const { document } = global;
+const { document } = root;
 
 type Component = any;
 

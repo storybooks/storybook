@@ -25,7 +25,6 @@ function getIntegrityOptions({ integrityOptions }: StoryshotsOptions) {
   };
 }
 
-// @ts-ignore
 function ensureOptionsDefaults(options: StoryshotsOptions) {
   const {
     suite = 'Storyshots',
@@ -50,7 +49,7 @@ function ensureOptionsDefaults(options: StoryshotsOptions) {
     testMethod,
     snapshotSerializers,
     integrityOptions,
-  } as any;
+  };
 }
 
 export default ensureOptionsDefaults;

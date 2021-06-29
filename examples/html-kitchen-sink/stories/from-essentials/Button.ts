@@ -1,8 +1,8 @@
-import global from 'global';
+import root from '@storybook/global-root';
+
+const { document } = root;
 
 import './button.css';
-
-const { document } = global;
 
 export interface ButtonProps {
   /**

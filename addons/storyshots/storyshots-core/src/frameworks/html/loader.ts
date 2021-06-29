@@ -1,14 +1,14 @@
-import global from 'global';
+import root from '@storybook/global-root';
+import { StoryshotsOptions } from '../../api/StoryshotsOptions';
 import configure from '../configure';
 import { Loader } from '../Loader';
-import { StoryshotsOptions } from '../../api/StoryshotsOptions';
 
 function test(options: StoryshotsOptions): boolean {
   return options.framework === 'html';
 }
 
 function load(options: StoryshotsOptions) {
-  global.STORYBOOK_ENV = 'html';
+  root.STORYBOOK_ENV = 'html';
 
   const storybook = jest.requireActual('@storybook/html');
 

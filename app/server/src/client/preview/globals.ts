@@ -1,5 +1,3 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { window: globalWindow } = global;
-
-globalWindow.STORYBOOK_ENV = 'SERVER';
+root.STORYBOOK_ENV = 'SERVER';

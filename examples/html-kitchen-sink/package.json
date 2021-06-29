@@ -33,7 +33,6 @@
     "autoprefixer": "^10.0.1",
     "eventemitter3": "^4.0.7",
     "format-json": "^1.0.3",
-    "global": "^4.4.0",
     "postcss": "^8.2.4",
     "postcss-color-rebeccapurple": "^6.0.0"
   },

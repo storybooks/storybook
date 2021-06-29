@@ -1,9 +1,7 @@
+import root from '@storybook/global-root';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import global from 'global';
 import App from './App';
+import './index.css';
 
-const { document } = global;
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, root.document.getElementById('root'));

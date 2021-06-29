@@ -1,4 +1,4 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import {
   Dispatch,
   MutableRefObject,
@@ -9,11 +9,10 @@ import {
   useState,
 } from 'react';
 import { matchesKeyCode, matchesModifiers } from '../../keybinding';
-
 import { CombinedDataset, Highlight, Selection } from './types';
 import { cycle, isAncestor, scrollIntoView } from './utils';
 
-const { document, window: globalWindow } = global;
+const { document } = root;
 
 export interface HighlightedProps {
   containerRef: MutableRefObject<HTMLElement>;
@@ -90,8 +89,8 @@ export const useHighlighted = ({
       if (!(isArrowUp || isArrowDown)) return;
       event.preventDefault();
 
-      const requestId = globalWindow.requestAnimationFrame(() => {
-        globalWindow.cancelAnimationFrame(lastRequestId);
+      const requestId = root.requestAnimationFrame(() => {
+        root.cancelAnimationFrame(lastRequestId);
         lastRequestId = requestId;
 
         const target = event.target as Element;

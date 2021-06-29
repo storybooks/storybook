@@ -155,6 +155,7 @@
     "@storybook/csf-tools": "workspace:*",
     "@storybook/ember": "workspace:*",
     "@storybook/eslint-config-storybook": "^2.4.0",
+    "@storybook/global-root": "workspace:*",
     "@storybook/html": "workspace:*",
     "@storybook/linter-config": "^2.5.0",
     "@storybook/node-logger": "workspace:*",
@@ -270,6 +271,42 @@
     "webpack-dev-middleware": "^3.7.3",
     "window-size": "^1.1.1"
   },
+  "dependenciesMeta": {
+    "@compodoc/compodoc": {
+      "built": false
+    },
+    "core-js": {
+      "built": false
+    },
+    "core-js-pure": {
+      "built": false
+    },
+    "ejs": {
+      "built": false
+    },
+    "level": {
+      "built": false
+    },
+    "node-uuid": {
+      "built": false,
+      "unplugged": false
+    },
+    "nodemon": {
+      "built": false
+    },
+    "parcel": {
+      "built": false
+    },
+    "preact": {
+      "built": false
+    },
+    "styled-components": {
+      "built": false
+    },
+    "yorkie": {
+      "built": false
+    }
+  },
   "optionalDependencies": {
     "@cypress/webpack-preprocessor": "^5.7.0",
     "cypress": "6.8.0",
@@ -323,41 +360,5 @@
         "Other"
       ]
     ]
-  },
-  "dependenciesMeta": {
-    "@compodoc/compodoc": {
-      "built": false
-    },
-    "core-js": {
-      "built": false
-    },
-    "core-js-pure": {
-      "built": false
-    },
-    "ejs": {
-      "built": false
-    },
-    "level": {
-      "built": false
-    },
-    "node-uuid": {
-      "built": false,
-      "unplugged": false
-    },
-    "nodemon": {
-      "built": false
-    },
-    "parcel": {
-      "built": false
-    },
-    "preact": {
-      "built": false
-    },
-    "styled-components": {
-      "built": false
-    },
-    "yorkie": {
-      "built": false
-    }
   }
 }

@@ -1,12 +1,12 @@
 import React, { FC, useContext } from 'react';
-import global from 'global';
+import root from '@storybook/global-root';
 import { Args, BaseAnnotations, BaseMeta } from '@storybook/addons';
 import { Anchor } from './Anchor';
 import { DocsContext, DocsContextProps } from './DocsContext';
 import { getDocsStories } from './utils';
 import { Component } from './types';
 
-const { document } = global;
+const { document } = root;
 
 type MetaProps = BaseMeta<Component> & BaseAnnotations<Args, any>;
 
@@ -28,7 +28,7 @@ function renderAnchor() {
  * and gets transformed into a default export underneath the hood.
  */
 export const Meta: FC<MetaProps> = () => {
-  const params = new URL(document.location).searchParams;
+  const params = new URL(document.location.toString()).searchParams;
   const isDocs = params.get('viewMode') === 'docs';
 
   return isDocs ? renderAnchor() : null;

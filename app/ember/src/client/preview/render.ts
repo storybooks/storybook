@@ -1,15 +1,15 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import dedent from 'ts-dedent';
-import { RenderContext, ElementArgs, OptionsArgs } from './types';
+import { OptionsArgs, RenderContext } from './types';
 
-const { window: globalWindow, document } = global;
+const { document, STORYBOOK_NAME } = root;
 
 declare let Ember: any;
 
 const rootEl = document.getElementById('root');
 
-const config = globalWindow.require(`${globalWindow.STORYBOOK_NAME}/config/environment`);
-const app = globalWindow.require(`${globalWindow.STORYBOOK_NAME}/app`).default.create({
+const config = root.require(`${STORYBOOK_NAME}/config/environment`);
+const app = root.require(`${STORYBOOK_NAME}/app`).default.create({
   autoboot: false,
   rootElement: rootEl,
   ...config.APP,
@@ -19,7 +19,7 @@ let lastPromise = app.boot();
 let hasRendered = false;
 let isRendering = false;
 
-function render(options: OptionsArgs, el: ElementArgs) {
+function render(options: OptionsArgs, el: HTMLElement) {
   if (isRendering) return;
   isRendering = true;
 

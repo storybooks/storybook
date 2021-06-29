@@ -1,7 +1,7 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import React from 'react';
 
-const { document } = global;
+const { document } = root;
 
 export default {
   title: 'Addons/QueryParams',

@@ -1,35 +1,38 @@
 import { addons } from '@storybook/addons';
 import { SELECT_STORY } from '@storybook/core-events';
-
-import globalPkg from 'global';
+import root from '@storybook/global-root';
 import { linkTo, hrefTo } from './preview';
 
-const { __STORYBOOK_STORY_STORE__ } = globalPkg;
+const __STORYBOOK_STORY_STORE__ = root.__STORYBOOK_STORY_STORE__ as any;
 
 jest.mock('@storybook/addons');
-jest.mock('global', () => ({
-  // @ts-ignore
+jest.mock('@storybook/global-root', () => ({
   document: global.document,
+  window: global,
   __STORYBOOK_STORY_STORE__: {
+    // Returns StoreSelection
     getSelection: jest.fn(() => ({
-      storyId: 'name',
-      kind: 'kind',
+      storyId: 'kind--name',
+      viewMode: 'docs',
     })),
+    // Returns PublishedStoreItem from where StoryIdentifier is mocked
     fromId: jest.fn(() => ({
-      story: 'name',
+      id: 'kind--name',
+      name: 'name',
       kind: 'kind',
     })),
   },
-  // @ts-ignore
-  window: global,
   __STORYBOOK_CLIENT_API__: {
+    // Returns PublishedStoreItem from where StoryIdentifier is mocked
     raw: jest.fn(() => [
       {
-        story: 'name',
+        id: 'kind--name',
+        name: 'name',
         kind: 'kind',
       },
       {
-        story: 'namekind',
+        id: 'kindname--namekind',
+        name: 'namekind',
         kind: 'kindname',
       },
     ]),
@@ -72,8 +75,9 @@ describe('preview', () => {
       __STORYBOOK_STORY_STORE__.fromId.mockImplementation((input: any) =>
         !input
           ? {
+              id: 'kind--name',
+              name: 'name',
               kind: 'kind',
-              story: 'name',
             }
           : null
       );
@@ -89,15 +93,16 @@ describe('preview', () => {
 
     it('should select the id provided', () => {
       __STORYBOOK_STORY_STORE__.fromId.mockImplementation((input: any) =>
-        input === 'kind--story'
+        input === 'kind--name'
           ? {
-              story: 'name',
+              id: 'kind--name',
+              name: 'name',
               kind: 'kind',
             }
           : null
       );
 
-      const handler = linkTo('kind--story');
+      const handler = linkTo('kind--name');
       handler();
 
       expect(channel.emit).toHaveBeenCalledWith(SELECT_STORY, {
@@ -114,9 +119,10 @@ describe('preview', () => {
         (a, b) => a + b,
         (a, b) => b + a
       );
+
       handler('kind', 'name');
 
-      expect(channel.emit.mock.calls).toContainEqual([
+      expect(channel.emit.mock.calls[0]).toEqual([
         SELECT_STORY,
         {
           kind: 'kindname',

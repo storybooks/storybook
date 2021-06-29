@@ -1,6 +1,6 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { document, Node } = global;
+const { document, Node } = root;
 
 function getRenderedTree(story: { render: () => any }) {
   const component = story.render();

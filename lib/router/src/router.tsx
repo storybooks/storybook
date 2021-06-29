@@ -1,21 +1,20 @@
-import global from 'global';
-import React, { ReactNode } from 'react';
-
 import {
+  History,
   Link,
   Location,
-  navigate,
-  LocationProvider,
-  RouteComponentProps,
   LocationContext,
+  LocationProvider,
+  navigate,
   NavigateFn,
   NavigateOptions,
-  History,
+  RouteComponentProps,
 } from '@reach/router';
+import root from '@storybook/global-root';
+import React, { ReactNode } from 'react';
+import { getMatch, parsePath, queryFromString, StoryData } from './utils';
 import { ToggleVisibility } from './visibility';
-import { queryFromString, parsePath, getMatch, StoryData } from './utils';
 
-const { document } = global;
+const { document } = root;
 
 interface Other extends StoryData {
   path: string;

@@ -11,9 +11,13 @@ const defaultDecorateStory = (getStory: StoryGetter, decorators: DecoratorFn[]) 
     getStory
   );
 
-const baseContext = {
+const baseContext: StoryContext = {
+  id: '',
   name: '',
   kind: '',
+  argTypes: {},
+  args: {},
+  globals: {},
   parameters: {},
 };
 
@@ -24,7 +28,10 @@ describe('makeDecorator', () => {
     const story = jest.fn();
     const decoratedStory = defaultDecorateStory(story, [decorator]);
 
-    const context = { kind: '', name: '', parameters: { test: 'test-val' } };
+    const context = {
+      ...baseContext,
+      parameters: { test: 'test-val' },
+    };
     decoratedStory(context);
 
     expect(wrapper).toHaveBeenCalledWith(expect.any(Function), context, { parameters: 'test-val' });

@@ -1,9 +1,8 @@
-import global from 'global';
-
-import './page.css';
+import root from '@storybook/global-root';
 import { createHeader } from './Header';
+import './page.css';
 
-const { document } = global;
+const { document } = root;
 
 export interface PageProps {
   user?: {};

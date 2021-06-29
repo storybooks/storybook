@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "babel-loader": "8.2.2",
-    "global": "^4.4.0",
     "react": "^15.7.0",
     "react-dom": "^15.7.0",
     "react-scripts": "3.4.4"
@@ -22,6 +21,7 @@
     "@storybook/addon-links": "6.4.0-alpha.6",
     "@storybook/addons": "6.4.0-alpha.6",
     "@storybook/builder-webpack4": "6.4.0-alpha.6",
+    "@storybook/global-root": "6.4.0-alpha.6",
     "@storybook/preset-create-react-app": "^3.1.6",
     "@storybook/react": "6.4.0-alpha.6",
     "@storybook/theming": "6.4.0-alpha.6",

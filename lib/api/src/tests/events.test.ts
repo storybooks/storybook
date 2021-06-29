@@ -1,7 +1,7 @@
 import { getEventMetadata } from '../lib/events';
 import { API } from '../index';
 
-jest.mock('global', () => ({
+jest.mock('@storybook/global-root', () => ({
   location: { origin: 'http://localhost:6006', pathname: '/' },
 }));
 

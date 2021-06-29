@@ -276,6 +276,10 @@
     "@storybook/ui": {
       "root": "lib/ui",
       "type": "library"
+    },
+    "@storybook/types": {
+      "root": "types",
+      "type": "library"
     }
   }
 }

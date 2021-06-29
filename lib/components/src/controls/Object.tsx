@@ -1,4 +1,4 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import cloneDeep from 'lodash/cloneDeep';
 import React, {
   ComponentProps,
@@ -18,8 +18,6 @@ import type { ControlProps, ObjectValue, ObjectConfig } from './types';
 import { Form } from '../form';
 import { Icons, IconsProps } from '../icon/icon';
 import { IconButton } from '../bar/button';
-
-const { window: globalWindow } = global;
 
 type JsonTreeProps = ComponentProps<typeof JsonTree>;
 
@@ -212,7 +210,7 @@ const RawInput = styled(Form.Textarea)(({ theme }) => ({
 
 const ENTER_EVENT = { bubbles: true, cancelable: true, key: 'Enter', code: 'Enter', keyCode: 13 };
 const dispatchEnterKey = (event: SyntheticEvent<HTMLInputElement>) => {
-  event.currentTarget.dispatchEvent(new globalWindow.KeyboardEvent('keydown', ENTER_EVENT));
+  event.currentTarget.dispatchEvent(new root.KeyboardEvent('keydown', ENTER_EVENT));
 };
 const selectValue = (event: SyntheticEvent<HTMLInputElement>) => {
   event.currentTarget.select();

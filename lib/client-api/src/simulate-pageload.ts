@@ -1,6 +1,6 @@
-import global from 'global';
+import root from '@storybook/global-root';
 
-const { document } = global;
+const { document } = root;
 
 // https://html.spec.whatwg.org/multipage/scripting.html
 const runScriptTypes = [

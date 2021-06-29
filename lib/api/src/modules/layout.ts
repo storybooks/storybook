@@ -1,12 +1,11 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import pick from 'lodash/pick';
 import deepEqual from 'fast-deep-equal';
 import { themes, ThemeVars } from '@storybook/theming';
-
 import merge from '../lib/merge';
 import { State, ModuleFn } from '../index';
 
-const { DOCS_MODE, document } = global;
+const { DOCS_MODE, document } = root;
 
 export type PanelPositions = 'bottom' | 'right';
 export type ActiveTabsType = 'sidebar' | 'canvas' | 'addons';
@@ -210,7 +209,8 @@ export const init: ModuleFn = ({ store, provider, singleStory }) => {
       const element = document.getElementById(elementId);
       if (element) {
         element.focus();
-        if (select) element.select();
+        // @ts-ignore
+        if (select && element.select) element.select();
       }
     },
 

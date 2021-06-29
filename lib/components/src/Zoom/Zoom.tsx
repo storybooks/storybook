@@ -1,14 +1,10 @@
-import global from 'global';
+import root from '@storybook/global-root';
 import { ZoomElement as Element } from './ZoomElement';
 import { ZoomIFrame as IFrame } from './ZoomIFrame';
 
-const { window: globalWindow } = global;
-
 export const browserSupportsCssZoom = (): boolean => {
   try {
-    return (
-      globalWindow.document.implementation.createHTMLDocument('').body.style.zoom !== undefined
-    );
+    return root.document.implementation.createHTMLDocument('').body.style.zoom !== undefined;
   } catch (error) {
     return false;
   }

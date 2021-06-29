@@ -43,13 +43,13 @@
     "@storybook/client-logger": "6.4.0-alpha.6",
     "@storybook/core-events": "6.4.0-alpha.6",
     "@storybook/csf": "0.0.1",
+    "@storybook/global-root": "6.4.0-alpha.6",
     "@storybook/router": "6.4.0-alpha.6",
     "@storybook/semver": "^7.3.2",
     "@storybook/theming": "6.4.0-alpha.6",
     "@types/reach__router": "^1.3.7",
     "core-js": "^3.8.2",
     "fast-deep-equal": "^3.1.3",
-    "global": "^4.4.0",
     "lodash": "^4.17.20",
     "memoizerific": "^1.11.3",
     "qs": "^6.10.0",
@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.167",
+    "@types/reach__router": "^1.3.7",
     "@types/semver": "^7.3.4",
     "flush-promises": "^1.0.2",
     "preval.macro": "^5.0.0"

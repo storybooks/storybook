@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@storybook/client-logger": "6.4.0-alpha.6",
-    "global": "^4.4.0",
+    "@storybook/global-root": "6.4.0-alpha.6",
     "prop-types": "^15.7.2",
     "react": "16.14.0",
     "react-dom": "16.14.0",

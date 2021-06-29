@@ -27,7 +27,6 @@
     "@types/node": "14.14.20",
     "@types/react": "^16.14.2",
     "@types/react-dom": "16.9.10",
-    "global": "^4.4.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-scripts": "^4.0.2",
@@ -37,6 +36,7 @@
     "@storybook/addon-essentials": "6.4.0-alpha.6",
     "@storybook/addons": "6.4.0-alpha.6",
     "@storybook/builder-webpack4": "6.4.0-alpha.6",
+    "@storybook/global-root": "6.4.0-alpha.6",
     "@storybook/preset-create-react-app": "^3.1.6",
     "@storybook/react": "6.4.0-alpha.6",
     "webpack": "4"

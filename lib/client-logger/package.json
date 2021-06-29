@@ -40,8 +40,8 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "core-js": "^3.8.2",
-    "global": "^4.4.0"
+    "@storybook/global-root": "6.4.0-alpha.3",
+    "core-js": "^3.8.2"
   },
   "publishConfig": {
     "access": "public"

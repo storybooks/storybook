@@ -1,20 +1,26 @@
-import React, { FunctionComponent, ReactNode, useCallback, useState, useEffect } from 'react';
-import { styled } from '@storybook/theming';
-import global from 'global';
-
-import TooltipTrigger from 'react-popper-tooltip';
 import { Modifier, Placement } from '@popperjs/core';
+import root from '@storybook/global-root';
+import { styled } from '@storybook/theming';
+import React, {
+  FunctionComponent,
+  LegacyRef,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import TooltipTrigger from 'react-popper-tooltip';
 import { Tooltip } from './Tooltip';
 
-const { document } = global;
+const { document } = root;
 
 // A target that doesn't speak popper
-const TargetContainer = styled.div<{ mode: string }>`
+const TargetContainer = styled.div<{ mode?: string }>`
   display: inline-block;
   cursor: ${(props) => (props.mode === 'hover' ? 'default' : 'pointer')};
 `;
 
-const TargetSvgContainer = styled.g<{ mode: string }>`
+const TargetSvgContainer = styled.g<{ mode?: string }>`
   cursor: ${(props) => (props.mode === 'hover' ? 'default' : 'pointer')};
 `;
 
@@ -81,8 +87,11 @@ const WithTooltipPure: FunctionComponent<WithTooltipPureProps> = ({
       )}
     >
       {({ getTriggerProps, triggerRef }) => (
-        // @ts-ignore
-        <Container ref={triggerRef} {...getTriggerProps()} {...props}>
+        <Container
+          ref={triggerRef as LegacyRef<HTMLDivElement & SVGGElement>}
+          {...getTriggerProps()}
+          {...props}
+        >
           {children}
         </Container>
       )}

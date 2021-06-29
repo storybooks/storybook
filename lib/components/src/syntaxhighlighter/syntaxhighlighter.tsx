@@ -1,33 +1,20 @@
 import React, { ComponentProps, FunctionComponent, MouseEvent, useState } from 'react';
 import { logger } from '@storybook/client-logger';
 import { styled } from '@storybook/theming';
-import global from 'global';
+import root from '@storybook/global-root';
 import memoize from 'memoizerific';
 
-// @ts-ignore
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
-// @ts-ignore
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
-// @ts-ignore
 import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
-// @ts-ignore
 import jsExtras from 'react-syntax-highlighter/dist/esm/languages/prism/js-extras';
-// @ts-ignore
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
-// @ts-ignore
 import graphql from 'react-syntax-highlighter/dist/esm/languages/prism/graphql';
-// @ts-ignore
 import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup';
-// @ts-ignore
 import md from 'react-syntax-highlighter/dist/esm/languages/prism/markdown';
-// @ts-ignore
 import yml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
-// @ts-ignore
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
-// @ts-ignore
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
-
-// @ts-ignore
 import ReactSyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-light';
 
 import { ActionBar } from '../ActionBar/ActionBar';
@@ -36,7 +23,7 @@ import { ScrollArea } from '../ScrollArea/ScrollArea';
 import { formatter } from './formatter';
 import type { SyntaxHighlighterProps } from './syntaxhighlighter-types';
 
-const { navigator, document, window: globalWindow } = global;
+const { navigator, document } = root;
 
 ReactSyntaxHighlighter.registerLanguage('jsextra', jsExtras);
 ReactSyntaxHighlighter.registerLanguage('jsx', jsx);
@@ -60,16 +47,16 @@ if (navigator?.clipboard) {
   copyToClipboard = (text: string) => navigator.clipboard.writeText(text);
 } else {
   copyToClipboard = async (text: string) => {
-    const tmp = document.createElement('TEXTAREA');
-    const focus = document.activeElement;
+    const tmp = document.createElement('TEXTAREA') as HTMLTextAreaElement;
+    const focus = document.activeElement as HTMLInputElement;
 
     tmp.value = text;
 
     document.body.appendChild(tmp);
-    tmp.select();
+    if (tmp.select) tmp.select();
     document.execCommand('copy');
     document.body.removeChild(tmp);
-    focus.focus();
+    if (focus.focus) focus.focus();
   };
 }
 export interface WrapperProps {
@@ -158,7 +145,7 @@ export const SyntaxHighlighter: FunctionComponent<Props> = ({
     copyToClipboard(highlightableCode)
       .then(() => {
         setCopied(true);
-        globalWindow.setTimeout(() => setCopied(false), 1500);
+        root.setTimeout(() => setCopied(false), 1500);
       })
       .catch(logger.error);
   };

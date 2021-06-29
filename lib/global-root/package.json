@@ -1,0 +1,51 @@
+{
+  "name": "@storybook/global-root",
+  "version": "6.4.0-alpha.6",
+  "description": "Core Storybook Global Root",
+  "keywords": [
+    "storybook"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/master/global-root",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/storybook"
+  },
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/ts3.9/index.d.ts",
+  "typesVersions": {
+    "<3.8": {
+      "*": [
+        "dist/ts3.4/*"
+      ]
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "prepare": "node ../../scripts/prepare.js"
+  },
+  "dependencies": {
+    "window-or-global": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/window-or-global": "^1.0.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "9511766a3b488ccf7091b919ecf4c8a5e8bbb060",
+  "sbmodern": "dist/modern/index.js"
+}

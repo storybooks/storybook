@@ -1,8 +1,8 @@
-import global from 'global';
-import { LitElement, html } from 'lit';
+import root from '@storybook/global-root';
+import { html, LitElement } from 'lit';
 import { demoWcCardStyle } from './demoWcCardStyle.css.js';
 
-const { CustomEvent } = global;
+const { CustomEvent } = root;
 
 /**
  * This is a container looking like a card with a back and front side you can switch
