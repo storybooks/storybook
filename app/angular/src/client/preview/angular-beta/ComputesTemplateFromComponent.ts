@@ -178,7 +178,9 @@ const buildTemplate = (
     selector
   );
 
-  return voidElements.some((element) => template.startsWith(element))
+  const elementSelector = template.replace(/([\S]+)(.*)/, '$1');
+
+  return voidElements.some((element) => elementSelector === element)
     ? template.replace(/([\S]+)(.*)/, `<$1$2${inputs}${outputs} />`)
     : template.replace(/([\S]+)(.*)/, `<$1$2${inputs}${outputs}>${innerTemplate}</$1>`);
 };
