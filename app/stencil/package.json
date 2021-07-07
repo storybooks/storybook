@@ -1,0 +1,82 @@
+{
+  "name": "@storybook/stencil",
+  "version": "6.4.0-alpha.11",
+  "description": "Storybook for stencil: View custom elements using stencil.js.",
+  "keywords": [
+    "custom elements",
+    "storybook",
+    "stencil"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/master/app/stencil",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "directory": "app/stencil"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/storybook"
+  },
+  "license": "MIT",
+  "main": "dist/cjs/client/index.js",
+  "module": "dist/esm/client/index.js",
+  "types": "dist/ts3.9/client/index.d.ts",
+  "typesVersions": {
+    "<3.8": {
+      "*": [
+        "dist/ts3.4/*"
+      ]
+    }
+  },
+  "bin": {
+    "build-storybook": "./bin/build.js",
+    "start-storybook": "./bin/index.js",
+    "storybook-server": "./bin/index.js"
+  },
+  "files": [
+    "bin/**/*",
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "prepare": "node ../../scripts/prepare.js"
+  },
+  "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/plugin-transform-react-jsx": "^7.12.12",
+    "@babel/preset-env": "^7.12.11",
+    "@storybook/addons": "6.4.0-alpha.11",
+    "@storybook/client-api": "6.4.0-alpha.11",
+    "@storybook/core": "6.4.0-alpha.11",
+    "@storybook/core-common": "6.4.0-alpha.11",
+    "@types/webpack-env": "^1.16.0",
+    "babel-plugin-bundled-import-meta": "^0.3.1",
+    "core-js": "^3.8.2",
+    "global": "^4.4.0",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "read-pkg-up": "^7.0.1",
+    "regenerator-runtime": "^0.13.7",
+    "ts-dedent": "^2.0.0"
+  },
+  "devDependencies": {
+    "@stencil/core": "^2.0.1"
+  },
+  "peerDependencies": {
+    "@stencil/core": "^2.0.1"
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "52cc8f0ba8fc0601c38620f7173a47b0fd7d38e2",
+  "sbmodern": "dist/modern/client/index.js"
+}

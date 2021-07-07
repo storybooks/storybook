@@ -13,6 +13,7 @@ describe.each([
   ['vue'],
   ['vue3'],
   ['web-components'],
+  ['stencil'],
 ])('%s', (app) => {
   it('should run standalone', async () => {
     // eslint-disable-next-line import/no-dynamic-require, global-require

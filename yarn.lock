@@ -5526,6 +5526,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stencil/core@npm:^2.0.1":
+  version: 2.6.0
+  resolution: "@stencil/core@npm:2.6.0"
+  bin:
+    stencil: bin/stencil
+  checksum: f263b8426c195cb43f78f2a0b0fbe4dbcf28773bb7262cfb985b765c59294612025b833dd3161826b07f09873c51f3d72ccea3b3635c0f20816e368d07a78190
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-a11y@6.4.0-alpha.11, @storybook/addon-a11y@workspace:*, @storybook/addon-a11y@workspace:addons/a11y":
   version: 0.0.0-use.local
   resolution: "@storybook/addon-a11y@workspace:addons/a11y"
@@ -6109,6 +6118,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@storybook/addons@npm:6.3.2":
+  version: 6.3.2
+  resolution: "@storybook/addons@npm:6.3.2"
+  dependencies:
+    "@storybook/api": 6.3.2
+    "@storybook/channels": 6.3.2
+    "@storybook/client-logger": 6.3.2
+    "@storybook/core-events": 6.3.2
+    "@storybook/router": 6.3.2
+    "@storybook/theming": 6.3.2
+    core-js: ^3.8.2
+    global: ^4.4.0
+    regenerator-runtime: ^0.13.7
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: d8af390f4a9d2b115e5a2c326e424c3ad7395a6f030a1d54f4d05d6848076271bc0756a7faa569b2cc3a25e1becd0a51670e2feb7e5e610b6f8c3a374694c4cb
+  languageName: node
+  linkType: hard
+
 "@storybook/addons@npm:^6.3.0":
   version: 6.3.0
   resolution: "@storybook/addons@npm:6.3.0"
@@ -6271,6 +6300,37 @@ __metadata:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
   checksum: aa5a2bbc01e1d8231832abccb949738dc085200eee3711eeb5608a0cd494662de1317a9974fcbb69dd46d7bbb60d0df07220b5dd389ce93e7d8942a1bc6a2eac
+  languageName: node
+  linkType: hard
+
+"@storybook/api@npm:6.3.2":
+  version: 6.3.2
+  resolution: "@storybook/api@npm:6.3.2"
+  dependencies:
+    "@reach/router": ^1.3.4
+    "@storybook/channels": 6.3.2
+    "@storybook/client-logger": 6.3.2
+    "@storybook/core-events": 6.3.2
+    "@storybook/csf": 0.0.1
+    "@storybook/router": 6.3.2
+    "@storybook/semver": ^7.3.2
+    "@storybook/theming": 6.3.2
+    "@types/reach__router": ^1.3.7
+    core-js: ^3.8.2
+    fast-deep-equal: ^3.1.3
+    global: ^4.4.0
+    lodash: ^4.17.20
+    memoizerific: ^1.11.3
+    qs: ^6.10.0
+    regenerator-runtime: ^0.13.7
+    store2: ^2.12.0
+    telejson: ^5.3.2
+    ts-dedent: ^2.0.0
+    util-deprecate: ^1.0.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 0d2da575266df140825711615db8b5598c2e8092ab46089a4d1be68753c443422d873e873d98fe6d1331f2c939c08f729c21f2d3216159ccac69e8556ff9ed3b
   languageName: node
   linkType: hard
 
@@ -6486,6 +6546,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/channels@npm:6.3.2":
+  version: 6.3.2
+  resolution: "@storybook/channels@npm:6.3.2"
+  dependencies:
+    core-js: ^3.8.2
+    ts-dedent: ^2.0.0
+    util-deprecate: ^1.0.2
+  checksum: 0336dafc45a022a55acf9d24cad65a8936776a4ab2c7d3932cf3a39d2e7eabd6e4877fef7ddcad2fd4e5f9e4786d61f777056305b85b338aa2babda0f1235c00
+  languageName: node
+  linkType: hard
+
 "@storybook/cli@6.4.0-alpha.11, @storybook/cli@workspace:*, @storybook/cli@workspace:lib/cli":
   version: 0.0.0-use.local
   resolution: "@storybook/cli@workspace:lib/cli"
@@ -6575,6 +6646,16 @@ __metadata:
     core-js: ^3.8.2
     global: ^4.4.0
   checksum: 9eb412856ef04883747a0e9e37b17f6d02189898a93d21f46ee670d1fb38d65c538067b9f88a9b4328c3a34572f12053bcf777c67700177d6696f392f64a5d46
+  languageName: node
+  linkType: hard
+
+"@storybook/client-logger@npm:6.3.2":
+  version: 6.3.2
+  resolution: "@storybook/client-logger@npm:6.3.2"
+  dependencies:
+    core-js: ^3.8.2
+    global: ^4.4.0
+  checksum: e86868504cd13072dea3176737719d9336a8fb1a8a17c4a0500b505aa9cfd66d2cfb7f3b4f53306964adc89adeb96cbd1fae1b7ca5bec385997373f79b339eef
   languageName: node
   linkType: hard
 
@@ -6781,6 +6862,15 @@ __metadata:
   dependencies:
     core-js: ^3.8.2
   checksum: 116ddf249a3968450b12c625487493281a293f85c4183887b3d24baf1623ddabea00f7dc62d80225264a968d9ef02fcb7415540e3763e512371b785b467279eb
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:6.3.2":
+  version: 6.3.2
+  resolution: "@storybook/core-events@npm:6.3.2"
+  dependencies:
+    core-js: ^3.8.2
+  checksum: 8a3b169df8d911cbc8b4ec18cc94db4ad80a47a72a06b03df8dbf517c4b9e75a2b916d18f5a7da1e0073f306b27f81772e9a1b40923f4c55ceb436bd3da231f0
   languageName: node
   linkType: hard
 
@@ -7581,6 +7671,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/router@npm:6.3.2":
+  version: 6.3.2
+  resolution: "@storybook/router@npm:6.3.2"
+  dependencies:
+    "@reach/router": ^1.3.4
+    "@storybook/client-logger": 6.3.2
+    "@types/reach__router": ^1.3.7
+    core-js: ^3.8.2
+    fast-deep-equal: ^3.1.3
+    global: ^4.4.0
+    lodash: ^4.17.20
+    memoizerific: ^1.11.3
+    qs: ^6.10.0
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 56ea0aa3228c64c81efe65235bdc757dda754e91891d12df9934e4e0ad84e020253ec2e726c0ad85751a2c17cba58bb03c2be87156daebcd3dea4cbabfed14f0
+  languageName: node
+  linkType: hard
+
 "@storybook/semver@npm:^7.3.2":
   version: 7.3.2
   resolution: "@storybook/semver@npm:7.3.2"
@@ -7639,6 +7750,89 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
+  languageName: unknown
+  linkType: soft
+
+"@storybook/source-loader@npm:*":
+  version: 6.3.2
+  resolution: "@storybook/source-loader@npm:6.3.2"
+  dependencies:
+    "@storybook/addons": 6.3.2
+    "@storybook/client-logger": 6.3.2
+    "@storybook/csf": 0.0.1
+    core-js: ^3.8.2
+    estraverse: ^5.2.0
+    global: ^4.4.0
+    loader-utils: ^2.0.0
+    lodash: ^4.17.20
+    prettier: ~2.2.1
+    regenerator-runtime: ^0.13.7
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 139d5b5c16033c8db3d3966311c45d85a974cbbbfa555a6f843b46057fa451dd7fca9c80eb78df78b2a9b6f7c9965ef52d26fb67e165e9765d4f3b8b810146a8
+  languageName: node
+  linkType: hard
+
+"@storybook/stencil@file:../../app/stencil::locator=stencil-kitchen-sink%40workspace%3Aexamples%2Fstencil-kitchen-sink":
+  version: 6.4.0-alpha.11
+  resolution: "@storybook/stencil@file:../../app/stencil#../../app/stencil::hash=f10df4&locator=stencil-kitchen-sink%40workspace%3Aexamples%2Fstencil-kitchen-sink"
+  dependencies:
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-syntax-import-meta": ^7.10.4
+    "@babel/plugin-transform-react-jsx": ^7.12.12
+    "@babel/preset-env": ^7.12.11
+    "@storybook/addons": 6.4.0-alpha.11
+    "@storybook/client-api": 6.4.0-alpha.11
+    "@storybook/core": 6.4.0-alpha.11
+    "@storybook/core-common": 6.4.0-alpha.11
+    "@types/webpack-env": ^1.16.0
+    babel-plugin-bundled-import-meta: ^0.3.1
+    core-js: ^3.8.2
+    global: ^4.4.0
+    react: 16.14.0
+    react-dom: 16.14.0
+    read-pkg-up: ^7.0.1
+    regenerator-runtime: ^0.13.7
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    "@stencil/core": ^2.0.1
+  bin:
+    build-storybook: ./bin/build.js
+    start-storybook: ./bin/index.js
+    storybook-server: ./bin/index.js
+  checksum: f7c40c11a05263501c09fd0ca020c948be1a91b5592c74776e29b7d7cec295a0dfdd304a337f75d260202d5fa9cc16002b1b2dd451015cccab5b017bda85d317
+  languageName: node
+  linkType: hard
+
+"@storybook/stencil@workspace:app/stencil":
+  version: 0.0.0-use.local
+  resolution: "@storybook/stencil@workspace:app/stencil"
+  dependencies:
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-syntax-import-meta": ^7.10.4
+    "@babel/plugin-transform-react-jsx": ^7.12.12
+    "@babel/preset-env": ^7.12.11
+    "@stencil/core": ^2.0.1
+    "@storybook/addons": 6.4.0-alpha.11
+    "@storybook/client-api": 6.4.0-alpha.11
+    "@storybook/core": 6.4.0-alpha.11
+    "@storybook/core-common": 6.4.0-alpha.11
+    "@types/webpack-env": ^1.16.0
+    babel-plugin-bundled-import-meta: ^0.3.1
+    core-js: ^3.8.2
+    global: ^4.4.0
+    react: 16.14.0
+    react-dom: 16.14.0
+    read-pkg-up: ^7.0.1
+    regenerator-runtime: ^0.13.7
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    "@stencil/core": ^2.0.1
+  bin:
+    build-storybook: ./bin/build.js
+    start-storybook: ./bin/index.js
+    storybook-server: ./bin/index.js
   languageName: unknown
   linkType: soft
 
@@ -7713,6 +7907,29 @@ __metadata:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
   checksum: df3d6a32c437777ab8672e5615171d220ee4a8933c1b732f9f7a94a6028f59b6e4141ac6775020a58874b2e6d737a5e4d929d298d62ff2371e33a826dcd1e2d2
+  languageName: node
+  linkType: hard
+
+"@storybook/theming@npm:6.3.2":
+  version: 6.3.2
+  resolution: "@storybook/theming@npm:6.3.2"
+  dependencies:
+    "@emotion/core": ^10.1.1
+    "@emotion/is-prop-valid": ^0.8.6
+    "@emotion/styled": ^10.0.27
+    "@storybook/client-logger": 6.3.2
+    core-js: ^3.8.2
+    deep-object-diff: ^1.1.0
+    emotion-theming: ^10.0.27
+    global: ^4.4.0
+    memoizerific: ^1.11.3
+    polished: ^4.0.5
+    resolve-from: ^5.0.0
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 66affbb428a78b1ef5cf30f95dcc7f65ae5670073998e21b827ebe81f4b3780794900a0e3056b88c2de1f5468ee4d6eb198dce5b08791bd84e6323fe27b3f986
   languageName: node
   linkType: hard
 
@@ -39726,6 +39943,18 @@ resolve@1.19.0:
   checksum: 714b61e152ba03a5e098b5364cc3076d8036edabc2892143fe3c64291194a401b74f071fadebba94551fb013a02f3bcad56a8be29a67b3c644ac78ffda921f80
   languageName: node
   linkType: hard
+
+"stencil-kitchen-sink@workspace:examples/stencil-kitchen-sink":
+  version: 0.0.0-use.local
+  resolution: "stencil-kitchen-sink@workspace:examples/stencil-kitchen-sink"
+  dependencies:
+    "@stencil/core": ^2.0.1
+    "@storybook/source-loader": "*"
+    "@storybook/stencil": ../../app/stencil
+    chalk: ^3.0.0
+    shelljs: ^0.8.3
+  languageName: unknown
+  linkType: soft
 
 "store2@npm:^2.12.0":
   version: 2.12.0

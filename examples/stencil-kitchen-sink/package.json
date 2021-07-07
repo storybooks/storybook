@@ -1,0 +1,38 @@
+{
+  "name": "stencil-kitchen-sink",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stencil Component Starter",
+  "license": "ISC",
+  "author": "",
+  "main": "dist/index.cjs.js",
+  "unpkg": "dist/stencil-kitchen-sink/stencil-kitchen-sink.esm.js",
+  "module": "dist/custom-elements/index.js",
+  "types": "dist/custom-elements/index.d.ts",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "build.watch": "stencil build --docs --watch",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate",
+    "storybook": "start-storybook -p 9001"
+  },
+  "dependencies": {
+    "@stencil/core": "^2.0.1"
+  },
+  "devDependencies": {
+    "@storybook/source-loader": "*",
+    "@storybook/stencil": "../../app/stencil",
+    "chalk": "^3.0.0",
+    "shelljs": "^0.8.3"
+  },
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs"
+}
