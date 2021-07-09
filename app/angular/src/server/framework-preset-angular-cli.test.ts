@@ -185,27 +185,47 @@ describe('framework-preset-angular-cli', () => {
       const baseWebpackConfig = newWebpackConfiguration();
       const webpackFinalConfig = await webpackFinal(baseWebpackConfig, options);
 
+      const expectedRules: any = [
+        {
+          oneOf: [
+            {
+              exclude: [],
+              use: expect.anything(),
+            },
+            {
+              include: [],
+              use: expect.anything(),
+            },
+          ],
+        },
+        { use: expect.anything() },
+      ];
       expect(webpackFinalConfig.module.rules).toEqual([
         {
-          exclude: [],
-          test: /\.css$/,
-          use: expect.anything(),
+          test: /\.(?:css)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [],
-          test: /\.scss$|\.sass$/,
-          use: expect.anything(),
+          test: /\.(?:scss)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [],
-          test: /\.less$/,
-          use: expect.anything(),
+          test: /\.(?:sass)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [],
-          test: /\.styl$/,
-          use: expect.anything(),
+          test: /\.(?:less)$/i,
+          rules: expectedRules,
         },
+        {
+          test: /\.(?:styl)$/i,
+          rules: expectedRules,
+        },
+        { mimetype: 'text/css', use: expect.anything() },
+        { mimetype: 'text/x-scss', use: expect.anything() },
+        { mimetype: 'text/x-sass', use: expect.anything() },
+        { mimetype: 'text/x-less', use: expect.anything() },
+        { mimetype: 'text/x-stylus', use: expect.anything() },
         ...baseWebpackConfig.module.rules,
       ]);
     });
@@ -220,9 +240,8 @@ describe('framework-preset-angular-cli', () => {
             "budgets": Array [],
           },
           ContextReplacementPlugin {
-            "newContentRecursive": undefined,
-            "newContentRegExp": undefined,
-            "newContentResource": undefined,
+            "newContentCreateContextMap": [Function],
+            "newContentResource": "${workspaceRoot}/$_lazy_route_resources",
             "resourceRegExp": /\\\\@angular\\(\\\\\\\\\\|\\\\/\\)core\\(\\\\\\\\\\|\\\\/\\)/,
           },
           DedupeModuleResolvePlugin {
@@ -307,47 +326,47 @@ describe('framework-preset-angular-cli', () => {
       const baseWebpackConfig = newWebpackConfiguration();
       const webpackFinalConfig = await webpackFinal(baseWebpackConfig, options);
 
+      const expectedRules = [
+        {
+          oneOf: [
+            {
+              exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
+              use: expect.anything(),
+            },
+            {
+              include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
+              use: expect.anything(),
+            },
+          ],
+        },
+        { use: expect.anything() },
+      ];
       expect(webpackFinalConfig.module.rules).toEqual([
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.css$/,
-          use: expect.anything(),
+          test: /\.(?:css)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.scss$|\.sass$/,
-          use: expect.anything(),
+          test: /\.(?:scss)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.less$/,
-          use: expect.anything(),
+          test: /\.(?:sass)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.styl$/,
-          use: expect.anything(),
+          test: /\.(?:less)$/i,
+          rules: expectedRules,
         },
         {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.css$/,
-          use: expect.anything(),
+          test: /\.(?:styl)$/i,
+          rules: expectedRules,
         },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.scss$|\.sass$/,
-          use: expect.anything(),
-        },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.less$/,
-          use: expect.anything(),
-        },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.styl$/,
-          use: expect.anything(),
-        },
+        { mimetype: 'text/css', use: expect.anything() },
+        { mimetype: 'text/x-scss', use: expect.anything() },
+        { mimetype: 'text/x-sass', use: expect.anything() },
+        { mimetype: 'text/x-less', use: expect.anything() },
+        { mimetype: 'text/x-stylus', use: expect.anything() },
         ...baseWebpackConfig.module.rules,
       ]);
     });
@@ -385,47 +404,47 @@ describe('framework-preset-angular-cli', () => {
       const baseWebpackConfig = newWebpackConfiguration();
       const webpackFinalConfig = await webpackFinal(baseWebpackConfig, options);
 
+      const expectedRules: any = [
+        {
+          oneOf: [
+            {
+              exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
+              use: expect.anything(),
+            },
+            {
+              include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
+              use: expect.anything(),
+            },
+          ],
+        },
+        { use: expect.anything() },
+      ];
       expect(webpackFinalConfig.module.rules).toEqual([
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.css$/,
-          use: expect.anything(),
+          test: /\.(?:css)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.scss$|\.sass$/,
-          use: expect.anything(),
+          test: /\.(?:scss)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.less$/,
-          use: expect.anything(),
+          test: /\.(?:sass)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.styl$/,
-          use: expect.anything(),
+          test: /\.(?:less)$/i,
+          rules: expectedRules,
         },
         {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.css$/,
-          use: expect.anything(),
+          test: /\.(?:styl)$/i,
+          rules: expectedRules,
         },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.scss$|\.sass$/,
-          use: expect.anything(),
-        },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.less$/,
-          use: expect.anything(),
-        },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.styl$/,
-          use: expect.anything(),
-        },
+        { mimetype: 'text/css', use: expect.anything() },
+        { mimetype: 'text/x-scss', use: expect.anything() },
+        { mimetype: 'text/x-sass', use: expect.anything() },
+        { mimetype: 'text/x-less', use: expect.anything() },
+        { mimetype: 'text/x-stylus', use: expect.anything() },
         ...baseWebpackConfig.module.rules,
       ]);
     });
@@ -463,47 +482,47 @@ describe('framework-preset-angular-cli', () => {
       const baseWebpackConfig = newWebpackConfiguration();
       const webpackFinalConfig = await webpackFinal(baseWebpackConfig, options);
 
+      const expectedRules: any = [
+        {
+          oneOf: [
+            {
+              exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
+              use: expect.anything(),
+            },
+            {
+              include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
+              use: expect.anything(),
+            },
+          ],
+        },
+        { use: expect.anything() },
+      ];
       expect(webpackFinalConfig.module.rules).toEqual([
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.css$/,
-          use: expect.anything(),
+          test: /\.(?:css)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.scss$|\.sass$/,
-          use: expect.anything(),
+          test: /\.(?:scss)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.less$/,
-          use: expect.anything(),
+          test: /\.(?:sass)$/i,
+          rules: expectedRules,
         },
         {
-          exclude: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.styl$/,
-          use: expect.anything(),
+          test: /\.(?:less)$/i,
+          rules: expectedRules,
         },
         {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.css$/,
-          use: expect.anything(),
+          test: /\.(?:styl)$/i,
+          rules: expectedRules,
         },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.scss$|\.sass$/,
-          use: expect.anything(),
-        },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.less$/,
-          use: expect.anything(),
-        },
-        {
-          include: [`${workspaceRoot}/src/styles.css`, `${workspaceRoot}/src/styles.scss`],
-          test: /\.styl$/,
-          use: expect.anything(),
-        },
+        { mimetype: 'text/css', use: expect.anything() },
+        { mimetype: 'text/x-scss', use: expect.anything() },
+        { mimetype: 'text/x-sass', use: expect.anything() },
+        { mimetype: 'text/x-less', use: expect.anything() },
+        { mimetype: 'text/x-stylus', use: expect.anything() },
         ...baseWebpackConfig.module.rules,
       ]);
     });

@@ -27,7 +27,7 @@ export function webpack(
         },
         {
           test: /[/\\]@angular[/\\]core[/\\].+\.js$/,
-          parser: { system: true },
+          parser: { system: false },
         },
         {
           test: /\.html$/,

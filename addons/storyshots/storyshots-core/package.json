@@ -65,8 +65,8 @@
     "ts-dedent": "^2.0.0"
   },
   "devDependencies": {
-    "@angular/core": "^11.2.0",
-    "@angular/platform-browser-dynamic": "^11.2.0",
+    "@angular/core": "^12.0.3",
+    "@angular/platform-browser-dynamic": "^12.0.3",
     "@storybook/addon-docs": "6.4.0-alpha.12",
     "@storybook/angular": "6.4.0-alpha.12",
     "@storybook/react": "6.4.0-alpha.12",

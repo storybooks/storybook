@@ -3,11 +3,11 @@
 exports[`Storyshots Addons/Docs with some emoji 1`] = `
 <storybook-wrapper>
   <storybook-button-component
-    _nghost-a-c43=""
+    _nghost-a-c48=""
     ng-reflect-text="😀 😎 👍 💯"
   >
     <button
-      _ngcontent-a-c43=""
+      _ngcontent-a-c48=""
     >
       😀 😎 👍 💯
     </button>
@@ -18,11 +18,11 @@ exports[`Storyshots Addons/Docs with some emoji 1`] = `
 exports[`Storyshots Addons/Docs with text 1`] = `
 <storybook-wrapper>
   <storybook-button-component
-    _nghost-a-c43=""
+    _nghost-a-c48=""
     ng-reflect-text="hello button"
   >
     <button
-      _ngcontent-a-c43=""
+      _ngcontent-a-c48=""
     >
       hello button
     </button>

@@ -3,13 +3,13 @@
 exports[`Storyshots Core / Parameters / All parameters All parameters passed to story 1`] = `
 <storybook-wrapper>
   <storybook-button-component
-    _nghost-a-c43=""
+    _nghost-a-c48=""
     ng-reflect-text="Parameters are {
     \\"docs\\": {
    "
   >
     <button
-      _ngcontent-a-c43=""
+      _ngcontent-a-c48=""
     >
       Parameters are {
     "docs": {

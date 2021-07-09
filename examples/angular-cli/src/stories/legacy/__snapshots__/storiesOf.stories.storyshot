@@ -3,20 +3,20 @@
 exports[`Storyshots Legacy / Story with storiesOf() with some emoji 1`] = `
 <storybook-wrapper>
   <storybook-button-component
-    _nghost-a-c43=""
+    _nghost-a-c48=""
     ng-reflect-text="😀 😎 👍 💯"
   >
     <button
-      _ngcontent-a-c43=""
+      _ngcontent-a-c48=""
     >
       😀 😎 👍 💯
     </button>
   </storybook-button-component><storybook-button-component
-    _nghost-a-c43=""
+    _nghost-a-c48=""
     ng-reflect-text="😀 😎 👍 💯"
   >
     <button
-      _ngcontent-a-c43=""
+      _ngcontent-a-c48=""
     >
       😀 😎 👍 💯
     </button>
@@ -27,11 +27,11 @@ exports[`Storyshots Legacy / Story with storiesOf() with some emoji 1`] = `
 exports[`Storyshots Legacy / Story with storiesOf() with text 1`] = `
 <storybook-wrapper>
   <storybook-button-component
-    _nghost-a-c43=""
+    _nghost-a-c48=""
     ng-reflect-text="Hello Button"
   >
     <button
-      _ngcontent-a-c43=""
+      _ngcontent-a-c48=""
     >
       Hello Button
     </button>
