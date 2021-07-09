@@ -11,7 +11,7 @@
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
-    "@storybook/client-logger": "6.4.0-alpha.13",
+    "@storybook/client-logger": "workspace:*",
     "global": "^4.4.0",
     "prop-types": "^15.7.2",
     "react": "16.14.0",
@@ -21,18 +21,18 @@
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@storybook/addon-a11y": "6.4.0-alpha.13",
-    "@storybook/addon-actions": "6.4.0-alpha.13",
-    "@storybook/addon-backgrounds": "6.4.0-alpha.13",
-    "@storybook/addon-docs": "6.4.0-alpha.13",
-    "@storybook/addon-jest": "6.4.0-alpha.13",
-    "@storybook/addon-links": "6.4.0-alpha.13",
-    "@storybook/addon-storyshots": "6.4.0-alpha.13",
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/builder-webpack4": "6.4.0-alpha.13",
+    "@storybook/addon-a11y": "workspace:*",
+    "@storybook/addon-actions": "workspace:*",
+    "@storybook/addon-backgrounds": "workspace:*",
+    "@storybook/addon-docs": "workspace:*",
+    "@storybook/addon-jest": "workspace:*",
+    "@storybook/addon-links": "workspace:*",
+    "@storybook/addon-storyshots": "workspace:*",
+    "@storybook/addons": "workspace:*",
+    "@storybook/builder-webpack4": "workspace:*",
     "@storybook/preset-create-react-app": "^3.1.6",
-    "@storybook/react": "6.4.0-alpha.13",
-    "@storybook/theming": "6.4.0-alpha.13",
+    "@storybook/react": "workspace:*",
+    "@storybook/theming": "workspace:*",
     "webpack": "4"
   },
   "storybook": {

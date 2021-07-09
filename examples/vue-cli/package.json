@@ -15,11 +15,11 @@
     "vue-property-decorator": "^9.1.2"
   },
   "devDependencies": {
-    "@storybook/addon-controls": "6.4.0-alpha.13",
-    "@storybook/addon-essentials": "6.4.0-alpha.13",
+    "@storybook/addon-controls": "workspace:*",
+    "@storybook/addon-essentials": "workspace:*",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/source-loader": "6.4.0-alpha.13",
-    "@storybook/vue": "6.4.0-alpha.13",
+    "@storybook/source-loader": "workspace:*",
+    "@storybook/vue": "workspace:*",
     "@vue/cli-plugin-babel": "~4.3.1",
     "@vue/cli-plugin-typescript": "~4.3.1",
     "@vue/cli-service": "~4.3.1",

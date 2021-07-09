@@ -45,11 +45,11 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/api": "6.4.0-alpha.13",
-    "@storybook/client-api": "6.4.0-alpha.13",
-    "@storybook/components": "6.4.0-alpha.13",
-    "@storybook/theming": "6.4.0-alpha.13",
+    "@storybook/addons": "workspace:*",
+    "@storybook/api": "workspace:*",
+    "@storybook/client-api": "workspace:*",
+    "@storybook/components": "workspace:*",
+    "@storybook/theming": "workspace:*",
     "core-js": "^3.8.2",
     "regenerator-runtime": "^0.13.7"
   },

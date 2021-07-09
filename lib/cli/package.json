@@ -48,8 +48,8 @@
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@storybook/codemod": "6.4.0-alpha.13",
-    "@storybook/node-logger": "6.4.0-alpha.13",
+    "@storybook/codemod": "workspace:*",
+    "@storybook/node-logger": "workspace:*",
     "@storybook/semver": "^7.3.2",
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
@@ -74,7 +74,7 @@
     "update-notifier": "^5.0.1"
   },
   "devDependencies": {
-    "@storybook/client-api": "6.4.0-alpha.13",
+    "@storybook/client-api": "workspace:*",
     "@types/cross-spawn": "^6.0.2",
     "@types/prompts": "^2.0.9",
     "@types/puppeteer-core": "^2.1.0",

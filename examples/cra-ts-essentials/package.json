@@ -34,11 +34,11 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "6.4.0-alpha.13",
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/builder-webpack4": "6.4.0-alpha.13",
+    "@storybook/addon-essentials": "workspace:*",
+    "@storybook/addons": "workspace:*",
+    "@storybook/builder-webpack4": "workspace:*",
     "@storybook/preset-create-react-app": "^3.1.6",
-    "@storybook/react": "6.4.0-alpha.13",
+    "@storybook/react": "workspace:*",
     "webpack": "4"
   },
   "storybook": {

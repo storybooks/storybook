@@ -40,7 +40,7 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/channels": "6.4.0-alpha.13",
+    "@storybook/channels": "workspace:*",
     "core-js": "^3.8.2",
     "global": "^4.4.0",
     "telejson": "^5.3.2"

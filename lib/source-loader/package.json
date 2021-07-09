@@ -41,8 +41,8 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/client-logger": "6.4.0-alpha.13",
+    "@storybook/addons": "workspace:*",
+    "@storybook/client-logger": "workspace:*",
     "@storybook/csf": "0.0.1",
     "core-js": "^3.8.2",
     "estraverse": "^5.2.0",

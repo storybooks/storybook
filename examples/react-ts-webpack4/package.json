@@ -8,10 +8,10 @@
     "storybook": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true start-storybook -p 9011 -c ./"
   },
   "dependencies": {
-    "@storybook/addon-controls": "6.4.0-alpha.13",
-    "@storybook/addon-essentials": "6.4.0-alpha.13",
-    "@storybook/builder-webpack4": "6.4.0-alpha.13",
-    "@storybook/react": "6.4.0-alpha.13",
+    "@storybook/addon-controls": "workspace:*",
+    "@storybook/addon-essentials": "workspace:*",
+    "@storybook/builder-webpack4": "workspace:*",
+    "@storybook/react": "workspace:*",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "prop-types": "15.7.2",

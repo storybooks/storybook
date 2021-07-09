@@ -40,12 +40,12 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/api": "6.4.0-alpha.13",
-    "@storybook/channels": "6.4.0-alpha.13",
-    "@storybook/client-logger": "6.4.0-alpha.13",
-    "@storybook/core-events": "6.4.0-alpha.13",
-    "@storybook/router": "6.4.0-alpha.13",
-    "@storybook/theming": "6.4.0-alpha.13",
+    "@storybook/api": "workspace:*",
+    "@storybook/channels": "workspace:*",
+    "@storybook/client-logger": "workspace:*",
+    "@storybook/core-events": "workspace:*",
+    "@storybook/router": "workspace:*",
+    "@storybook/theming": "workspace:*",
     "core-js": "^3.8.2",
     "global": "^4.4.0",
     "regenerator-runtime": "^0.13.7"

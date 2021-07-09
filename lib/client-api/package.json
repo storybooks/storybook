@@ -40,11 +40,11 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/channel-postmessage": "6.4.0-alpha.13",
-    "@storybook/channels": "6.4.0-alpha.13",
-    "@storybook/client-logger": "6.4.0-alpha.13",
-    "@storybook/core-events": "6.4.0-alpha.13",
+    "@storybook/addons": "workspace:*",
+    "@storybook/channel-postmessage": "workspace:*",
+    "@storybook/channels": "workspace:*",
+    "@storybook/client-logger": "workspace:*",
+    "@storybook/core-events": "workspace:*",
     "@storybook/csf": "0.0.1",
     "@types/qs": "^6.9.5",
     "@types/webpack-env": "^1.16.0",

@@ -45,12 +45,12 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/api": "6.4.0-alpha.13",
-    "@storybook/client-api": "6.4.0-alpha.13",
-    "@storybook/core": "6.4.0-alpha.13",
-    "@storybook/core-common": "6.4.0-alpha.13",
-    "@storybook/node-logger": "6.4.0-alpha.13",
+    "@storybook/addons": "workspace:*",
+    "@storybook/api": "workspace:*",
+    "@storybook/client-api": "workspace:*",
+    "@storybook/core": "workspace:*",
+    "@storybook/core-common": "workspace:*",
+    "@storybook/node-logger": "workspace:*",
     "@types/webpack-env": "^1.16.0",
     "core-js": "^3.8.2",
     "global": "^4.4.0",

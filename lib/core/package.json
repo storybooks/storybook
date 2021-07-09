@@ -40,8 +40,8 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/core-client": "6.4.0-alpha.13",
-    "@storybook/core-server": "6.4.0-alpha.13"
+    "@storybook/core-client": "workspace:*",
+    "@storybook/core-server": "workspace:*"
   },
   "peerDependencies": {
     "@storybook/builder-webpack5": "6.4.0-alpha.13",

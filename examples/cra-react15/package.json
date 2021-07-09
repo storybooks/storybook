@@ -18,13 +18,13 @@
     "react-scripts": "3.4.4"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "6.4.0-alpha.13",
-    "@storybook/addon-links": "6.4.0-alpha.13",
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/builder-webpack4": "6.4.0-alpha.13",
+    "@storybook/addon-actions": "workspace:*",
+    "@storybook/addon-links": "workspace:*",
+    "@storybook/addons": "workspace:*",
+    "@storybook/builder-webpack4": "workspace:*",
     "@storybook/preset-create-react-app": "^3.1.6",
-    "@storybook/react": "6.4.0-alpha.13",
-    "@storybook/theming": "6.4.0-alpha.13",
+    "@storybook/react": "workspace:*",
+    "@storybook/theming": "workspace:*",
     "babel-core": "6",
     "babel-runtime": "6",
     "webpack": "4"

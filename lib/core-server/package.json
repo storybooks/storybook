@@ -40,12 +40,12 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/builder-webpack4": "6.4.0-alpha.13",
-    "@storybook/core-client": "6.4.0-alpha.13",
-    "@storybook/core-common": "6.4.0-alpha.13",
-    "@storybook/csf-tools": "6.4.0-alpha.13",
-    "@storybook/manager-webpack4": "6.4.0-alpha.13",
-    "@storybook/node-logger": "6.4.0-alpha.13",
+    "@storybook/builder-webpack4": "workspace:*",
+    "@storybook/core-client": "workspace:*",
+    "@storybook/core-common": "workspace:*",
+    "@storybook/csf-tools": "workspace:*",
+    "@storybook/manager-webpack4": "workspace:*",
+    "@storybook/node-logger": "workspace:*",
     "@storybook/semver": "^7.3.2",
     "@types/node": "^14.0.10",
     "@types/node-fetch": "^2.5.7",
@@ -75,7 +75,7 @@
     "webpack": "4"
   },
   "devDependencies": {
-    "@storybook/builder-webpack5": "6.4.0-alpha.13",
+    "@storybook/builder-webpack5": "workspace:*",
     "@types/compression": "^1.7.0",
     "@types/ip": "^1.1.0",
     "@types/serve-favicon": "^2.5.2",

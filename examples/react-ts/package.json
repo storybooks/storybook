@@ -8,11 +8,11 @@
     "storybook": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true start-storybook -p 9011 -c ./"
   },
   "dependencies": {
-    "@storybook/addon-controls": "6.4.0-alpha.13",
-    "@storybook/addon-essentials": "6.4.0-alpha.13",
-    "@storybook/components": "6.4.0-alpha.13",
-    "@storybook/react": "6.4.0-alpha.13",
-    "@storybook/theming": "6.4.0-alpha.13",
+    "@storybook/addon-controls": "workspace:*",
+    "@storybook/addon-essentials": "workspace:*",
+    "@storybook/components": "workspace:*",
+    "@storybook/react": "workspace:*",
+    "@storybook/theming": "workspace:*",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "formik": "^2.2.9",

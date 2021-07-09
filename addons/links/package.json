@@ -41,11 +41,11 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/client-logger": "6.4.0-alpha.13",
-    "@storybook/core-events": "6.4.0-alpha.13",
+    "@storybook/addons": "workspace:*",
+    "@storybook/client-logger": "workspace:*",
+    "@storybook/core-events": "workspace:*",
     "@storybook/csf": "0.0.1",
-    "@storybook/router": "6.4.0-alpha.13",
+    "@storybook/router": "workspace:*",
     "@types/qs": "^6.9.5",
     "core-js": "^3.8.2",
     "global": "^4.4.0",

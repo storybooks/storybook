@@ -27,7 +27,7 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/cli": "6.4.0-alpha.13"
+    "@storybook/cli": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

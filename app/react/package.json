@@ -49,10 +49,10 @@
     "@babel/preset-flow": "^7.12.1",
     "@babel/preset-react": "^7.12.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@storybook/addons": "6.4.0-alpha.13",
-    "@storybook/core": "6.4.0-alpha.13",
-    "@storybook/core-common": "6.4.0-alpha.13",
-    "@storybook/node-logger": "6.4.0-alpha.13",
+    "@storybook/addons": "workspace:*",
+    "@storybook/core": "workspace:*",
+    "@storybook/core-common": "workspace:*",
+    "@storybook/node-logger": "workspace:*",
     "@storybook/react-docgen-typescript-plugin": "1.0.2-canary.253f8c1.0",
     "@storybook/semver": "^7.3.2",
     "@types/webpack-env": "^1.16.0",
@@ -71,7 +71,7 @@
     "webpack": "4"
   },
   "devDependencies": {
-    "@storybook/client-api": "6.4.0-alpha.13",
+    "@storybook/client-api": "workspace:*",
     "@types/node": "^14.14.20",
     "@types/prompts": "^2.0.9"
   },
