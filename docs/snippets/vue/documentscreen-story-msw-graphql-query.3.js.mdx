@@ -1,0 +1,95 @@
+```js
+// YourPage.stories.js
+
+import DocumentScreen from './DocumentScreen.vue';
+import WrapperComponent from './ApolloWrapperClient.vue';
+
+import { graphql } from 'msw';
+
+export default {
+  component: DocumentScreen,
+  title: 'Mock GraphQL query with Storybook and MSW',
+};
+
+//👇The mocked data that will be used in the story
+const TestData = {
+  user: {
+    userID: 1,
+    name: 'Someone',
+  },
+  document: {
+    id: 1,
+    userID: 1,
+    title: 'Something',
+    brief: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    status: 'approved',
+  },
+  subdocuments: [
+    {
+      id: 1,
+      userID: 1,
+      title: 'Something',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'approved',
+    },
+    {
+      id: 2,
+      userID: 1,
+      title: 'Something else',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'awaiting review',
+    },
+    {
+      id: 3,
+      userID: 2,
+      title: 'Another document',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'approved',
+    },
+    {
+      id: 4,
+      userID: 2,
+      title: 'Something',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'approved',
+    },
+  ],
+};
+
+const PageTemplate = (args) => ({
+  components: { DocumentScreen, WrapperComponent },
+  setup() {
+    return { args };
+  },
+  template: '<WrapperComponent><SampleGraphqlComponent v-bind="args"/></WrapperComponent>',
+});
+
+export const MockedSuccess = PageTemplate.bind({});
+MockedSuccess.parameters = {
+  msw: [
+    graphql.query('AllInfoQuery', (req, res, ctx) => {
+      return res(ctx.data(TestData));
+    }),
+  ],
+};
+
+export const MockedError = PageTemplate.bind({});
+MockedError.parameters = {
+  msw: [
+    graphql.query('AllInfoQuery', (req, res, ctx) => {
+      return res(
+        ctx.delay(800),
+        ctx.errors([
+          {
+            message: 'Access denied',
+          },
+        ])
+      );
+    }),
+  ],
+};
+```

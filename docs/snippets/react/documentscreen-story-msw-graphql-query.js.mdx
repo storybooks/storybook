@@ -1,0 +1,111 @@
+```js
+// YourPage.stories.js | YourPage.stories.jsx | YourPage.stories.ts | YourPage.stories.tsx
+
+import React from 'react';
+
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+import { graphql } from 'msw';
+
+import DocumentScreen from './DocumentScreen';
+
+export default {
+  component: DocumentScreen,
+  title: 'Mock GraphQL query with Storybook and MSW',
+};
+
+const mockedClient = new ApolloClient({
+  uri: 'https://your-graphql-endpoint',
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+  },
+});
+
+//👇The mocked data that will be used in the story
+const TestData = {
+  user: {
+    userID: 1,
+    name: 'Someone',
+  },
+  document: {
+    id: 1,
+    userID: 1,
+    title: 'Something',
+    brief: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    status: 'approved',
+  },
+  subdocuments: [
+    {
+      id: 1,
+      userID: 1,
+      title: 'Something',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'approved',
+    },
+    {
+      id: 2,
+      userID: 1,
+      title: 'Something else',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'awaiting review',
+    },
+    {
+      id: 3,
+      userID: 2,
+      title: 'Another document',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'approved',
+    },
+    {
+      id: 4,
+      userID: 2,
+      title: 'Something',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      status: 'approved',
+    },
+  ],
+};
+
+const PageTemplate = () => (
+  <ApolloProvider client={mockedClient}>
+    <DocumentScreen />
+  </ApolloProvider>
+);
+
+export const MockedSuccess = PageTemplate.bind({});
+MockedSuccess.parameters = {
+  msw: [
+    graphql.query('AllInfoQuery', (req, res, ctx) => {
+      return res(ctx.data(TestData));
+    }),
+  ],
+};
+
+export const MockedError = PageTemplate.bind({});
+MockedError.parameters = {
+  msw: [
+    graphql.query('AllInfoQuery', (req, res, ctx) => {
+      return res(
+        ctx.delay(800),
+        ctx.errors([
+          {
+            message: 'Access denied',
+          },
+        ])
+      );
+    }),
+  ],
+};
+```

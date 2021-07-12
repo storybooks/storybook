@@ -1,0 +1,56 @@
+```js
+// YourPage.js | YourPage.jsx | YourPage.ts | YourPage.tsx
+
+import React from 'react';
+
+import { useQuery, gql } from '@apollo/client';
+
+const AllInfoQuery = gql`
+  query AllInfo {
+    user {
+      userID
+      name
+    }
+    document {
+      id
+      userID
+      title
+      brief
+      status
+    }
+    subdocuments {
+      id
+      userID
+      title
+      content
+      status
+    }
+  }
+`;
+
+function useFetchInfo() {
+  const { loading, error, data } = useQuery(AllInfoQuery);
+
+  return { loading, error, data };
+}
+
+function DocumentScreen() {
+  const { loading, error, data } = useFetchInfo();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>There was an error fetching the data!</p>;
+  }
+
+  return (
+    <PageLayout user={data.user}>
+      <DocumentHeader document={data.document} />
+      <DocumentList documents={data.subdocuments} />
+    </PageLayout>
+  );
+}
+export default DocumentScreen;
+```

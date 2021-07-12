@@ -10,8 +10,12 @@ In case you are having trouble with Angular Ivy you can deactivate it in your `m
 
 ```javascript
 module.exports = {
-  stories: [/* ... */],
-  addons: [/* ... */],
+  stories: [
+    /* ... */
+  ],
+  addons: [
+    /* ... */
+  ],
   angularOptions: {
     enableIvy: false,
   },
@@ -32,7 +36,7 @@ npm test -- --coverage --collectCoverageFrom='["src/**/*.{js,jsx}","!src/**/stor
 💡 <strong>Note</strong>: If you're using <a href="https://yarnpkg.com/">yarn</a> as a package manager, you'll need to adjust the command accordingly.
 </div>
 
-### I see `ReferenceError: React is not defined` when using storybooks with Next.js
+### I see `ReferenceError: React is not defined` when using Storybook with Next.js
 
 Next automatically defines `React` for all of your files via a babel plugin. In Storybook, you can solve this either by:
 
@@ -59,19 +63,22 @@ module.exports = {
 Fast refresh is an opt-in feature that can be used in Storybook React.
 There are two ways that you can enable it, go ahead and pick one:
 
-* You can set a `FAST_REFRESH` environment variable in your `.env` file:
+- You can set a `FAST_REFRESH` environment variable in your `.env` file:
+
 ```
 FAST_REFRESH=true
 ```
 
-* Or you can set the following properties in your `.storybook/main.js` files:
+- Or you can set the following properties in your `.storybook/main.js` files:
+
 ```js
 module.exports = {
   reactOptions: {
     fastRefresh: true,
-  }
+  },
 };
 ```
+
 <div class="aside">
 💡 <strong>Note:</strong> Fast Refresh only works in development mode with React 16.10 or higher.
 </div>
@@ -81,6 +88,7 @@ module.exports = {
 A common error is that an addon tries to access the "channel", but the channel is not set. It can happen in a few different cases:
 
 1.  You're trying to access addon channel (e.g., by calling `setOptions`) in a non-browser environment like Jest. You may need to add a channel mock:
+
     ```js
     import { addons, mockChannel } from '@storybook/addons';
 
@@ -110,11 +118,10 @@ class MyComponent extends Component {
     };
   }
   // ...
-};
+}
 
 export const defaultView = () => <MyComponent initialState={} />;
 ```
-
 
 ### Why aren't Controls visible in the Canvas panel but visible in the Docs panel?
 
@@ -142,16 +149,16 @@ Starting with Storybook version 6.0, we've introduced some great features aimed 
 
 With this, we would like to point out that if you plan on using addons created by our fantastic community, you need to consider that some of those addons might be working with an outdated version of Storybook.
 
-We're actively working in providing a better way to address this situation, but in the meantime, we would ask a bit of caution on your end so that you don't run into unexpected problems. Let us know by creating an issue in the [Storybook repo](https://github.com/storybookjs/storybook/issues) so that we can gather information and create a curated list with those addons to help not only you but the rest of the community.
+We're actively working to provide a better way to address this situation, but in the meantime, we would ask for a bit of caution on your end so that you don't run into unexpected problems. Let us know by creating an issue in the [Storybook repo](https://github.com/storybookjs/storybook/issues) so that we can gather information and create a curated list with those addons to help not only you but the rest of the community.
 
 ### Is it possible to browse the documentation for past versions of Storybook?
 
 With the release of version 6.0, we updated our documentation as well. That doesn't mean that the old documentation was removed. We kept it to help you with your Storybook migration process. Use the content from the table below in conjunction with our <a href="https://github.com/storybookjs/storybook/blob/next/MIGRATION.md">migration guide</a> .
 
-We're only covering version 5.3 and 5.0 as they were important milestones for Storybook. If you want to go back in time a little more, you'll have to check the specific release in the monorepo.
+We're only covering versions 5.3 and 5.0 as they were important milestones for Storybook. If you want to go back in time a little more, you'll have to check the specific release in the monorepo.
 
 | Section          | Page                                       | Current Location                                                                   | Version 5.3 location                                                                                                                                                                                                                                                 | Version 5.0 location                                                                                                                                     |
-|------------------|--------------------------------------------|------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | ------------------------------------------ | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Get Started      | Install                                    | [See current documentation](../get-started/install.md)                             | [See versioned documentation](https://github.com/storybookjs/storybook/tree/release/5.3/docs/src/pages/guides/quick-start-guide)                                                                                                                                     | [See versioned documentation](https://github.com/storybookjs/storybook/tree/release/5.0/docs/src/pages/guides/quick-start-guide)                         |
 |                  | What's a story                             | [See current documentation](../get-started/whats-a-story.md)                       | [See versioned documentation for your framework](https://github.com/storybookjs/storybook/blob/release/5.3/docs/src/pages/guides)                                                                                                                                    | [See versioned documentation for your framework](https://github.com/storybookjs/storybook/blob/release/5.0/docs/src/pages/guides)                        |
 |                  | Browse Stories                             | [See current documentation](../get-started/browse-stories.md)                      | [See versioned documentation for your framework](https://github.com/storybookjs/storybook/blob/release/5.3/docs/src/pages/guides)                                                                                                                                    | [See versioned documentation for your framework](https://github.com/storybookjs/storybook/blob/release/5.0/docs/src/pages/guides)                        |
@@ -201,18 +208,17 @@ We're only covering version 5.3 and 5.0 as they were important milestones for St
 |                  | Frameworks                                 | [See current documentation](../api/new-frameworks.md)                              | Non existing feature or undocumented                                                                                                                                                                                                                                 | Non existing feature or undocumented                                                                                                                     |
 |                  | CLI options                                | [See current documentation](../api/cli-options.md)                                 | [See versioned documentation](https://github.com/storybookjs/storybook/tree/release/5.3/docs/src/pages/configurations/cli-options)                                                                                                                                   | [See versioned documentation](https://github.com/storybookjs/storybook/tree/release/5.0/docs/src/pages/configurations/cli-options)                       |
 
-
 <div class="aside">
 With the release of version 5.3, we've updated how you can write your stories more compactly and easily. It doesn't mean that the <code>storiesOf</code> format has been removed. For the time being, we're still supporting it, and we have documentation for it. But be advised that this is bound to change in the future.
 </div>
 
 ### What icons are available for my toolbar or my addon?
 
-With the [`@storybook/components`](https://www.npmjs.com/package/@storybook/components) package, you get a set of icons that you can use to customize your own UI. Use the table below as a reference while writing your addon or defining your Storybook global types.
+With the [`@storybook/components`](https://www.npmjs.com/package/@storybook/components) package, you get a set of icons that you can use to customize your UI. Use the table below as a reference while writing your addon or defining your Storybook global types.
 Go through this [story](https://5a375b97f4b14f0020b0cda3-wbeulgbetj.chromatic.com/?path=/story/basics-icon--labels) to see how the icons look.
 
 | accessibility  | accessibilityalt | add          | admin        | alert         |
-|----------------|------------------|--------------|--------------|---------------|
+| -------------- | ---------------- | ------------ | ------------ | ------------- |
 | arrowdown      | arrowleft        | arrowleftalt | arrowright   | arrowrightalt |
 | arrowup        | back             | basket       | batchaccept  | batchdeny     |
 | beaker         | bell             | bitbucket    | book         | bookmark      |
@@ -245,10 +251,9 @@ Go through this [story](https://5a375b97f4b14f0020b0cda3-wbeulgbetj.chromatic.co
 | useradd        | useralt          | users        | video        | watch         |
 | wrench         | youtube          | zoom         | zoomout      | zoomreset     |
 
-
 ### I see a "No Preview" error with a Storybook production build
 
-If you're using the `serve` package to verify your production build of Storybook, you'll get that error. It relates how `serve` handles rewrites. For instance, `/iframe.html` is rewritten into `/iframe`, and you'll get that error.
+If you're using the `serve` package to verify your production build of Storybook, you'll get that error. It relates to how `serve` handles rewrites. For instance, `/iframe.html` is rewritten into `/iframe`, and you'll get that error.
 
 We recommend that you use [http-server](https://www.npmjs.com/package/http-server) instead and use the following command to preview Storybook:
 
@@ -272,7 +277,48 @@ If you run into a situation where this is not the case, you can adjust the `conf
 
 See our documentation on how to customize the [Storyshots configuration](./snapshot-testing.md).
 
-
 ### Why are my MDX stories not working in IE11?
 
 Currently there's an issue when using MDX stories with IE11. This issue does <strong>not</strong> apply to [DocsPage](../writing-docs/docs-page.md). If you're interested in helping us fix this issue, read our <a href="https://github.com/storybookjs/storybook/blob/next/CONTRIBUTING.md">Contribution guidelines</a> and submit a pull request.
+
+### Why are my mocked GraphQL queries failing with Storybook's MSW addon?
+
+If you're working with Vue 3, you'll need to install [`@vue/apollo-composable`](https://www.npmjs.com/package/@vue/apollo-composable). With Svelte, you'll need to install [`@rollup/plugin-replace`](https://www.npmjs.com/package/@rollup/plugin-replace) and update your `rollup.config` file to the following:
+
+```js
+// rollup.config
+
+// Boilerplate imports
+
+import replace from '@rollup/plugin-replace';
+const production = !process.env.ROLLUP_WATCH;
+
+// Remainder rollup.config implementation
+
+export default {
+  input: 'src/main.js',
+  output: {
+    sourcemap: true,
+    format: 'iife',
+    name: 'app',
+    file: 'public/build/bundle.js',
+  },
+  plugins: [
+    // Other plugins
+
+    // Configures the replace plugin to allow Grapqhl Queries to work properly
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
+};
+```
+
+With Angular, the most common issue is the placement of the `mockServiceWorker.js` file. Use this [example](https://github.com/mswjs/examples/tree/master/examples/rest-angular/) as a point of reference.
+
+### Can I use other GraphQL providers with Storybook's MSW addon?
+
+Yes, check the [addon's examples](https://github.com/mswjs/msw-storybook-addon/tree/master/packages/docs/src/demos) to learn how to integrate different providers.
+
+### Can I mock GraphQL mutations with Storybook's MSW addon?
+
+No, currently, the MSW addon only has support for GraphQL queries. If you're interested in including this feature, open an issue in the [MSW addon repository](https://github.com/mswjs/msw-storybook-addon) and follow up with the maintainer.

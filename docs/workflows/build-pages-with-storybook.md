@@ -7,13 +7,13 @@ Storybook helps you build any component, from small “atomic” components to c
 There are many ways to build pages in Storybook. Here are common patterns and solutions.
 
 - Pure presentational pages.
-- Connected components (e.g. network requests, context, browser environment).
+- Connected components (e.g., network requests, context, browser environment).
 
 ## Pure presentational pages
 
 Teams at the BBC, The Guardian, and the Storybook maintainers themselves build pure presentational pages. If you take this approach, you don't need to do anything special to render your pages in Storybook.
 
-It's straightforward to write components to be fully presentational all the way up to the screen level. That makes it easy to show in Storybook. The idea is you then do all the messy “connected” logic in a single wrapper component in your app outside of Storybook. You can see an example of this approach in the [Data](https://storybook.js.org/tutorials/intro-to-storybook/react/en/data/) chapter of the Intro to Storybook tutorial.
+It's straightforward to write components to be fully presentational up to the screen level. That makes it easy to show in Storybook. The idea is that you do all the messy “connected” logic in a single wrapper component in your app outside of Storybook. You can see an example of this approach in the [Data](https://storybook.js.org/tutorials/intro-to-storybook/react/en/data/) chapter of the Intro to Storybook tutorial.
 
 The benefits:
 
@@ -22,9 +22,9 @@ The benefits:
 
 The downsides:
 
-- Your existing app may not be structured in this way and it may be difficult to change it.
+- Your existing app may not be structured in this way, and it may be difficult to change it.
 
-- Fetching data in one place means that you need to drill it down to the components that actually use it. This can be natural in a page that composes one big GraphQL query (for instance), but in other data fetching approaches may make this less appropriate.
+- Fetching data in one place means that you need to drill it down to the components that use it. This can be natural in a page that composes one big GraphQL query (for instance), but other data fetching approaches may make this less appropriate.
 
 - It's less flexible if you want to load data incrementally in different places on the screen.
 
@@ -64,23 +64,90 @@ In such cases it is natural to use [args composition](../writing-stories/args.md
 
 <!-- prettier-ignore-end -->
 
-This approach is particularly useful when the various subcomponents export a complex list of different stories, which you can pick and choose to build realistic scenarios for your screen-level stories without repeating yourself. By reusing the data and taking a Don't-Repeat-Yourself(DRY) philosophy, your story maintenance burden is minimal.
+This approach is beneficial when the various subcomponents export a complex list of different stories. You can pick and choose to build realistic scenarios for your screen-level stories without repeating yourself. Your story maintenance burden is minimal by reusing the data and taking a Don't-Repeat-Yourself(DRY) philosophy.
 
 ## Mocking connected components
 
-If you need to render a connected component in Storybook, you can mock the network requests that it makes to fetch its data. There are various layers in which you can do that.
+If you need to render a connected component in Storybook, you can mock the network requests to fetch its data. There are various layers in which you can do that.
 
 ### Mocking providers
 
-If you are using a provider that supplies data via the context, you can wrap your story in a decorator that supplies a mocked version of that provider. For example, in the [Screens](https://storybook.js.org/tutorials/intro-to-storybook/react/en/screen/) chapter of the Intro to Storybook tutorial we mock a Redux provider with mock data.
+If you are using a provider that supplies data via the context, you can wrap your story in a decorator that provides a mocked version of that provider. For example, in the [Screens](https://storybook.js.org/tutorials/intro-to-storybook/react/en/screen/) chapter of the Intro to Storybook tutorial, we mock a Redux provider with mock data.
 
-Additionally, there may be addons that supply such providers and nice APIs to set the data they provide. For instance [`storybook-addon-apollo-client`](https://www.npmjs.com/package/storybook-addon-apollo-client) provides this API:
+### Mocking API Services
+
+Connected applications are everywhere, consuming data either from REST or GraphQL endpoints. If you're working in an application that relies on either of these data providers, you can add Mock Service Worker (MSW) and [Storybook's MSW addon](https://storybook.js.org/addons/msw-storybook-addon) to mock data alongside your app and stories.
+
+[Mock Service Worker](https://mswjs.io/) is an API mocking library. It relies on service workers to capture network requests and provides mocked data in response. The MSW addon adds this functionality into Storybook, allowing you to mock API requests in your stories.
+
+#### Mocking REST requests with MSW addon
+
+The approach documented [above](#args-composition-for-presentational-screens) could be quickly adapted if you're relying on a Restful API. For instance, if you're retrieving the list of documents from a Restful endpoint, you could have an implementation similar to:
 
 <!-- prettier-ignore-start -->
 
 <CodeSnippets
   paths={[
-    'react/component-story-with-query.js.mdx',
+    'react/document-screen-fetch.js.mdx',
+    'vue/document-screen-fetch.3.js.mdx',
+    'angular/document-screen-fetch.ts.mdx',
+    'svelte/document-screen-fetch.js.mdx',
+  ]}
+/>
+
+<!-- prettier-ignore-end -->
+
+To test your screen with the mocked data, you could write a similar set of stories:
+
+<!-- prettier-ignore-start -->
+
+<CodeSnippets
+  paths={[
+    'react/documentscreen-story-msw-rest-request.js.mdx',
+    'vue/documentscreen-story-msw-rest-request.3.js.mdx',
+    'angular/documentscreen-story-msw-rest-request.ts.mdx',
+    'svelte/documentscreen-story-msw-rest-request.js.mdx',
+  ]}
+/>
+
+<!-- prettier-ignore-end -->
+
+<div class="aside">
+💡 <strong>Note:</strong> This example details how you can mock the REST request with fetch. Similar HTTP clients such as <a href="https://axios-http.com/">axios</a> can be used as well.
+</div>
+
+The mocked data (i.e., `TestData`) will be injected via [parameters](./writing-stories/parameters), enabling you to configure it per-story basis.
+
+#### Mocking GraphQL queries with MSW addon
+
+If instead of a Restful endpoint, you're retrieving the data from a [GraphQL](https://www.apollographql.com/docs/react/integrations/integrations/) endpoint. You could have the following implementation for your screen:
+
+<!-- prettier-ignore-start -->
+
+<CodeSnippets
+  paths={[
+    'react/document-screen-with-graphql.js.mdx',
+    'vue/document-screen-with-graphql.3.js.mdx',
+    'angular/document-screen-with-graphql.ts.mdx',
+    'svelte/document-screen-with-grapqhl.js.mdx',
+  ]}
+/>
+
+<!-- prettier-ignore-end -->
+
+To test your screen with the GraphQL mocked data, you could write the following stories:
+
+<!-- prettier-ignore-start -->
+
+<CodeSnippets
+  paths={[
+    'react/documentscreen-story-msw-graphql-query.js.mdx',
+    'vue/documentscreen-story-msw-graphql-query.3.js.mdx',
+    'vue/apollo-wrapper-component.with-mock-implementation-3.js.mdx',
+    'angular/documentscreen-story-msw-graphql-query.ts.mdx',
+    'angular/apollo-module.mock-apollo-module.ts.mdx',
+    'svelte/documentscreen-story-msw-graphql-query.js.mdx',
+    'svelte/apollo-wrapper-component.with-mock-implementation.js.mdx',
   ]}
 />
 
@@ -88,11 +155,12 @@ Additionally, there may be addons that supply such providers and nice APIs to se
 
 ### Mocking imports
 
-It is also possible to mock imports directly, as you might in a unit test, using webpack’s aliasing. This is extremely useful if your component makes network requests directly with third-party libraries.
+It is also possible to mock imports directly, as you might in a unit test, using webpack’s aliasing. It's advantageous if your component makes network requests directly with third-party libraries.
 
 We're going to use [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) as an example.
 
-Let's start by creating our own mock, which we'll use later with a [decorator](../writing-stories/decorators#global-decorators). Create a new file called `isomorphic-fetch.js` inside a directory called `__mocks__` (we'll leave the location to you, don't forget to adjust the imports to your needs) and add the following code inside:
+Inside a directory called `__mocks__`, create a new file called
+`isomorphic-fetch.js` with the following code:
 
 <!-- prettier-ignore-start -->
 
@@ -104,7 +172,7 @@ Let's start by creating our own mock, which we'll use later with a [decorator](.
 
 <!-- prettier-ignore-end -->
 
-The above code creates a decorator which reads story-specific data off the story's [parameters](../writing-stories/parameters), allowing you to configure the mock on a per-story basis.
+The code above creates a decorator which reads story-specific data off the story's [parameters](../writing-stories/parameters), enabling you to configure the mock on a per-story basis.
 
 To use the mock in place of the real import, we use [webpack aliasing](https://webpack.js.org/configuration/resolve/#resolvealias):
 
@@ -118,7 +186,7 @@ To use the mock in place of the real import, we use [webpack aliasing](https://w
 
 <!-- prettier-ignore-end -->
 
-Add the decorator you've just implemented to your [storybook/preview.js](../configure/overview.md#configure-story-rendering) (if you don't have it already, you'll need to create the file):
+Add the decorator you've just implemented to your [storybook/preview.js](../configure/overview.md#configure-story-rendering):
 
 <!-- prettier-ignore-start -->
 
@@ -130,7 +198,7 @@ Add the decorator you've just implemented to your [storybook/preview.js](../conf
 
 <!-- prettier-ignore-end -->
 
-Once that configuration is complete, we can set the mock values in a specific story. Let's borrow an example from this [blog post](https://medium.com/@edogc/visual-unit-testing-with-react-storybook-and-fetch-mock-4594d3a281e6):
+Finally, we can set the mock values in a specific story. Let's borrow an example from this [blog post](https://medium.com/@edogc/visual-unit-testing-with-react-storybook-and-fetch-mock-4594d3a281e6):
 
 <!-- prettier-ignore-start -->
 
@@ -147,17 +215,17 @@ Once that configuration is complete, we can set the mock values in a specific st
 
 ### Specific mocks
 
-Another mocking approach is to use libraries that intercept calls at a lower level. For instance you can use [`fetch-mock`](https://www.npmjs.com/package/fetch-mock) to mock fetch requests specifically, or [`msw`](https://www.npmjs.com/package/msw) to mock all kinds of network traffic.
+Another mocking approach is to use libraries that intercept calls at a lower level. For instance, you can use [`fetch-mock`](https://www.npmjs.com/package/fetch-mock) to mock fetch requests specifically.
 
-Similar to the import mocking above, once you have a mock you’ll still want to set the return value of the mock on a per-story basis. Do this in Storybook with a decorator that reads story parameters.
+Like the [import mocking](##mocking-imports) above, once you have a mock, you’ll still want to set the return value of the mock per-story basis. Do this in Storybook with a [decorator](../writing-stories/decorators.md) that reads the story's [parameters](../writing-stories/parameters.md).
 
 ### Avoiding mocking dependencies
 
-It's possible to mostly avoid mocking the dependencies of connected "container" components entirely through passing them around via props, or React context. However, it necessitates a strict split of container and presentational component logic. For example, if you have a component that is responsible for data fetching logic and rendering DOM, it will need to be mocked as previously described.
+It's possible to avoid mocking the dependencies of connected "container" components entirely by passing them around via props or React context. However, it requires a strict split of the container and presentational component logic. For example, if you have a component responsible for data fetching logic and rendering DOM, it will need to be mocked as previously described.
 
-It’s common to import and embed container components in amongst presentational components. However, as we discovered earlier, in order to also render them within Storybook, we’ll likely have to mock their dependencies or the imports themselves.
+It’s common to import and embed container components amongst presentational components. However, as we discovered earlier, to render them within Storybook, we’ll likely have to mock their dependencies or the imports themselves.
 
-Not only can this quickly grow to become a tedious task, it’s also very difficult to mock container components that use local state. So, a solution to this problem is instead of importing containers directly, instead create a React context that provides the container components. This allows you to freely embed container components as usual, at any level in the component hierarchy without worrying about subsequently mocking their dependencies; since we can simply swap out the containers themselves with their mocked presentational counterpart.
+Not only can this quickly grow to become a tedious task, but it’s also challenging to mock container components that use local states. So, instead of importing containers directly, a solution to this problem is to create a React context that provides the container components. It allows you to freely embed container components as usual, at any level in the component hierarchy without worrying about subsequently mocking their dependencies; since we can swap out the containers themselves with their mocked presentational counterpart.
 
 We recommend dividing context containers up over specific pages or views in your app. For example, if you had a `ProfilePage` component, you might set up a file structure as follows:
 
@@ -170,13 +238,13 @@ ProfilePageContext.js
 
 <div class="aside">
 
-It’s also often useful to setup a “global” container context, (perhaps named `GlobalContainerContext`) for container components that may be rendered on every page of your app, and adding it to the top level of your application. While it’s possible to place every container within this global context, it should only provide containers that are required globally.
+It’s also often helpful to set up a “global” container context (perhaps named `GlobalContainerContext`) for container components that may be rendered on every page of your app and adding them to the top level of your application. While it’s possible to place every container within this global context, it should only provide globally required containers.
 
 </div>
 
 Let’s look at an example implementation of this approach.
 
-First we’ll need to create a React context, and we can name it `ProfilePageContext`. It does nothing more than export a React context:
+First, create a React context, and name it `ProfilePageContext`. It does nothing more than export a React context:
 
 <!-- prettier-ignore-start -->
 
@@ -222,7 +290,7 @@ If the same context applies to all `ProfilePage` stories, we can also use a [dec
 
 #### Providing containers to your application
 
-Now, in context of your application, you’ll need to provide `ProfilePage` with all of the container components it requires by wrapping it with `ProfilePageContext.Provider`:
+Now, in the context of your application, you’ll need to provide `ProfilePage` with all of the container components it requires by wrapping it with `ProfilePageContext.Provider`:
 
 For example, in Next.js, this would be your `pages/profile.js` component.
 
@@ -238,7 +306,7 @@ For example, in Next.js, this would be your `pages/profile.js` component.
 
 #### Mocking global containers in Storybook
 
-If you’ve setup `GlobalContainerContext`, in order to provide context to all stories you’ll need to set up a decorator within Storybook’s `preview.js`. For example:
+If you’ve set up `GlobalContainerContext`, you’ll need to set up a decorator within Storybook’s `preview.js` to provide context to all stories. For example:
 
 <!-- prettier-ignore-start -->
 
