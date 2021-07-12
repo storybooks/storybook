@@ -1,7 +1,12 @@
 import { StoryFn as StoryFunction, StoryContext, useMemo, useEffect } from '@storybook/addons';
 
 import { PARAM_KEY as BACKGROUNDS_PARAM_KEY } from '../constants';
-import { clearStyles, addBackgroundStyle, getBackgroundColorByName } from '../helpers';
+import {
+  clearStyles,
+  addBackgroundStyle,
+  getBackgroundColorByName,
+  isReduceMotionEnabled,
+} from '../helpers';
 
 export const withBackground = (StoryFn: StoryFunction, context: StoryContext) => {
   const { globals, parameters } = context;
@@ -29,10 +34,11 @@ export const withBackground = (StoryFn: StoryFunction, context: StoryContext) =>
     context.viewMode === 'docs' ? `#anchor--${context.id} .docs-story` : '.sb-show-main';
 
   const backgroundStyles = useMemo(() => {
+    const transitionStyle = 'transition: background-color 0.3s;';
     return `
       ${selector} {
         background: ${selectedBackgroundColor} !important;
-        transition: background-color 0.3s;
+        ${isReduceMotionEnabled() ? '' : transitionStyle}
       }
     `;
   }, [selectedBackgroundColor, selector]);
