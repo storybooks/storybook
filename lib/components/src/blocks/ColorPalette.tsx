@@ -53,9 +53,24 @@ const SwatchLabels = styled.div({
   flexDirection: 'row',
 });
 
-const Swatch = styled.div({
+interface SwatchProps {
+  background: string;
+}
+
+const Swatch = styled.div<SwatchProps>(({ background }) => ({
+  position: 'relative',
   flex: 1,
-});
+
+  '&::before': {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background,
+    content: '""',
+  },
+}));
 
 const SwatchColors = styled.div(({ theme }) => ({
   ...getBlockBackgroundStyle(theme),
@@ -64,6 +79,8 @@ const SwatchColors = styled.div(({ theme }) => ({
   height: 50,
   marginBottom: 5,
   overflow: 'hidden',
+  backgroundColor: 'white',
+  backgroundImage: `repeating-linear-gradient(-45deg, #ccc, #ccc 1px, #fff 1px, #fff 16px)`,
 }));
 
 const SwatchSpecimen = styled.div({
@@ -122,15 +139,7 @@ interface ColorProps {
 }
 
 function renderSwatch(color: string, index: number) {
-  return (
-    <Swatch
-      key={`${color}-${index}`}
-      title={color}
-      style={{
-        background: color,
-      }}
-    />
-  );
+  return <Swatch key={`${color}-${index}`} title={color} background={color} />;
 }
 
 function renderSwatchLabel(color: string, index: number, colorDescription?: string) {
