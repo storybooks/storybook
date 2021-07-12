@@ -15,7 +15,7 @@ export const getCaptionForLocale = (locale) => {
 <Story name="StoryWithLocale">
   {(args, { globals: { locale } }) => {
     const caption = getCaptionForLocale(locale);
-    return <>{caption}</>;
+    return `<p>${caption}</p>`;
   }}
 </Story>
 ```
