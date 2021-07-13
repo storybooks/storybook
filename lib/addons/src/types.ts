@@ -197,6 +197,14 @@ export interface BaseAnnotations<Args, StoryFnReturnType> {
    * @see [Decorators](https://storybook.js.org/docs/addons/introduction/#1-decorators)
    */
   decorators?: BaseDecorators<StoryFnReturnType>;
+  /**
+   * Define a custom render function for the story(ies). If not passed, a default render function by the framework will be used.
+   */
+  render?: (args: Args, context: StoryContext) => StoryFnReturnType;
+  /**
+   * Function that is executed after the story is rendered.
+   */
+  play?: Function;
 }
 
 export interface Annotations<Args, StoryFnReturnType>
@@ -263,11 +271,17 @@ export interface BaseMeta<ComponentType> {
   subcomponents?: Record<string, ComponentType>;
 }
 
-export interface BaseStory<Args, StoryFnReturnType> {
-  (args: Args, context: StoryContext): StoryFnReturnType;
-
+type BaseStoryObject<Args, StoryFnReturnType> = {
   /**
    * Override the display name in the UI
    */
   storyName?: string;
-}
+};
+
+type BaseStoryFn<Args, StoryFnReturnType> = {
+  (args: Args, context: StoryContext): StoryFnReturnType;
+};
+
+export type BaseStory<Args, StoryFnReturnType> =
+  | BaseStoryFn<Args, StoryFnReturnType>
+  | BaseStoryObject<Args, StoryFnReturnType>;
