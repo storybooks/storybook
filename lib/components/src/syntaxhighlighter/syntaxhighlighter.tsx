@@ -1,4 +1,10 @@
-import React, { ComponentProps, FunctionComponent, MouseEvent, useState } from 'react';
+import React, {
+  ClipboardEvent,
+  ComponentProps,
+  FunctionComponent,
+  MouseEvent,
+  useState,
+} from 'react';
 import { logger } from '@storybook/client-logger';
 import { styled } from '@storybook/theming';
 import global from 'global';
@@ -54,12 +60,13 @@ const themedSyntax = memoize(2)((theme) =>
   Object.entries(theme.code || {}).reduce((acc, [key, val]) => ({ ...acc, [`* .${key}`]: val }), {})
 );
 
-let copyToClipboard: (text: string) => Promise<void>;
+const copyToClipboard: (text: string) => Promise<void> = createCopyToClipboardFunction();
 
-if (navigator?.clipboard) {
-  copyToClipboard = (text: string) => navigator.clipboard.writeText(text);
-} else {
-  copyToClipboard = async (text: string) => {
+export function createCopyToClipboardFunction() {
+  if (navigator?.clipboard) {
+    return (text: string) => navigator.clipboard.writeText(text);
+  }
+  return async (text: string) => {
     const tmp = document.createElement('TEXTAREA');
     const focus = document.activeElement;
 
@@ -72,6 +79,7 @@ if (navigator?.clipboard) {
     focus.focus();
   };
 }
+
 export interface WrapperProps {
   bordered?: boolean;
   padded?: boolean;
@@ -152,7 +160,7 @@ export const SyntaxHighlighter: FunctionComponent<Props> = ({
   const highlightableCode = format ? formatter(children) : children.trim();
   const [copied, setCopied] = useState(false);
 
-  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const onClick = (e: MouseEvent<HTMLButtonElement> | ClipboardEvent<HTMLDivElement>) => {
     e.preventDefault();
 
     copyToClipboard(highlightableCode)
@@ -164,7 +172,7 @@ export const SyntaxHighlighter: FunctionComponent<Props> = ({
   };
 
   return (
-    <Wrapper bordered={bordered} padded={padded} className={className}>
+    <Wrapper bordered={bordered} padded={padded} className={className} onCopyCapture={onClick}>
       <Scroller>
         <ReactSyntaxHighlighter
           padded={padded || bordered}
