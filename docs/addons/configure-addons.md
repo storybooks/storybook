@@ -35,4 +35,4 @@ For example, the [Actions addon](https://storybook.js.org/addons/@storybook/addo
 
 Use the [`useChannel`](./addons-api#usechannel) hook to access the channel data within your addon.
 
-For a complete example, check out [storybookjs/addon-kit/withRoundTrip.js](https://github.com/storybookjs/addon-kit/blob/main/src/withRoundTrip.js)
+For a complete example, check out [storybookjs/addon-kit/withRoundTrip.ts](https://github.com/storybookjs/addon-kit/blob/main/src/withRoundTrip.ts)
